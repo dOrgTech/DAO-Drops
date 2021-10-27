@@ -1,0 +1,876 @@
+/* IBM Plex Mono */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+
+
+/* Obviously Demo */
+/* ---------------------------------------------------------------------- */
+
+/* Regular */
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-Regu.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-Regu.woff') format('woff');
+    font-weight: 400;
+}
+
+/* Medium */
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-Medi.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-Medi.woff') format('woff');
+    font-weight: 500;
+}
+
+/* Semibold */
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-Semi.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-Semi.woff') format('woff');
+    font-weight: 600;
+}
+
+/* Bold */
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-Bold.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-Bold.woff') format('woff');
+    font-weight: 700;
+}
+
+/* Black */
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-Blck.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-Blck.woff') format('woff');
+    font-weight: 900;
+}
+/* ---------------------------------------------------------------------- */
+
+
+/* Obviously Demo Wide */
+/* ---------------------------------------------------------------------- */
+
+/* Medium */
+@font-face {
+    font-family: 'Obviously Demo Wide';
+    src: url('./assets/fonts/ObviouslyDemo-WideMedi.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideMedi.woff') format('woff');
+    font-weight: 500;
+}
+
+/* Semibold */
+@font-face {
+    font-family: 'Obviously Demo Wide';
+    src: url('./assets/fonts/ObviouslyDemo-WideSemi.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideSemi.woff') format('woff');
+    font-weight: 600;
+}
+
+/* Bold */
+@font-face {
+    font-family: 'Obviously Demo Wide';
+    src: url('./assets/fonts/ObviouslyDemo-WideBold.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideBold.woff') format('woff');
+    font-weight: 700;
+}
+
+/* Black */
+@font-face {
+    font-family: 'Obviously Demo Wide';
+    src: url('./assets/fonts/ObviouslyDemo-WideBlck.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideBlck.woff') format('woff');
+    font-weight: 900;
+}
+/* ---------------------------------------------------------------------- */
+
+
+/* Obviously Demo Extended */
+/* ---------------------------------------------------------------------- */
+
+/* Semibold */
+@font-face {
+    font-family: 'Obviously Demo Extended';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdSemi.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdSemi.woff') format('woff');
+    font-weight: 600;
+}
+/* ---------------------------------------------------------------------- */
+
+
+/* EXTRA FONTS */
+/* ---------------------------------------------------------------------- */
+/* 
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompLghtItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompLghtItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompSuprItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompSuprItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompBoldItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompBoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompLght.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompLght.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompMedi.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompMedi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-Cond.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-Cond.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondBold.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondBlckItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondBlckItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompBold.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-BoldItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompThinItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompThinItalic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompBlckItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompBlckItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondBlck.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondBlck.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompThin.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompThin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompBlck.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompBlck.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompSupr.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompSupr.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-Comp.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-Comp.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompMediItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompMediItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompSemiItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompSemiItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CompSemi.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CompSemi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-BlckItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-BlckItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondMediItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondMediItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondMedi.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondMedi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondBoldItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondBoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondLght.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondLght.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondLghtItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondLghtItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondSemi.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondSemi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondSemiItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondSemiItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdMedi.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdMedi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdMediItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdMediItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdLghtItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdLghtItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondSupr.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondSupr.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdThin.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdThin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwBlckItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwBlckItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdBoldItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdBoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwBlck.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwBlck.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdLght.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdLght.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdSupr.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdSupr.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-Narw.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-Narw.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdBlck.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdBlck.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondThin.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondThin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondSuprItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondSuprItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-Lght.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-Lght.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdBlckItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdBlckItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-MediItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-MediItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdSemiItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdSemiItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdThinItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdThinItalic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdSuprItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdSuprItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwBold.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-CondThinItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-CondThinItalic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-LghtItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-LghtItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-Extd.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-Extd.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ExtdBold.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ExtdBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-SuprItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-SuprItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwThinItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwThinItalic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ThinItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ThinItalic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwMediItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwMediItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-Wide.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-Wide.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-Thin.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-WideItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-SemiItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-SemiItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwMedi.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwMedi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-Supr.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-Supr.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwBoldItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwBoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwSupr.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwSupr.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-WideBoldItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideBoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-ReguItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-ReguItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwSuprItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwSuprItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-WideBlckItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideBlckItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwSemiItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwSemiItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-WideLghtItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideLghtItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwSemi.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwSemi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-WideLght.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideLght.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwLghtItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwLghtItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-WideMediItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideMediItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwThin.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwThin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-NarwLght.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-NarwLght.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-WideThinItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideThinItalic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-WideThin.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideThin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-WideSemiItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideSemiItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-WideSuprItalic.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideSuprItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Obviously Demo';
+    src: url('./assets/fonts/ObviouslyDemo-WideSupr.woff2') format('woff2'),
+        url('./assets/fonts/ObviouslyDemo-WideSupr.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+ */

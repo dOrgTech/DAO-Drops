@@ -1,0 +1,197 @@
+@import "./fonts.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    /* Global Styles */
+    html {
+      @apply overflow-x-hidden;
+      scroll-behavior: smooth;
+    }
+  
+    body {
+      @apply m-0 p-0 overflow-x-hidden font-ob text-indigoDD;
+    }
+  
+    img{
+      @apply max-w-full select-none;
+      -webkit-user-drag: none;
+      user-drag: none;
+      -webkit-touch-callout: none;
+    }
+
+    button, input{
+      @apply focus:outline-none;
+    }
+
+    ol, ul{
+      list-style: initial;
+    }
+
+    /* Inputs */
+    input{
+      @apply bg-gray2 px-3 font-normal;
+    }
+
+    textarea{
+      @apply bg-gray2 px-3 py-2 font-normal resize-none outline-none; 
+    }
+
+    select{
+      @apply outline-none focus:outline-none;
+    }
+
+    /* Headings & Subtitles */
+    h1{
+      @apply font-obWide font-black text-6xl;
+    }
+
+    h2{
+      @apply font-obWide font-black text-5xl;
+    }
+
+    h3{
+      @apply font-obWide font-black text-4xl;
+    }
+    
+    h4{
+      @apply font-ob font-black text-2xl;
+    }
+    
+    h5{
+      @apply font-ob font-black text-lg;
+    }
+    
+    h6{
+      @apply font-obExtd font-semibold text-sm;
+    }
+
+    .subtitle1{
+      @apply font-obWide font-bold text-4xl;
+    }
+    
+    .subtitle2{
+      @apply font-obWide font-medium text-4xl;
+    }
+
+    /* Remove Input Arrows */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    /* Selection Color */
+    ::selection {
+      @apply bg-aquaDD;
+    }
+
+    ::-moz-selection {
+      @apply bg-aquaDD;
+    }
+  
+
+}
+
+
+@layer components {
+  .phase1-bg{
+    background: url('./assets/phase1/circles.svg') no-repeat center, url('./assets/phase1/bg.png') no-repeat center;
+    background-size: cover;
+  }
+
+  .button1{
+    @apply subtitle1 uppercase cursor-pointer border-b-8 border-aquaDD pb-5 hover:translate-x-1 transition-transform;
+    width: 33.5rem;
+    background-image: url( './assets/icons/arrow-magenta.svg' );
+    background-repeat: no-repeat;
+    background-position: 100% 20%;
+  }
+  
+  .button2{
+    @apply text-white font-ob font-medium uppercase cursor-pointer pb-1 pl-3 pr-16 w-48; 
+    background: url('./assets/icons/arrow-white.svg') no-repeat center, linear-gradient(90deg, #13DAFF 0%, #8BE5FF 100%);
+    background-position: 83%;
+    border-radius: 1.25rem;
+    height: 3.25rem;
+  }
+
+  .countdown-text{
+    @apply font-ob font-bold uppercase text-xs text-center mt-0.5;
+  }
+  
+  .countdown-number{
+    @apply text-center;
+    width: 6.25rem;
+  }
+
+  .popup{
+    @apply relative;
+    background: url( './assets/phase1/popup-bg.png') no-repeat top;
+    background-size: cover;
+    width: 1000px;
+    height: 664px;
+    box-shadow: 6.5px 2.5px 20px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
+@layer utilities{
+  .required:after {
+    content:" *";
+    color: #FE1D1D;
+    font-size: 0.625rem;
+    vertical-align: text-bottom;
+  }
+
+  .endsin-line:before{
+    content: '';
+    display:inline-block;
+    border-top: 35px solid white;
+    border-right: 35px solid transparent;
+    position: relative;
+    height: 30px;
+    right: -114px;
+    top: -0.5px;
+    transform: rotate(270deg);
+  }
+
+  .endsin-line:after{
+    content: '';
+    position: relative;
+    height: 58px;
+    right: -97px;
+    top: -0.5px;
+    border-color: #3c1dfe;
+    border-right-style:solid;
+    border-right-width:6px;
+    transform: rotate(-45deg);
+  }
+
+  @keyframes bubble-animation{
+    0%{
+        }
+    33%{
+        transform: translateX(70px) translateY(205px);
+        }
+    66%{
+        transform: translateX(400px) translateY(-70px);
+        }
+    100%{
+        transform: translateX(0) translateY(0);
+        }
+  }
+
+  .bubble{
+    animation: bubble-animation 15s infinite 1s linear;
+  }
+
+}
+
+
