@@ -107,11 +107,42 @@
   }
 
   .button1{
-    @apply subtitle1 uppercase cursor-pointer border-b-8 border-aquaDD pb-5 hover:translate-x-1 transition-transform;
-    width: 33.5rem;
+    @apply subtitle1 text-3xl 800px:text-4xl w-[29rem] 800px:w-[33.5rem] uppercase cursor-pointer border-b-8 border-aquaDD pb-5 hover:translate-x-1 transition-transform;
     background-image: url( './assets/icons/arrow-magenta.svg' );
     background-repeat: no-repeat;
     background-position: 100% 20%;
+  }
+  
+  .button1-down{
+    @apply subtitle1 text-3xl 800px:text-4xl w-[29rem] 800px:w-[33.5rem] uppercase cursor-pointer border-b-8 border-aquaDD pb-5 hover:translate-x-1 transition-transform;
+    background-image: url( './assets/icons/arrow-magenta-down.svg' );
+    background-repeat: no-repeat;
+    background-position: 100% 20%;
+    background-size: 7%;
+  }
+
+  .button1-small{
+    @apply subtitle1 text-xl w-[20rem] uppercase cursor-pointer border-b-[6px] border-aquaDD pb-2 hover:translate-x-1 transition-transform;
+    background-image: url( './assets/icons/arrow-magenta.svg' );
+    background-repeat: no-repeat;
+    background-position: 100% 20%;
+    background-size: 11%;
+  }
+
+  .details-button-yellow{
+    @apply font-ob font-bold text-[15px] w-[10rem] uppercase cursor-pointer border-b-4 border-yellow2DD pb-1 hover:translate-x-1 transition-transform;
+    background-image: url( './assets/icons/arrow-yellow.svg' );
+    background-repeat: no-repeat;
+    background-position: 100% 40%;
+    background-size: 12%;
+  }
+
+  .details-button-indigo{
+    @apply font-ob font-bold text-[15px] w-[10rem] uppercase cursor-pointer border-b-4 border-indigo2DD pb-1 hover:translate-x-1 transition-transform;
+    background-image: url( './assets/icons/arrow-indigo.svg' );
+    background-repeat: no-repeat;
+    background-position: 100% 40%;
+    background-size: 12%;
   }
   
   .button2{
@@ -137,6 +168,15 @@
     background-size: cover;
     width: 1000px;
     height: 664px;
+    box-shadow: 6.5px 2.5px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .project-popup{
+    @apply relative;
+    background: url( './assets/phase2/aqua-box2.svg') no-repeat top;
+    background-size: contain;
+    width: 550px;
+    height: 900px;
     box-shadow: 6.5px 2.5px 20px rgba(0, 0, 0, 0.2);
   }
 }
@@ -174,6 +214,24 @@
     transform: rotate(-45deg);
   }
 
+  .phase2:after{
+    right: -94px;
+  }
+
+  .toplay:before{
+    right: -80px;
+  }
+
+  .toplay:after{
+    right: -62px;
+    top: 0.5px;
+  }
+
+  .address:after{
+    @apply text-aquaDD ml-5 text-4xl absolute -top-1;
+    content: '•';
+  }
+
   @keyframes bubble-animation{
     0%{
         }
@@ -190,6 +248,41 @@
 
   .bubble{
     animation: bubble-animation 15s infinite 1s linear;
+  }
+
+  @keyframes bubble-animation2{
+    0%, 100% {
+      transform: translateY(0);
+      transition-timing-function: ease-in;
+    }
+    50% {
+      transform: translateY(-3%);
+      transition-timing-function: ease-out;
+    }
+  }
+
+  .bubble-animation2{
+    animation: bubble-animation2 6s infinite;
+  }
+
+  .p-orange{
+    background: linear-gradient(133.19deg, #FFBDBF 5.69%, #FFD1C0 94.95%);
+  }
+
+  .p-green{
+    background: linear-gradient(133.19deg, #80F6CB 5.69%, #38FADE 94.95%);
+  }
+
+  .p-pink{
+    background: linear-gradient(133.19deg, #FF98E8 5.69%, #FDC0FE 87.98%);
+  }
+
+  .p-blue{
+    background: linear-gradient(133.19deg, #53FFFF 5.69%, #5BC5FF 94.95%);
+  }
+
+  .header-bg{
+    background: rgba(253, 192, 254, 0.3);
   }
 
 }

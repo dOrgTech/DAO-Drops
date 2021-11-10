@@ -37,7 +37,7 @@ const Phase1 = () => {
 
   return (
     <>
-      <div className='phase1-bg h-screen px-[10%] pt-16'>
+      <div className='phase1-bg h-screen px-[5%] 800px:px-[10%] pt-16'>
 
           <div className='flex items-start relative'>
               <img src={logo} alt='DAO Drops Logo' />
@@ -45,10 +45,10 @@ const Phase1 = () => {
                   <img className={`h-full w-full object-cover absolute transition-opacity ease-in duration-300 z-10 ${isVideoLoaded ? 'opacity-0' : 'opacity-100' }`} src={dropsThumbnail} alt='Drops Thumbnail' />
                   <video className={`h-full w-full object-cover absolute z-10 ${isVideoLoaded ? 'opacity-100' : 'opacity-0' }`} src={dropsVideo} autoPlay loop playsInline muted onLoadedData={onLoadedData} />
                   
-                  <img className='absolute top-[-6%] left-[35%] z-20 bubble' src={bubble} alt='Bubble' />
-                  <img className='absolute top-[20%] left-[9%] z-10' src={squiggle} alt='Squiggle' />
-                  <img className='absolute top-[44%] right-[19%] z-10' src={dots} alt='Dots' />
-                  <img className='absolute -bottom-1 left-[-3.125rem] z-0' src={smallDots} alt='Dots' />
+                  <img className='absolute top-[-6%] left-[35%] z-20 800px:bubble' src={bubble} alt='Bubble' />
+                  <img className='absolute top-[111%] left-[47%] 800px:top-[20%] 800px:left-[9%] z-20' src={squiggle} alt='Squiggle' />
+                  <img className='absolute top-[44%] right-[19%] z-10 hidden 800px:block' src={dots} alt='Dots' />
+                  <img className='absolute -bottom-32 -left-20 800px:-bottom-1 800px:left-[-3.125rem] z-0' src={smallDots} alt='Dots' />
 
                   <div className='absolute bottom-0 z-20'>
                     <div className='w-48 h-10 bg-white border-t-[6px] border-indigoDD text-lg font-ob font-bold uppercase flex justify-center items-center endsin-line'>
@@ -56,32 +56,32 @@ const Phase1 = () => {
                     </div>
 
                     <div className='w-[32rem] h-[6.5rem] bg-white border-t-[6px] border-r-[6px] border-indigoDD font-obWide font-black text-5xl flex justify-center items-center'>
-                      <Countdown date={'2021-11-11T12:00:00.000+00:00'} renderer={renderer} />  
+                      <Countdown date={'2021-11-20T12:00:00.000+00:00'} renderer={renderer} />  
                     </div>
                   </div>
 
               </div>
-              <img className='absolute -bottom-20 z-0' src={aquaBox} alt='Aqua Box' />
+              <img className='absolute -bottom-20 z-0 scale-75 800px:scale-100' src={aquaBox} alt='Aqua Box' />
           </div>
 
-          <div class='flex flex-wrap'>
-            <div className='mt-[6.25rem]'>
-                <div className='font-ob text-magentaDD text-sm border-b border-magentaDD pb-4 w-[19rem]'>
+          <div className='flex flex-wrap pb-8 800px:p-0'>
+            <div className='mt-[6.25rem] order-2 800px:order-1 w-full 800px:w-auto relative'>
+                <div className='font-ob text-magentaDD text-xl 800px:text-sm border-b border-magentaDD pb-4 w-full 800px:w-[19rem]'>
                   Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and funded<br/>
                   by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
                 </div>
 
-                <div className='mt-2.5'>
+                <div className='800px:mt-2.5 absolute 800px:relative right-4 top-4 800px:inset-0 scale-150 800px:scale-100'>
                   <a target='_blank' rel='noreferrer' href='https://twitter.com'>
                     <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
                   </a>
                 </div>
             </div>
 
-            <div className='ml-16 mt-10 z-10'>
-              <h3 className='text-[2.75rem] mb-5'>something big is about to drop.</h3>
-              <div className='subtitle2 mb-10'>know someone deserving?</div>
-              <div className='button1' onClick={ () => { SetPopupStatus('nominate'); } }>Nominate Them</div>
+            <div className='800px:ml-16 mt-48 800px:mt-10 z-10 order-1 800px:order-2'>
+              <h3 className='text-3xl 800px:text-[2.6rem] mb-5'>something big is about to drop.</h3>
+              <div className='subtitle2 hidden 800px:block'>know someone deserving?</div>
+              <div className='button1 mt-10' onClick={ () => { SetPopupStatus('nominate'); } }>Nominate Them</div>
             </div>
           </div>
 
@@ -108,7 +108,7 @@ const NominatePopup = (props) => {
                   
                   <div className='flex'>
                     <div className='w-max mr-16'>
-                      <div class='bg-gray1 border-gray2 border-[7px] rounded-full w-max p-5 mb-2 cursor-pointer'><img src={picture} alt='Picture' /></div>
+                      <div className='bg-gray1 border-gray2 border-[7px] rounded-full w-max p-5 mb-2 cursor-pointer'><img src={picture} alt='Picture' /></div>
                       <div className='font-ibm font-bold text-xl text-center'>Picture</div>
                     </div>
 
@@ -148,7 +148,7 @@ const NominatePopup = (props) => {
             
             <div className='flex mt-24'>
                 <div div className='w-max mr-16'>
-                  <div class='bg-gray1 border-gray2 border-[7px] rounded-full w-max p-5'><img src={picture} alt='Picture' /></div>
+                  <div className='bg-gray1 border-gray2 border-[7px] rounded-full w-max p-5'><img src={picture} alt='Picture' /></div>
                 </div>
 
                 <div>

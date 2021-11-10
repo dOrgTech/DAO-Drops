@@ -21,7 +21,7 @@ export const rangeValidation = (number, max) => {
 }
 
 export const truncate = (string) => {
-    if (string.length > 11) string = string.substr(0, 6) + "..." + string.substr(string.length - 4, string.length)
+    if (string.length > 11) string = string.substr(0, 11) + "..." + string.substr(string.length - 11, string.length)
     return string
 }
 
