@@ -1,0 +1,20 @@
+[
+  {
+    "projectName": "Good project number one",
+    "projectDescription": "A good Project",
+    "website": "Website address of this good project",
+    "address": "0x36928500bc1dcd7af6a2b4008875cc336b927d57",
+    "currentPoints": 0,
+    "icon": "No Pic",
+    "contact": "www.contactaddressOne.com"
+  },
+  {
+    "projectName": "Good project number two",
+    "projectDescription": "Another good Project",
+    "website": "Website address of this good project",
+    "address": "0x7e1e3334130355799f833ffec2d731bca3e68af6",
+    "currentPoints": 0,
+    "icon": "No Pic",
+    "contact": "www.contactaddressTwo.com"
+  }
+]
