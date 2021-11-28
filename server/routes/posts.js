@@ -16,8 +16,8 @@ const router = express.Router();
 router.get("/", getPosts);
 router.post("/", createPost);
 router.patch("/:id", updatePost);
-router.get("/:id", getScore);
-router.get("/", getPicks);
-router.patch("/:id", updatePick);
+router.get("/score/:id", getScore);
+router.get("/picks/", getPicks);
+router.patch("/picks/:id", updatePick);
 
 export default router;
