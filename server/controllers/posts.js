@@ -36,10 +36,14 @@ export const updatePost = async (req, res) => {
 };
 
 export const getScore = async (req, res) => {
+  const { id: _id } = req.params;
   const account = req.body;
   try {
-    const score = await PostMessage.find(account);
-    res.status(200).json(score);
+    const score = await GetScore.findOne({"account": _id});
+    if (score) {
+      res.status(200).json({"score": Number(score.score)}); }
+    else {
+      res.status(200).json({"score": 0}); }
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

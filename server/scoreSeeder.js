@@ -26,7 +26,8 @@ mongoose
 
 const scores = JSON.parse(
   fs.readFileSync(
-    "/home/stan36/repos/DAO-Drops/server/scoreData/ScoreSheet.json",
+    // "scoreData/SS.json",
+    "scoreData/ScoreSheet.json",
     "utf-8"
   )
 );
