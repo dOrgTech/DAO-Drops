@@ -7,7 +7,8 @@ const picksSchema = mongoose.Schema({
   address: String,
   currentPoints: String,
   icon: String,
-  contact: String
+  contact: String,
+  contactMethod: String
 });
 
 const Picks = mongoose.model("Picks", picksSchema);
