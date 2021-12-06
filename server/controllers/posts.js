@@ -45,6 +45,25 @@ export const getScore = async (req, res) => {
   }
 };
 
+export const updateScore = async (req, res) => {
+  const { id: _id } = req.params;
+  const accountData = req.body; // should include:
+  // acoount: the eth address of the account being updated
+  // score: the updated remaining score of this account
+  // object array: an array of objects containing the projects this account has allocated points to as well as how many points each received
+  // object ex:
+  // {
+  //    id: project mongo id,
+  //    points: number of points this account allocated to this project
+  // }
+
+  const updateScore = await PostMessage.findByIdAndUpdate(_id, accountData, {
+    new: true
+  });
+
+  res.json(updatePost);
+};
+
 export const getPicks = async (req, res) => {
   try {
     const picks = await Picks.find();
@@ -56,11 +75,15 @@ export const getPicks = async (req, res) => {
 
 export const updatePick = async (req, res) => {
   const { id: _id } = req.params;
-  const post = req.body;
+  const pickData = req.body;
 
-  const updatePick = await Picks.findByIdAndUpdate(_id, post, {
-    new: true
-  });
+  const updatedPick = await Picks.findByIdAndUpdate(
+    _id,
+    { currentPoints: pickData },
+    {
+      new: true
+    }
+  );
 
-  res.json(updatePick);
+  res.json(updatedPick);
 };

@@ -5,6 +5,7 @@ import {
   createPost,
   updatePost,
   getScore,
+  updateScore,
   getPicks,
   updatePick
 } from "../controllers/posts.js";
@@ -17,6 +18,7 @@ router.get("/", getPosts);
 router.post("/", createPost);
 router.patch("/:id", updatePost);
 router.get("/score/:id", getScore);
+router.patch("/score/:id", updateScore);
 router.get("/picks/", getPicks);
 router.patch("/picks/:id", updatePick);
 
