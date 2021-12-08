@@ -5,10 +5,10 @@ const picksSchema = mongoose.Schema({
   projectDescription: String,
   website: String,
   address: String,
-  currentPoints: String,
   icon: String,
   contact: String,
-  contactMethod: String
+  contactMethod: String,
+  currentPoints: Array
 });
 
 const Picks = mongoose.model("Picks", picksSchema);
