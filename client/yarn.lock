@@ -5862,6 +5862,11 @@
   "resolved" "https://registry.npmjs.org/caseless/-/caseless-0.12.0.tgz"
   "version" "0.12.0"
 
+"chained-function@^0.5.0":
+  "integrity" "sha1-JWS73994AxlL6/daayvQQe3iOzo="
+  "resolved" "https://registry.npmjs.org/chained-function/-/chained-function-0.5.0.tgz"
+  "version" "0.5.0"
+
 "chalk@^0.5.1":
   "integrity" "sha1-Zjs6ZItotV0EaQ1JFnqoN4WPIXQ="
   "resolved" "https://registry.npmjs.org/chalk/-/chalk-0.5.1.tgz"
@@ -15815,7 +15820,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.5"
 
-"prop-types@^15.5.10", "prop-types@^15.7.2":
+"prop-types@^15.5.10", "prop-types@^15.6.0", "prop-types@^15.7.2":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -16181,6 +16186,14 @@
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.8.3.tgz"
   "version" "0.8.3"
 
+"react-repeatable@^2.0.1":
+  "integrity" "sha512-i4IA2s+1Fo59VtVN3lPi2sYUv3etug846YbT2gXBPNo+qfoAmoi2kDWY/truOqAxxza67wR67wqGEQYHVctDWw=="
+  "resolved" "https://registry.npmjs.org/react-repeatable/-/react-repeatable-2.0.1.tgz"
+  "version" "2.0.1"
+  dependencies:
+    "chained-function" "^0.5.0"
+    "prop-types" "^15.6.0"
+
 "react-scripts@^4.0.0", "react-scripts@4.0.3":
   "integrity" "sha512-S5eO4vjUzUisvkIPB7jVsKtuH2HhWcASREYWHAQ1FP5HyCv3xgn+wpILAEWkmy+A+tTNbSZClhxjT3qz6g4L1A=="
   "resolved" "https://registry.npmjs.org/react-scripts/-/react-scripts-4.0.3.tgz"
@@ -16247,7 +16260,7 @@
   optionalDependencies:
     "fsevents" "^2.1.3"
 
-"react@*", "react@^17.0.2", "react@>= 0.14.0 < 18.0.0", "react@>= 15", "react@>= 16", "react@17.0.2":
+"react@*", "react@^0.14.0 || >=15.0.0", "react@^17.0.2", "react@>= 0.14.0 < 18.0.0", "react@>= 15", "react@>= 16", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"

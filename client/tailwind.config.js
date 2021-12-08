@@ -9,8 +9,6 @@ module.exports = {
         aquaDD: '#2bfae1',
         magentaDD: '#ff6ce1',
         yellowDD: '#ffec86',
-        yellow2DD: '#fff8d2',
-        indigo2DD: '#b1a4ff',
         gray1: '#fafafa',
         gray2: '#f2f2f2',
         gray3: '#dedede',

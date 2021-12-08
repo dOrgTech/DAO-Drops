@@ -42,7 +42,7 @@ const Phase1 = () => {
   return (
     <>
       <div className='phase1-bg-mobile 1000px:phase1-bg 1800px:h-screen px-[5%] 1000px:px-[10%] pt-16'>
-
+          <a className='font-ob font-semibold text-magentaDD tracking-[4px] text-xl absolute right-[5%] 1000px:right-[10%] 1200px:right-16 top-6 z-20' href="#">FAQ</a>
           <div className='flex items-start relative'>
               <img src={logo} alt='DAO Drops Logo' />
               <div className='ml-8 600px:ml-12 w-full h-[31rem] 1000px:h-[38rem] border-[6px] border-indigoDD z-10 relative'>
@@ -88,7 +88,7 @@ const Phase1 = () => {
 
             <div className='1000px:ml-16 mt-40 1000px:mt-10 z-10 order-1 1000px:order-2'>
               <h3 className='text-3xl 600px:text-4xl 1000px:text-[calc(1.4rem+1vw)] mb-5 leading-10'>something big is about to drop.</h3>
-              <div className='subtitle2 hidden 1000px:block text-[calc(0.8rem+1vw)]'>know someone deserving?</div>
+              <div className='subtitle2 hidden 1000px:block text-[calc(0.8rem+1vw)]'>know a project or someone deserving?</div>
               <div className='button1-small 600px:button1 mt-8 1000px:mt-10 1000px:mb-8' onClick={ () => { SetPopupStatus('nominate'); } }>Nominate Them</div>
             </div>
           </div>
@@ -112,14 +112,18 @@ const NominatePopup = (props) => {
     SetPopupStatus('submitted');
   };
 
+  useEffect(() => {
+    document.querySelectorAll(".image-upload div input").forEach(el => el.setAttribute("accept","image/*"));
+  }, [popupStatus]);
+
   return (
     <>
       { popupStatus === 'nominate' ?
-          <div className='flex items-center justify-center fixed inset-0 bg-popupOverlay z-10' id='popup-overlay' onClick={(e) => e.target === document.querySelector('#popup-overlay') ? (document.querySelector('#popup-overlay').style.display = 'none', SetPopupStatus('hidden'), setProjectData(newProject)) : null}>
+          <div className='flex items-center justify-center fixed inset-0 bg-popupOverlay z-30' id='popup-overlay' onClick={(e) => e.target === document.querySelector('#popup-overlay') ? (document.querySelector('#popup-overlay').style.display = 'none', SetPopupStatus('hidden'), setProjectData(newProject)) : null}>
               <div className='popup-mobile 800px:popup'>
                 <img className='absolute -right-4 -top-4 cursor-pointer' src={closeIcon} alt="Close Popup" onClick={() => {document.querySelector('#popup-overlay').style.display = "none"; SetPopupStatus('hidden'); setProjectData(newProject); }} />
                 <div className='rounded-t-[4.5rem] mt-[3.75rem] px-8 800px:px-16 py-8 bg-white w-full h-[calc(100%-3.75rem)]'>
-                  <div className='font-ibm font-bold text-lg text-center mb-9'>Hello! Please nominate a project that you think should receive funds.</div>
+                  <div className='font-ibm font-bold text-base 600px:text-lg text-left mb-9 px-2 800px:px-4'>Hello! Please nominate a project or individual that you think should receive funds. DAO drops focuses on retroactive public goods funding.</div>
 
                   <div className='flex'>
                     <div className='w-max mr-16 hidden 800px:block'>
@@ -145,18 +149,18 @@ const NominatePopup = (props) => {
                         </div>
 
                         <div className="flex flex-col justify-end w-full">
-                          <label for='project-name' className='required'>Project Name</label>
+                          <label htmlFor='project-name' className='required'>Project or individual Name</label>
                           <input className='w-full h-10 mt-1.5 mb-3' type='text' id='project-name' name='project-name' value={projectData.name} onChange={ (e) => setProjectData({...projectData, name: e.target.value}) } required />
                         </div>
                       </div>
 
-                      <label for='funding-reason' className='required'>Why should they receive the funding? Tell us more!</label>
-                      <textarea className='w-full h-28 mt-1.5 mb-2' id='funding-reason' name='funding-reason' value={projectData.message} onChange={ (e) => setProjectData({...projectData, message: e.target.value}) } required />
+                      <label htmlFor='funding-reason' className='required'>Why should they receive the funding? Tell us more!</label>
+                      <textarea className='w-full h-28 mt-1.5 mb-2' id='funding-reason' name='funding-reason' maxLength= "1400" value={projectData.message} onChange={ (e) => setProjectData({...projectData, message: e.target.value}) } required />
 
-                      <label for='website'>Link to website/Gitcoin</label>
+                      <label htmlFor='website'>Link to website/Gitcoin</label>
                       <input className='w-full h-10 mt-1.5 mb-3' type='text' id='website' name='website' value={projectData.link} onChange={ (e) => setProjectData({...projectData, link: e.target.value}) }  />
 
-                      <label for='contact' className='required'>Contact of project (for verification)</label>
+                      <label htmlFor='contact' className='required'>Contact of project (for verification)</label>
                       <div className='flex items-center mt-1.5 mb-6'>
                         <select className='border border-gray3 rounded-[1.25rem] h-10 px-7 min-w-[9rem] text-gray4 font-bold mr-7' name="contact-method" id="contact-method" value={projectData.contactMethod} onChange={ (e) => setProjectData({...projectData, contactMethod: e.target.value}) } >
                           <option value="email">email</option>
@@ -175,13 +179,13 @@ const NominatePopup = (props) => {
           </div>
 
         : popupStatus === 'submitted' ?
-        <div className='flex items-center justify-center fixed inset-0 bg-popupOverlay z-10' id='popup-overlay' onClick={(e) => e.target === document.querySelector('#popup-overlay') ? (document.querySelector('#popup-overlay').style.display = 'none', SetPopupStatus('hidden'), setProjectData(newProject)) : null}>
+        <div className='flex items-center justify-center fixed inset-0 bg-popupOverlay z-30' id='popup-overlay' onClick={(e) => e.target === document.querySelector('#popup-overlay') ? (document.querySelector('#popup-overlay').style.display = 'none', SetPopupStatus('hidden'), setProjectData(newProject)) : null}>
         <div className='popup-mobile 800px:popup' style={{backgroundPosition: '0 -75px'}}>
           <img className='absolute -right-4 -top-4 cursor-pointer' src={closeIcon} alt="Close Popup" onClick={() => {document.querySelector('#popup-overlay').style.display = "none"; SetPopupStatus('hidden'); setProjectData(newProject); }} />
           <div className='rounded-t-[4.5rem] mt-[13rem] px-8 800px:px-16 py-8 bg-white w-full h-[calc(100%-13rem)]'>
             
             <div className='flex flex-col 800px:flex-row mt-10 mb-24 1000px:my-[109.5px] justify-center items-center'>
-                <div div className='w-max mb-8 800px:mb-0 800px:mr-16'>
+                <div className='w-max mb-8 800px:mb-0 800px:mr-16'>
                   <div className='bg-gray1 border-gray2 border-[6px] w-max rounded-full'>
                     <img className='rounded-full w-[150px] h-[150px] object-contain' src={projectData.image ? projectData.image : picture} alt='Picture' />
                   </div>

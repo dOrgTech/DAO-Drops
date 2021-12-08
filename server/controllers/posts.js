@@ -65,7 +65,7 @@ export const updateScore = async (req, res) => {
     new: true
   });
 
-  res.json(updatePost);
+  res.json(updateScore);
 };
 
 export const getPicks = async (req, res) => {

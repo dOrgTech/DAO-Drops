@@ -23,6 +23,7 @@ import squiggle2 from '../assets/phase2/squiggle2.svg'
 import metamask from '../assets/phase2/metamask.png'
 import axios from "axios";
 import {useStickyState} from '../customHooks/StickyState'
+import Repeatable from 'react-repeatable'
 
 // Phase2 Component
 // ------------------------------------------------------------------------------------------------------- //
@@ -69,6 +70,7 @@ const Phase2 = (props) => {
       <div className='phase2-bg px-[5%] 1000px:px-[10%]'>
 
           <header className={`flex justify-end z-20 w-full pt-4 ${props.walletStatus === 'connected' && 'fixed px-[5%] 1000px:pr-[10%] ml-[-5%] 1000px:ml-[-10%] pt-2 1000px:pt-4 bg-headerColor h-[65px]'}`}>
+            <a className={`font-ob font-semibold text-magentaDD tracking-[4px] text-xl absolute left-[5%] 1000px:left-[calc(10%+97px)] top-5 z-20 ${props.walletStatus === 'connected' && 'hidden 1000px:block'}`} href="#">FAQ</a>
             { props.walletStatus === 'connected'
               ? <div className='uppercase flex flex-col relative w-full 1000px:w-auto'>
                   <div className='border-[3px] border-aquaDD aqua-dot font-ob font-bold w-[21rem] px-4 pb-2 pt-1 mb-2 bg-white hidden 1000px:block'>{truncate(props.address,11)}</div>
@@ -223,7 +225,7 @@ const Phase2 = (props) => {
           : <div id='drop-points' className='mt-12 1000px:mt-32 mb-20 z-10 text-center m-auto'>
               <h3 className='text-2xl 600px:text-3xl 1000px:text-[2.6rem] mb-6 800px:mb-10'>HOW TO DROP POINTS</h3>
               <div className='subtitle2 text-base 600px:text-lg 800px:text-xl 1000px:text-2xl mb-10 1200px:px-[13%]'>Distribute your points in the projects that you think they should receive fundings. You can modify your points until Phase 2 ends and it will always be automatically saved.</div>
-              <div className='mt-16 mb-8 mx-auto w-72 h-[6px] bg-[#ACBBC2] rounded-full opacity-40 1000px:hidden'></div>
+              <div className='mt-16 mb-8 mx-auto w-72 h-[6px] bg-[#ACBBC2] rounded-full opacity-40 1000px:hidden'/>
             </div>
           }
 
@@ -256,14 +258,16 @@ const Phase2 = (props) => {
       </div>
 
       <footer className='w-full h-24 px-[4%] flex justify-between items-center bg-footerColor'>
-        <div className='font-ob text-magentaDD text-lg'>
+        <div className='font-ob text-magentaDD text-base 600px:text-lg 1000px:w-1/3'>
           Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and funded<br/>
           by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
         </div>
 
-        <div className='scale-150'>
+        <a className='font-ob font-semibold text-magentaDD tracking-[4px] text-xl 1000px:w-1/3 text-center' href="#">FAQ</a>
+
+        <div className='1000px:w-1/3 text-right'>
           <a target='_blank' rel='noreferrer' href='https://twitter.com'>
-            <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
+            <img className='inline scale-150 hover:scale-[155%]' src={twitter} alt='Twitter' />
           </a>
         </div>
       </footer>
@@ -280,23 +284,41 @@ const Project = (props) => {
   const colorsPattern = [0,1,2,3,1,2,3,0,2,3,0,1,3,0,1,2]
   const color = colors[colorsPattern[props.index%16]]
 
-    return (
-    <div className={`w-52 h-48 700px:w-72 700px:h-64 rounded-[1.75rem] p-2 pl-5 700px:p-4 700px:pl-7 relative ${color} `}>
-      <div className='font-ob font-black text-[1.65rem] 700px:text-4xl leading-8 700px:leading-10 pt-1 ellipsis'>{props.name}</div>
-      <div className={`${color === 'p-blue' ? 'details-button-indigo' : 'details-button-yellow' } mt-3 700px:mt-4 z-10`} onClick={ () => { props.setPopupStatus('visible'); props.setPopupDetails({ name: props.name, message: props.desc, link: props.website, image: props.icon, id:props.id }); } }>view details</div>
+  function decrement() {
+    if(props.votes && props.votes[props.id] !== 0) {
+      props.setVotes(votes => ({...votes, [props.id]: votes[props.id]-1}));
+      props.setPoints(props.points+1);
+    }
+  }
 
-      <div class='flex mt-6 700px:mt-10'>
-        <img src={minus} alt="minus" className='cursor-pointer w-7 700px:w-auto' onClick={props.votes && props.votes[props.id] !== 0 ? () => { props.setVotes({...props.votes, [props.id]: props.votes[props.id]-1}); props.setPoints(props.points+1) } : null } />
-        <span className='font-ibm font-semibold text-[1.5rem] 700px:text-[1.75rem] mx-1.5 700px:mx-2'>{props.votes ? props.votes[props.id] : '0'}</span>
-        <img src={plus} alt="plus" className='cursor-pointer w-7 700px:w-auto' onClick={ props.votes && props.points !==0 ?  () => {props.setVotes({...props.votes, [props.id]: props.votes[props.id]+1}); props.setPoints(props.points-1) } : 0 }/>
-      </div>
+  function increment() {
+    if(props.votes && props.points !==0) {
+      props.setVotes(votes => ({...votes, [props.id]: votes[props.id]+1}));
+      props.setPoints(props.points-1)
+    }
+  }
 
-      { props.icon &&
-        <>
-          {color === 'p-pink' && <img className='absolute bottom-6 right-2 mr-3 mb-3 700px:mr-4 700px:mb-4 z-0 w-[42px] 700px:w-auto' src={smallDots2} alt='Dots' /> }
-          <img className='absolute bottom-0 right-0 mr-3 mb-3 700px:mr-4 700px:mb-4 w-[55px] h-[55px] 700px:w-[82px] 700px:h-[82px] object-cover rounded-full' src={props.icon} alt={props.name} />
-        </>
-      }
+  return (
+  <div className={`w-52 h-48 700px:w-72 700px:h-64 rounded-[1.75rem] p-2 pl-5 700px:p-4 700px:pl-7 relative ${color} `}>
+    <div className='font-ob font-black text-[1.65rem] 700px:text-4xl leading-8 700px:leading-10 pt-1 ellipsis'>{props.name}</div>
+    <div className='mt-3 700px:mt-4 z-10 details-button' onClick={ () => { props.setPopupStatus('visible'); props.setPopupDetails({ name: props.name, message: props.desc, link: props.website, image: props.icon, id:props.id }); } }>view details</div>
+
+    {!props.votes
+      ? <div className='flex mt-6 700px:mt-10 font-medium'>Loading...</div>
+      : <div className='flex mt-6 700px:mt-10 items-center'>
+          <Repeatable repeatInterval={100} onPress={decrement} onHold={decrement}> <img src={minus} alt="minus" className='cursor-pointer w-7 700px:w-auto' /> </Repeatable>
+          <span className='font-ibm font-semibold text-[1.5rem] 700px:text-[1.75rem] mx-1.5 700px:mx-2.5'>{props.votes ? props.votes[props.id] : '0'}</span>
+          <Repeatable repeatInterval={100} onPress={increment} onHold={increment}> <img src={plus} alt="plus" className='cursor-pointer w-7 700px:w-auto' /> </Repeatable>
+          {/*<input className='font-ibm font-semibold text-[1.5rem] 700px:text-[1.75rem] mx-1.5 700px:mx-2 w-[50px]' type="number" value={props.votes[props.id]}onChange={ (e) => { props.setVotes({...props.votes, [props.id]: Number(e.target.value)}); props.setPoints(0); } } />*/}
+        </div>
+    }
+
+    { props.icon &&
+      <>
+        {color.includes("p-pink") && <img className='absolute bottom-6 right-2 mr-3 mb-3 700px:mr-4 700px:mb-4 z-0 w-[42px] 700px:w-auto' src={smallDots2} alt='Dots' /> }
+        <img className='absolute bottom-0 right-0 mr-3 mb-3 700px:mr-4 700px:mb-4 w-[55px] h-[55px] 700px:w-[82px] 700px:h-[82px] object-cover rounded-full' src={props.icon} alt={props.name} />
+      </>
+    }
 
 
     </div>
@@ -307,6 +329,20 @@ const ProjectPopup = (props) => {
   
   const { popupStatus, setPopupStatus, popupDetails, setVotes, votes, points, setPoints } = props
 
+  function decrement() {
+    if(votes && votes[popupDetails.id] !== 0) {
+      setVotes(v => ({...v, [popupDetails.id]: v[popupDetails.id]-1}));
+      setPoints(points+1);
+    }
+  }
+
+  function increment() {
+    if(votes && points !==0) {
+      setVotes(v => ({...v, [popupDetails.id]: v[popupDetails.id]+1}));
+      setPoints(points-1)
+    }
+  }
+
   return (
     <>
       { popupStatus === 'visible' ?
@@ -316,7 +352,7 @@ const ProjectPopup = (props) => {
           
             <div className='bg-white w-full relative h-[calc(100%-89px)] mt-[89px] border-r-[6px] border-b-[6px] border-l-[6px] border-indigoDD'>
 
-                <div div className='absolute inset-x-0 top-[-4.4rem] m-auto w-max'>
+                <div className='absolute inset-x-0 top-[-4.4rem] m-auto w-max'>
                   <div className='bg-white border-indigoDD border-[7px] rounded-full flex justify-center items-center'><img className='w-32 h-32 object-none rounded-full' src={popupDetails.image} alt='Project Icon' /></div>
                 </div>
 
@@ -333,10 +369,10 @@ const ProjectPopup = (props) => {
                     <a target='_blank' rel='noreferrer' href={`https://etherscan.io/address/0x07a80533c9e5179e99c0ca60a51a552d0c38f0ca`} className='font-ibm'>0x07a80533c9e5179e99c0ca60a51a552d0c38f0ca</a>
                   </div>
 
-                  <div class='flex mt-8 justify-center'>
-                    <img className='scale-[135%] cursor-pointer' src={minus} alt="minus" onClick={votes && votes[popupDetails.id] !== 0 ? () => { setVotes({...votes, [popupDetails.id]: votes[popupDetails.id]-1}); setPoints(points+1) } : null } />
+                  <div className='flex mt-8 justify-center items-center'>
+                    <Repeatable repeatInterval={100} onPress={decrement} onHold={decrement}> <img className='scale-[135%] cursor-pointer' src={minus} alt="minus" /> </Repeatable>
                     <span className='font-ibm font-semibold text-[2.5rem] mx-4'>{votes ? votes[popupDetails.id] : '0'}</span>
-                    <img className='scale-[135%] cursor-pointer' src={plus} alt="plus" onClick={ votes && points !==0 ?  () => {setVotes({...votes, [popupDetails.id]: votes[popupDetails.id]+1}); setPoints(points-1) } : 0 }/>
+                    <Repeatable repeatInterval={100} onPress={increment} onHold={increment}> <img className='scale-[135%] cursor-pointer' src={plus} alt="plus" /> </Repeatable>
                   </div>
 
                 </div>

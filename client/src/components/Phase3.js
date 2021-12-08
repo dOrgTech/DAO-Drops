@@ -27,7 +27,7 @@ const Phase3 = (props) => {
   const [popupStatus, setPopupStatus] = useState('hidden');
   const [connectToggle, setConnectToggle] = useState(false);
   const [walletToggle, setWalletToggle] = useState(false);
-  const [claimed, setClaimed] = useState(false);
+  const [claimed, setClaimed] = useState('check');
   const [projectsPicks, setProjectsPicks] = useState();
   const [popupDetails, setPopupDetails] = useState();
 
@@ -46,6 +46,7 @@ const Phase3 = (props) => {
       <div className='phase2-bg px-[5%] 1000px:px-[10%]'>
 
           <header className={`flex justify-end z-30 w-full pt-4 ${props.walletStatus === 'connected' && 'fixed px-[5%] 1000px:pr-[10%] ml-[-5%] 1000px:ml-[-10%] pt-2 1000px:pt-4 bg-headerColor h-[65px]'}`}>
+            <a className={`font-ob font-semibold text-magentaDD tracking-[4px] text-xl absolute left-[5%] 1000px:left-[calc(10%+81px)] top-4 z-20 ${props.walletStatus === 'connected' && 'hidden 600px:block'}`} href="#">FAQ</a>
             { props.walletStatus === 'connected'
               ? <div className='flex flex-col relative'>
                   <div className='border-[3px] border-aquaDD aqua-dot after:content-["•"] after:right-4 font-ob font-bold w-[21rem] px-4 pb-2 pt-1 mb-2 bg-white cursor-pointer uppercase' onClick={() => setWalletToggle(!walletToggle)}>{truncate(props.address,11)}</div>
@@ -57,7 +58,7 @@ const Phase3 = (props) => {
                           <div className='text-left font-ob font-normal mt-4'>Signed in as:</div>
                           <div className='break-words text-left leading-5 pb-3'>{props.address}</div>
                           
-                          {claimed && 
+                          {claimed === 'winner' &&
                             <>
                               <hr className='-mx-4 mt-3' />
                               <div className='text-left font-ob font-normal mt-5 mb-1'>Your rewards:</div>
@@ -107,16 +108,42 @@ const Phase3 = (props) => {
 
                 <div className='w-[24rem] 1000px:w-[28rem] h-[31.1rem] bg-white border-[6px] border-indigoDD font-obWide font-black text-5xl flex flex-col'>
                   <div className='border-b-[6px] w-full pb-6 pt-3 text-center border-indigoDD text-4xl 1000px:text-5xl'>REWARDS</div>
-                  <div className={`px-8 ${claimed ? 'py-6' : 'py-10'} flex flex-col`}>
-                    <div className='font-obWide font-medium text-lg'>{claimed ? 'Awesome!' : 'You won the'}</div>
-                    <div className='text-xl 1000px:text-2xl'>{claimed ? 'DAO drops poap will now appear on your wallet.' : 'DAO drops poap!'}</div>
-                    <img className='mx-auto mt-2' src={poap} alt='poap' />
-                    <div className='text-2xl text-center'>DDP</div>
-                    { claimed
-                      ? <div className='font-ob font-medium text-center mt-3 text-xl'>✅ CLAIMED</div>
-                      : <button className='button2 ml-auto text-sm mt-6 mx-auto' onClick={() => setClaimed(true)}>Claim Poap</button>
-                    }
-                  </div>   
+
+
+                  { claimed === 'check'
+                    ? <div className='px-8 py-12 flex flex-col'>
+                        <div className='font-obWide font-medium text-lg'>If you participated as an allocator you have a reward!</div>
+                        <button className='button2 text-sm my-8 uppercase w-60' style={{backgroundPosition: '90% 50%'}} onClick={props.walletStatus === 'connected' ? () => setClaimed('winner') : () => setConnectToggle(true)}>Check Rewards</button>
+                        <div className='font-obWide font-medium text-lg'>You can check the leader board results below.</div>
+                      </div>
+
+                    : claimed === 'winner'
+                    ? <div className='px-8 py-10 flex flex-col'>
+                        <div className='font-obWide font-medium text-lg'>You won the</div>
+                        <div className='text-xl 1000px:text-2xl'>DAO drops poap</div>
+                        <img className='mx-auto mt-6' src={poap} alt='poap' />
+                        <div className='text-2xl text-center'>DDP</div>
+                        <button className='button2 ml-auto text-sm mt-8 mx-auto' onClick={() => setClaimed('claimed')}>Claim Poap</button>
+                      </div>
+
+                    : claimed === 'claimed'
+                      ? <div className='px-8 py-6 flex flex-col'>
+                          <div className='font-obWide font-medium text-lg'>Awesome!</div>
+                          <div className='text-xl 1000px:text-2xl'>DAO drops poap will now appear on your wallet.</div>
+                          <img className='mx-auto mt-3' src={poap} alt='poap' />
+                          <div className='text-2xl text-center'>DDP</div>
+                          <div className='font-ob font-medium text-center mt-5 text-xl'>✅ CLAIMED</div>
+                        </div>
+
+                    : claimed === 'not-winner'
+                      ? <div className='pl-8 pr-16 py-12 flex flex-col'>
+                          <div className='font-obWide font-medium text-xl mb-10'>You don’t have any rewards to claim but be sure to participate on the next Dao Drops!</div>
+                          <div className='font-obWide font-medium text-xl'>You can check the leader board results below.</div>
+                      </div>
+                    : null
+                  }
+
+
                 </div>
               </div>
               
@@ -209,14 +236,16 @@ const Phase3 = (props) => {
       </div>
 
       <footer className='w-full h-24 px-[4%] flex justify-between items-center bg-footerColor'>
-        <div className='font-ob text-magentaDD text-lg'>
+        <div className='font-ob text-magentaDD text-base 600px:text-lg 1000px:w-1/3'>
           Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and funded<br/>
           by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
         </div>
 
-        <div className='scale-150'>
+        <a className='font-ob font-semibold text-magentaDD tracking-[4px] text-xl 1000px:w-1/3 text-center' href="#">FAQ</a>
+
+        <div className='1000px:w-1/3 text-right'>
           <a target='_blank' rel='noreferrer' href='https://twitter.com'>
-            <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
+            <img className='inline scale-150 hover:scale-[155%]' src={twitter} alt='Twitter' />
           </a>
         </div>
       </footer>
@@ -235,7 +264,7 @@ const Project = (props) => {
   return (
     <div className={`w-52 h-48 700px:w-72 700px:h-64 rounded-[1.75rem] p-2 pl-5 700px:p-4 700px:pl-7 relative ${color} `}>
       <div className='font-ob font-black text-[1.65rem] 700px:text-4xl leading-8 700px:leading-10 pt-1 ellipsis'>{props.name}</div>
-      <div className={`${color === 'p-blue' ? 'details-button-indigo' : 'details-button-yellow' } mt-3 700px:mt-4 z-10`} onClick={ () => { props.setPopupStatus('visible'); props.setPopupDetails({ name: props.name, message: props.desc, link: props.website, image: props.icon, points:props.points }); } }>view details</div>
+      <div className='mt-3 700px:mt-4 z-10 details-button' onClick={ () => { props.setPopupStatus('visible'); props.setPopupDetails({ name: props.name, message: props.desc, link: props.website, image: props.icon, points:props.points }); } }>view details</div>
 
       <div className='flex flex-col mt-2 700px:mt-5'>
         <div className='font-obWide font-black text-4xl 700px:text-5xl pb-0.5 700px:pb-1'>{props.points || '0'}</div>
@@ -273,7 +302,7 @@ const ProjectPopup = (props) => {
           
             <div className='bg-white w-full relative h-[calc(100%-89px)] mt-[89px] border-r-[6px] border-b-[6px] border-l-[6px] border-indigoDD'>
 
-                <div div className='absolute inset-x-0 top-[-4.4rem] m-auto w-max'>
+                <div className='absolute inset-x-0 top-[-4.4rem] m-auto w-max'>
                   <div className='bg-white border-indigoDD border-[7px] rounded-full flex justify-center items-center'><img className='w-32 h-32 object-none rounded-full' src={popupDetails.image} alt='Project Icon' /></div>
                 </div>
 
