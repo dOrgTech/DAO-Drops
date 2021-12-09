@@ -11,7 +11,7 @@ import {
 
 const router = express.Router();
 
-//reached at: localhost:5000/submissions
+//reached at: localhost:5000/posts
 
 router.get("/", getPosts);
 router.post("/", createPost);

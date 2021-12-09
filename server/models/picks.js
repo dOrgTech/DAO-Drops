@@ -7,6 +7,7 @@ const picksSchema = mongoose.Schema({
   address: String,
   icon: String,
   contact: String,
+  contactMethod: String,
   currentScore: Number,
   currentPoints: Array
 });

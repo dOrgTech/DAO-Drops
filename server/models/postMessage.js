@@ -6,7 +6,8 @@ const postSchema = mongoose.Schema({
   address: String,
   link: String,
   contact: String,
-  selectedFile: String,
+  contactMethod: String,
+  image: String,
   createdAt: {
     type: Date,
     default: new Date()

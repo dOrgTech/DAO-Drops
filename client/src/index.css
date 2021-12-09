@@ -1,6 +1,329 @@
-body {
-  background-color: #ffffff;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='0' x2='0' y1='0' y2='100%25' gradientTransform='rotate(240)'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='1' stop-color='%234FE'/%3E%3C/linearGradient%3E%3Cpattern patternUnits='userSpaceOnUse' id='b' width='540' height='450' x='0' y='0' viewBox='0 0 1080 900'%3E%3Cg fill-opacity='0.1'%3E%3Cpolygon fill='%23444' points='90 150 0 300 180 300'/%3E%3Cpolygon points='90 150 180 0 0 0'/%3E%3Cpolygon fill='%23AAA' points='270 150 360 0 180 0'/%3E%3Cpolygon fill='%23DDD' points='450 150 360 300 540 300'/%3E%3Cpolygon fill='%23999' points='450 150 540 0 360 0'/%3E%3Cpolygon points='630 150 540 300 720 300'/%3E%3Cpolygon fill='%23DDD' points='630 150 720 0 540 0'/%3E%3Cpolygon fill='%23444' points='810 150 720 300 900 300'/%3E%3Cpolygon fill='%23FFF' points='810 150 900 0 720 0'/%3E%3Cpolygon fill='%23DDD' points='990 150 900 300 1080 300'/%3E%3Cpolygon fill='%23444' points='990 150 1080 0 900 0'/%3E%3Cpolygon fill='%23DDD' points='90 450 0 600 180 600'/%3E%3Cpolygon points='90 450 180 300 0 300'/%3E%3Cpolygon fill='%23666' points='270 450 180 600 360 600'/%3E%3Cpolygon fill='%23AAA' points='270 450 360 300 180 300'/%3E%3Cpolygon fill='%23DDD' points='450 450 360 600 540 600'/%3E%3Cpolygon fill='%23999' points='450 450 540 300 360 300'/%3E%3Cpolygon fill='%23999' points='630 450 540 600 720 600'/%3E%3Cpolygon fill='%23FFF' points='630 450 720 300 540 300'/%3E%3Cpolygon points='810 450 720 600 900 600'/%3E%3Cpolygon fill='%23DDD' points='810 450 900 300 720 300'/%3E%3Cpolygon fill='%23AAA' points='990 450 900 600 1080 600'/%3E%3Cpolygon fill='%23444' points='990 450 1080 300 900 300'/%3E%3Cpolygon fill='%23222' points='90 750 0 900 180 900'/%3E%3Cpolygon points='270 750 180 900 360 900'/%3E%3Cpolygon fill='%23DDD' points='270 750 360 600 180 600'/%3E%3Cpolygon points='450 750 540 600 360 600'/%3E%3Cpolygon points='630 750 540 900 720 900'/%3E%3Cpolygon fill='%23444' points='630 750 720 600 540 600'/%3E%3Cpolygon fill='%23AAA' points='810 750 720 900 900 900'/%3E%3Cpolygon fill='%23666' points='810 750 900 600 720 600'/%3E%3Cpolygon fill='%23999' points='990 750 900 900 1080 900'/%3E%3Cpolygon fill='%23999' points='180 0 90 150 270 150'/%3E%3Cpolygon fill='%23444' points='360 0 270 150 450 150'/%3E%3Cpolygon fill='%23FFF' points='540 0 450 150 630 150'/%3E%3Cpolygon points='900 0 810 150 990 150'/%3E%3Cpolygon fill='%23222' points='0 300 -90 450 90 450'/%3E%3Cpolygon fill='%23FFF' points='0 300 90 150 -90 150'/%3E%3Cpolygon fill='%23FFF' points='180 300 90 450 270 450'/%3E%3Cpolygon fill='%23666' points='180 300 270 150 90 150'/%3E%3Cpolygon fill='%23222' points='360 300 270 450 450 450'/%3E%3Cpolygon fill='%23FFF' points='360 300 450 150 270 150'/%3E%3Cpolygon fill='%23444' points='540 300 450 450 630 450'/%3E%3Cpolygon fill='%23222' points='540 300 630 150 450 150'/%3E%3Cpolygon fill='%23AAA' points='720 300 630 450 810 450'/%3E%3Cpolygon fill='%23666' points='720 300 810 150 630 150'/%3E%3Cpolygon fill='%23FFF' points='900 300 810 450 990 450'/%3E%3Cpolygon fill='%23999' points='900 300 990 150 810 150'/%3E%3Cpolygon points='0 600 -90 750 90 750'/%3E%3Cpolygon fill='%23666' points='0 600 90 450 -90 450'/%3E%3Cpolygon fill='%23AAA' points='180 600 90 750 270 750'/%3E%3Cpolygon fill='%23444' points='180 600 270 450 90 450'/%3E%3Cpolygon fill='%23444' points='360 600 270 750 450 750'/%3E%3Cpolygon fill='%23999' points='360 600 450 450 270 450'/%3E%3Cpolygon fill='%23666' points='540 600 630 450 450 450'/%3E%3Cpolygon fill='%23222' points='720 600 630 750 810 750'/%3E%3Cpolygon fill='%23FFF' points='900 600 810 750 990 750'/%3E%3Cpolygon fill='%23222' points='900 600 990 450 810 450'/%3E%3Cpolygon fill='%23DDD' points='0 900 90 750 -90 750'/%3E%3Cpolygon fill='%23444' points='180 900 270 750 90 750'/%3E%3Cpolygon fill='%23FFF' points='360 900 450 750 270 750'/%3E%3Cpolygon fill='%23AAA' points='540 900 630 750 450 750'/%3E%3Cpolygon fill='%23FFF' points='720 900 810 750 630 750'/%3E%3Cpolygon fill='%23222' points='900 900 990 750 810 750'/%3E%3Cpolygon fill='%23222' points='1080 300 990 450 1170 450'/%3E%3Cpolygon fill='%23FFF' points='1080 300 1170 150 990 150'/%3E%3Cpolygon points='1080 600 990 750 1170 750'/%3E%3Cpolygon fill='%23666' points='1080 600 1170 450 990 450'/%3E%3Cpolygon fill='%23DDD' points='1080 900 1170 750 990 750'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect x='0' y='0' fill='url(%23a)' width='100%25' height='100%25'/%3E%3Crect x='0' y='0' fill='url(%23b)' width='100%25' height='100%25'/%3E%3C/svg%3E");
-  background-attachment: fixed;
-  background-size: cover;
+@import "./fonts.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    /* Global Styles */
+    html {
+      @apply overflow-x-hidden;
+      scroll-behavior: smooth;
+      scroll-padding-top: 65px;
+    }
+  
+    body {
+      @apply m-0 p-0 overflow-x-hidden font-ob text-indigoDD h-full min-w-[500px];
+    }
+  
+    img{
+      @apply max-w-full select-none;
+      -webkit-user-drag: none;
+      user-drag: none;
+      -webkit-touch-callout: none;
+    }
+
+    button, input{
+      @apply focus:outline-none;
+    }
+
+    ol, ul{
+      list-style: initial;
+    }
+
+    /* Inputs */
+    input{
+      @apply bg-gray2 px-3 font-normal;
+    }
+
+    textarea{
+      @apply bg-gray2 px-3 py-2 font-normal resize-none outline-none; 
+    }
+
+    select{
+      @apply outline-none focus:outline-none;
+    }
+
+    /* Headings & Subtitles */
+    h1{
+      @apply font-obWide font-black text-6xl;
+    }
+
+    h2{
+      @apply font-obWide font-black text-5xl;
+    }
+
+    h3{
+      @apply font-obWide font-black text-4xl;
+    }
+    
+    h4{
+      @apply font-ob font-black text-2xl;
+    }
+    
+    h5{
+      @apply font-ob font-black text-lg;
+    }
+    
+    h6{
+      @apply font-obExtd font-semibold text-sm;
+    }
+
+    .subtitle1{
+      @apply font-obWide font-bold text-4xl;
+    }
+    
+    .subtitle2{
+      @apply font-obWide font-medium text-4xl;
+    }
+
+    /* Remove Input Arrows */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    /* Selection Color */
+    ::selection {
+      @apply bg-aquaDD;
+    }
+
+    ::-moz-selection {
+      @apply bg-aquaDD;
+    }
+
+    select{
+      background-image: url( './assets/icons/select-arrow.svg');
+      background-repeat: no-repeat;
+      background-position: 85% 52%;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
 }
+
+
+@layer components {
+  .phase1-bg{
+    background: url('./assets/phase1/circles.svg') no-repeat center, url('./assets/phase1/bg.png') no-repeat center center fixed; 
+    background-size: cover;
+  }
+  
+  .phase2-bg{
+    background: url('./assets/phase2/bg.jpg') no-repeat center center; 
+    background-size: cover;
+  }
+  
+  .phase1-bg-mobile{
+    background: url('./assets/phase1/bg-mobile.svg') no-repeat center;
+    background-size: cover;
+  }
+
+  .button1{
+    @apply subtitle1 600px:text-3xl 1200px:text-4xl 600px:w-[28rem] 1200px:w-[33.5rem] uppercase cursor-pointer border-b-8 border-aquaDD pb-5 hover:translate-x-1 transition-transform;
+    background-image: url( './assets/icons/arrow-magenta.svg' );
+    background-repeat: no-repeat;
+    background-position: 100% 20%;
+  }
+  
+  .button1-small{
+    @apply button1 text-2xl w-[23rem] border-b-[6px] pb-3;
+    background-size: 11%;
+  }
+
+  .button1-small-down{
+    @apply button1-small hover:translate-x-0 hover:translate-y-1 transition-transform;
+    background-image: url( './assets/icons/arrow-magenta-down.svg' );
+    background-size: 6.5%;
+    background-position: 97% 25%;
+  }
+  
+  .button1-down{
+    @apply subtitle1 text-3xl 1000px:text-4xl w-[29rem] 1000px:w-[33.5rem] uppercase cursor-pointer border-b-8 border-aquaDD pb-5 hover:translate-y-1 transition-transform;
+    background-image: url( './assets/icons/arrow-magenta-down.svg' );
+    background-repeat: no-repeat;
+    background-position: 100% 20%;
+    background-size: 7%;
+  }
+
+  .button2{
+    @apply text-white font-ob font-medium uppercase cursor-pointer pb-1 pl-3 pr-16 w-48;
+    background: url('./assets/icons/arrow-white.svg') no-repeat center, linear-gradient(90deg, #13DAFF 0%, #8BE5FF 100%);
+    background-position: 83%;
+    border-radius: 1.25rem;
+    height: 3.25rem;
+  }
+
+  .button2:hover{
+    background: url('./assets/icons/arrow-white.svg') no-repeat center, linear-gradient(90deg, #02bbff 0%, #47ceff 100%);
+    background-position: 83%;
+  }
+
+  .countdown-text{
+    @apply font-ob font-bold uppercase text-xs text-center mt-0.5;
+  }
+  
+  .countdown-number{
+    @apply text-center w-[5rem] 800px:w-[6.25rem] text-3xl 600px:text-[2.6rem] 800px:text-5xl mr-0 600px:mr-6 800px:mr-5;
+  }
+  
+  .countdown-number2{
+    @apply text-center w-[6.25rem] text-5xl;
+  }
+
+  .popup{
+    @apply relative mx-[5%];
+    background: url( './assets/phase1/popup-bg.png') no-repeat top;
+    background-size: cover;
+    width: 1000px;
+    box-shadow: 6.5px 2.5px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .popup-mobile{
+    @apply popup;
+    background: url( './assets/phase1/popup-bg-mobile.svg') no-repeat top;
+    background-size: cover;
+    background-position: 0 -65px;
+  }
+
+  .project-popup{
+    @apply relative scale-75 600px:scale-100;
+    background: url( './assets/phase2/aqua-box2.svg') no-repeat top;
+    background-size: contain;
+    width: 550px;
+    height: 900px;
+    box-shadow: 6.5px 2.5px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  @media screen and (max-height: 920px) {
+    .project-popup{
+      @apply scale-75;
+    }
+  }
+}
+
+
+@layer utilities{
+  .required:after {
+    content:" *";
+    color: #FE1D1D;
+    font-size: 0.625rem;
+    vertical-align: text-bottom;
+  }
+
+  .endsin-line:before{
+    content: '';
+    display:inline-block;
+    border-top: 35px solid white;
+    border-right: 35px solid transparent;
+    position: relative;
+    height: 30px;
+    right: -114px;
+    top: -0.5px;
+    transform: rotate(270deg);
+  }
+
+  .endsin-line:after{
+    content: '';
+    position: relative;
+    height: 58px;
+    right: -97px;
+    top: -0.5px;
+    border-color: #3c1dfe;
+    border-right-style:solid;
+    border-right-width:6px;
+    transform: rotate(-45deg);
+  }
+
+  .phase2:after{
+    right: -94px;
+  }
+
+  .toplay:before{
+    right: -80px;
+  }
+
+  .toplay:after{
+    right: -62px;
+    top: 0.5px;
+  }
+
+  .aqua-dot:after{
+    @apply text-aquaDD text-4xl absolute -top-1 right-3;
+    content: '•';
+  }
+
+  .ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  @keyframes bubble-animation{
+    0%, 100% {
+      transform: translateY(0);
+      transition-timing-function: ease-in;
+    }
+    50% {
+      transform: translateY(-3%);
+      transition-timing-function: ease-out;
+    }
+  }
+
+  .bubble-animation{
+    animation: bubble-animation 6s infinite;
+  }
+
+  .details-button-custom{
+    @apply font-ob font-bold text-[12px] 700px:text-[15px] w-[7.5rem] 700px:w-[10rem] uppercase cursor-pointer border-b-4 pb-1 hover:translate-x-1 transition-transform;
+    background-repeat: no-repeat;
+    background-position: 100% 40%;
+    background-size: 12%;
+  }
+
+  .p-orange{
+    background: linear-gradient(133.19deg, #FFBDBF 5.69%, #FFD1C0 94.95%);
+  }
+
+  .p-green{
+    background: linear-gradient(133.19deg, #80F6CB 5.69%, #38FADE 94.95%);
+  }
+
+  .p-pink{
+    background: linear-gradient(133.19deg, #FF98E8 5.69%, #FDC0FE 87.98%);
+  }
+
+  .p-blue{
+    background: linear-gradient(133.19deg, #53FFFF 5.69%, #5BC5FF 94.95%);
+  }
+
+  .p-orange .details-button{
+    @apply details-button-custom border-[#fff8d2];
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxNiAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGQ9Ik0xNC41OTM0IDcuMDAwMzZMMTUuMTQ5NSA3LjkzODg1VjYuMDYxODZMMTQuNTkzNCA3LjAwMDM2Wk0wIDguMDkxMjZIMTQuNTkzNFY1LjkwOTQ1SDBWOC4wOTEyNlpNMTUuMTQ5NSA2LjA2MTg2TDcuNzg1OSAxLjY5ODIyTDYuNjczNjEgMy41NzUyMkwxNC4wMzcyIDcuOTM4ODVMMTUuMTQ5NSA2LjA2MTg2Wk0xNC4wMzcyIDYuMDYxODZMNi42NzM2MSAxMC40MjU1TDcuNzg1OSAxMi4zMDI1TDE1LjE0OTUgNy45Mzg4NUwxNC4wMzcyIDYuMDYxODZaIiBmaWxsPSIjRkZGOEQyIi8+DQo8L3N2Zz4NCg==);
+  }
+
+  .p-green .details-button{
+    @apply details-button-custom border-[#EAFEFC];
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxNiAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE0LjU5MzQgNy4wMDAzNkwxNS4xNDk1IDcuOTM4ODVWNi4wNjE4NkwxNC41OTM0IDcuMDAwMzZaTTAgOC4wOTEyNkgxNC41OTM0VjUuOTA5NDVIMFY4LjA5MTI2Wk0xNS4xNDk1IDYuMDYxODZMNy43ODU5IDEuNjk4MjJMNi42NzM2MSAzLjU3NTIyTDE0LjAzNzIgNy45Mzg4NUwxNS4xNDk1IDYuMDYxODZaTTE0LjAzNzIgNi4wNjE4Nkw2LjY3MzYxIDEwLjQyNTVMNy43ODU5IDEyLjMwMjVMMTUuMTQ5NSA3LjkzODg1TDE0LjAzNzIgNi4wNjE4NloiIGZpbGw9IiNFQUZFRkMiLz4KPC9zdmc+Cg==)
+  }
+
+  .p-pink .details-button{
+    @apply details-button-custom border-[#FFF0FC];
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxNiAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE0LjU5MzQgNy4wMDAzNkwxNS4xNDk1IDcuOTM4ODVWNi4wNjE4NkwxNC41OTM0IDcuMDAwMzZaTTAgOC4wOTEyNkgxNC41OTM0VjUuOTA5NDVIMFY4LjA5MTI2Wk0xNS4xNDk1IDYuMDYxODZMNy43ODU5IDEuNjk4MjJMNi42NzM2MSAzLjU3NTIyTDE0LjAzNzIgNy45Mzg4NUwxNS4xNDk1IDYuMDYxODZaTTE0LjAzNzIgNi4wNjE4Nkw2LjY3MzYxIDEwLjQyNTVMNy43ODU5IDEyLjMwMjVMMTUuMTQ5NSA3LjkzODg1TDE0LjAzNzIgNi4wNjE4NloiIGZpbGw9IiNGRkYwRkMiLz4KPC9zdmc+Cg==);
+  }
+
+  .p-blue .details-button{
+    @apply details-button-custom border-[#b1a4ff];
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxNiAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGQ9Ik0xNC41OTM0IDcuMDAwMzZMMTUuMTQ5NSA3LjkzODg1VjYuMDYxODZMMTQuNTkzNCA3LjAwMDM2Wk0wIDguMDkxMjZIMTQuNTkzNFY1LjkwOTQ1SDBWOC4wOTEyNlpNMTUuMTQ5NSA2LjA2MTg2TDcuNzg1OSAxLjY5ODIyTDYuNjczNjEgMy41NzUyMkwxNC4wMzcyIDcuOTM4ODVMMTUuMTQ5NSA2LjA2MTg2Wk0xNC4wMzcyIDYuMDYxODZMNi42NzM2MSAxMC40MjU1TDcuNzg1OSAxMi4zMDI1TDE1LjE0OTUgNy45Mzg4NUwxNC4wMzcyIDYuMDYxODZaIiBmaWxsPSIjQjFBNEZGIi8+DQo8L3N2Zz4NCg==);
+  }
+}
+
+
