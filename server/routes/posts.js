@@ -6,8 +6,7 @@ import {
   updatePost,
   getScore,
   updateScore,
-  getPicks,
-  updatePick
+  getPicks
 } from "../controllers/posts.js";
 
 const router = express.Router();
@@ -20,6 +19,5 @@ router.patch("/:id", updatePost);
 router.get("/score/:id", getScore);
 router.patch("/score/:id", updateScore);
 router.get("/picks/", getPicks);
-router.patch("/picks/:id", updatePick);
 
 export default router;
