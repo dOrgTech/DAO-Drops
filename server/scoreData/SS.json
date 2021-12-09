@@ -1,10 +1,26 @@
 [
   {
-    "account": "0x36928500bc1dcd7af6a2b4008875cc336b927d57",
-    "score": 8
+    "account": "0xAD65ba23ccaF846C229d3f8b6cF66453c3939a90",
+    "score": 100
   },
   {
-    "account": "0x7e1e3334130355799f833ffec2d731bca3e68af6",
-    "score": 1
+    "account": "0x460c2616e452aC355A3385075A786b08E773c18F",
+    "score": 100
+  },
+  {
+    "account": "0x7fc1a3D5264a2B2563162EbAF17180ED2e5804BC",
+    "score": 100
+  },
+  {
+    "account": "0x3D6661A9829e921902b1521071cAbc06CC680A35",
+    "score": 100
+  },
+  {
+    "account": "0x5E642f8C81DE40E7e49b6a2B606dFB94A005bC44",
+    "score": 100
+  },
+  {
+    "account": "0x639749b7b08aEe65039c21d8a411103C6ceBEBF0",
+    "score": 100
   }
 ]
