@@ -26,7 +26,7 @@ mongoose
 
 const picks = JSON.parse(
   fs.readFileSync(
-    "/home/stan36/repos/DAO-Drops/server/pickData/Picks.json",
+    "pickData/Picks.json",
     "utf-8"
   )
 );

@@ -39,12 +39,8 @@ export const getScore = async (req, res) => {
   const { id: _id } = req.params;
   const account = req.body;
   try {
-    const score = await GetScore.findOne({ account: _id });
-    if (score) {
-      res.status(200).json({ score: Number(score.score) });
-    } else {
-      res.status(200).json({ score: 0 });
-    }
+    const score = await GetScore.findOne({"account": _id});
+    res.status(200).json(score);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -75,10 +71,10 @@ export const updateScore = async (req, res) => {
   });
 
   const picksArry = accountData.picks;
-  const numberofPicks = picksArray.length;
+  const numberofPicks = picksArry.length;
 
   for (let i = 0; i < numberofPicks; i++) {
-    const pick = await Picks.findOne({ id: picksArry[i].id });
+    const pick = await Picks.findOne({ _id: picksArry[i].id });
     const oldScore = pick.currentScore;
     let newScore = picksArry[i].points + oldScore;
     const updatedPick = await Picks.findByIdAndUpdate(

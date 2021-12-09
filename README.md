@@ -14,8 +14,8 @@ In the client terminal run yarn start
 
 to import a score sheet put the ScoreSheet.json into the scoreData folder inside server then
 
-run "node seeder -i"
+run "node scoreSeeder -i"
 
 to delete the current score sheet stored in mongoDB run
 
-"node seeder -d"
+"node scoreSeeder -d"
