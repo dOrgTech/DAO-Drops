@@ -39,11 +39,21 @@ export const getScore = async (req, res) => {
   const { id: _id } = req.params;
   const account = req.body;
   try {
-    const score = await GetScore.findOne({"account": _id});
+    const score = await GetScore.findOne({ account: _id });
     if (score) {
-      res.status(200).json({"score": Number(score.score)}); }
-    else {
-      res.status(200).json({"score": 0}); }
+      res.status(200).json({ score: Number(score.score) });
+    } else {
+      res.status(200).json({ score: 0 });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const getPicks = async (req, res) => {
+  try {
+    const picks = await Picks.find();
+    res.status(200).json(picks);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -60,34 +70,27 @@ export const updateScore = async (req, res) => {
   //    id: project mongo id,
   //    points: number of points this account allocated to this project
   // }
-
-  const updateScore = await PostMessage.findByIdAndUpdate(_id, accountData, {
+  const updateScore = await GetScore.findByIdAndUpdate(_id, accountData, {
     new: true
   });
 
-  res.json(updateScore);
-};
+  const picksArry = accountData.picks;
+  const numberofPicks = picksArray.length;
 
-export const getPicks = async (req, res) => {
-  try {
-    const picks = await Picks.find();
-    res.status(200).json(picks);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
+  for (let i = 0; i < numberofPicks; i++) {
+    const pick = await Picks.findOne({ id: picksArry[i].id });
+    const oldScore = pick.currentScore;
+    let newScore = picksArry[i].points + oldScore;
+    const updatedPick = await Picks.findByIdAndUpdate(
+      picksArry[i].id,
+      { currentPoints: picksArry[i].points, currentScore: newScore },
+      {
+        new: true
+      }
+    );
   }
-};
 
-export const updatePick = async (req, res) => {
-  const { id: _id } = req.params;
-  const pickData = req.body;
+  let updatedPick;
 
-  const updatedPick = await Picks.findByIdAndUpdate(
-    _id,
-    { currentPoints: pickData },
-    {
-      new: true
-    }
-  );
-
-  res.json(updatedPick);
+  res.json(updatePost);
 };
