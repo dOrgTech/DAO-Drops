@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as constants from '../Constants';
 import { truncate } from "../Utils";
 import Countdown from 'react-countdown';
 import logo from '../assets/logos/logo.svg'
@@ -35,6 +36,7 @@ const Phase2 = (props) => {
   const [connectToggle, setConnectToggle] = useState(false);
   const [projectsPicks, setProjectsPicks] = useState();
   const [votes, setVotes] = useState();
+  const [votesSubmitted, setVotesSubmitted] = useState('false');
 
   useEffect(() => {
     axios.get('http://localhost:5000/posts/picks/')
@@ -47,6 +49,23 @@ const Phase2 = (props) => {
       .catch(e => console.error(e));
 
   }, []);
+
+  useEffect(() => {
+    setVotesSubmitted(props.addressDetails && props.addressDetails.picks.length && props.address ? 'true' : 'false')
+  }, [props.address, props.walletStatus]);
+
+  const submitPoints = e => {
+    e.preventDefault();
+    setVotesSubmitted('sending')
+
+    const picksSelected = Object.entries(votes).map(([k, v]) => ({ ["id"]: k, ["points"]: v }));
+    const picksSubmission = {score: props.points, picks: picksSelected}
+
+    const url = `http://localhost:5000/posts/score/${props.addressDetails._id}`
+    axios.patch(url, picksSubmission).then(r => { r.status === 200 && setVotesSubmitted('true')} ).catch(e => console.error(e));
+
+  };
+
 
   const renderer = ({
     formatted: { days, hours, minutes, seconds },
@@ -70,29 +89,29 @@ const Phase2 = (props) => {
       <div className='phase2-bg px-[5%] 1000px:px-[10%]'>
 
           <header className={`flex justify-end z-20 w-full pt-4 ${props.walletStatus === 'connected' && 'fixed px-[5%] 1000px:pr-[10%] ml-[-5%] 1000px:ml-[-10%] pt-2 1000px:pt-4 bg-headerColor h-[65px]'}`}>
-            <a className={`font-ob font-semibold text-magentaDD tracking-[4px] text-xl absolute left-[5%] 1000px:left-[calc(10%+97px)] top-5 z-20 ${props.walletStatus === 'connected' && 'hidden 1000px:block'}`} href="#">FAQ</a>
+            <a className={`font-ob font-semibold text-magentaDD tracking-[4px] text-xl absolute left-[5%] 1000px:left-[calc(10%+97px)] top-5 z-20 ${props.walletStatus === 'connected' && 'hidden 1000px:block'}`} href={constants.FAQ} target='_blank'>FAQ</a>
             { props.walletStatus === 'connected'
               ? <div className='uppercase flex flex-col relative w-full 1000px:w-auto'>
                   <div className='border-[3px] border-aquaDD aqua-dot font-ob font-bold w-[21rem] px-4 pb-2 pt-1 mb-2 bg-white hidden 1000px:block'>{truncate(props.address,11)}</div>
           
-                  <div className='absolute top-[49px] z-20 bg-white hidden 1000px:block'>
+                  <div className={`absolute top-[49px] z-20 bg-white hidden 1000px:block ${ (votesSubmitted === 'true' || props.points === 0) && 'grayscale pointer-events-none'} `} >
                     <div className='border-4 border-aquaDD font-ob font-bold w-[21rem] p-4 text-center'>
                       <div>you have</div>
                       <div className='font-obWide font-black text-6xl pb-3'>{props.points}</div>
                       <div>points remaining</div>
                     </div>
                     <div className='border-b-4 border-r-4 border-l-4 border-aquaDD font-ob font-bold w-[21rem] p-4'>
-                      <div className='button1-small text-[1.3rem] w-[16.5rem] pb-2 m-auto' style={{backgroundPosition: '100% 35%', backgroundSize: '14%'}}>Send Points</div>
+                      <div className='button1-small text-[1.3rem] w-[16.5rem] pb-2 m-auto' style={{backgroundPosition: '100% 35%', backgroundSize: '14%'}} onClick={submitPoints}>{votesSubmitted === 'sending' ? 'Sending...' : votesSubmitted === 'true' ? 'Points Sent' : 'Send Points'}</div>
                     </div>
                   </div>
 
                   <div className='flex 1000px:hidden h-[50px] bg-white border-[3px] border-aquaDD'>
-                    <div className='flex justify-center items-center flex-1 border-aquaDD border-r-[3px] font-ob font-bold w-full uppercase px-2 600px:px-4'>
+                    <div className={`flex justify-center items-center flex-1 border-aquaDD border-r-[3px] font-ob font-bold w-full uppercase px-2 600px:px-4 ${ (votesSubmitted === 'true' || props.points === 0) && 'grayscale pointer-events-none'} `} >
                       <span className='font-obWide font-black text-2xl pb-2 pr-2 w-[73px]'>{props.points} </span>
                       <span className='leading-3 700px:leading-4 text-[0.7rem] 700px:text-[0.9rem] pb-0.5'>Your Points Remaining</span>
                     </div>
-                    <div className="flex-1">
-                      <div className='button1-small text-[0.6rem] w-[7.5rem] 700px:text-[0.8rem] 700px:w-[10rem] pb-0 m-auto border-b-4 mx-2 600px:mx-auto' style={{backgroundPosition: '100% 60%', backgroundSize: '14%'}}>Send Points</div>
+                    <div className={`flex-1 ${ (votesSubmitted === 'true' || props.points === 0) && 'grayscale pointer-events-none'} `} >
+                      <div className='button1-small text-[0.6rem] w-[7.5rem] 700px:text-[0.8rem] 700px:w-[10rem] pb-0 m-auto border-b-4 mx-2 600px:mx-auto' style={{backgroundPosition: '100% 60%', backgroundSize: '14%'}} onClick={submitPoints}>{votesSubmitted === 'sending' ? 'Sending...' : votesSubmitted === 'true' ? 'Points Sent' : 'Send Points'}</div>
                     </div>
                     <div className='flex justify-center items-center pb-1 px-1 pr-2 flex-1 aqua-dot 700px:after:content-["•"] after:right-4 after:top-0 font-ob font-bold w-full border-aquaDD border-l-[3px] bg-white'>{truncate(props.address,4)}</div>
                   </div>
@@ -165,8 +184,8 @@ const Phase2 = (props) => {
                   <a href='#drop-points' className='button1-down mx-auto self-center 1000px:mx-0 1000px:self-start text-3xl w-[24rem] block'>Drop Points</a>
                 </div>
               : <div className='mt-4 1000px:mt-10 z-10 pr-[6.3rem] 1000px:pr-6 pl-8 1000px:pl-0'>
-                  <h3 className='text-3xl 600px:text-4xl 1000px:text-[calc(1.4rem+1vw)] mb-5'>Connect your wallet</h3>
-                  <div className='subtitle2 text-[calc(0.65rem+1vw)] leading-6 800px:leading-7 1000px:leading-8 1200px:leading-10'>To be part of this awesome experience to drop your points and make it rain ☔</div>
+                  <h3 className='text-3xl 600px:text-4xl 1000px:text-[calc(1.4rem+1vw)] mb-6'>Connect your wallet</h3>
+                  <div className='subtitle2 text-[calc(0.75rem+1vw)] 1000px:text-[calc(0.65rem+1vw)] leading-6 800px:leading-7 1000px:leading-8 1200px:leading-10'>To drop your points and make it rain ☔</div>
                 </div>
             }
 
@@ -177,7 +196,7 @@ const Phase2 = (props) => {
               </div>
 
               <div className='1000px:mt-2.5 absolute 1000px:relative right-4 top-4 1000px:inset-0 scale-150 1000px:scale-100'>
-                <a target='_blank' rel='noreferrer' href='https://twitter.com'>
+                <a target='_blank' rel='noreferrer' href={constants.Twitter}>
                   <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
                 </a>
               </div>
@@ -213,7 +232,7 @@ const Phase2 = (props) => {
                 </div>
 
                 <div className='absolute right-4 top-4 scale-150'>
-                  <a target='_blank' rel='noreferrer' href='https://twitter.com'>
+                  <a target='_blank' rel='noreferrer' href={constants.Twitter}>
                     <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
                   </a>
                 </div>
@@ -249,6 +268,7 @@ const Phase2 = (props) => {
                   votes={votes}
                   points={props.points}
                   setPoints={props.setPoints}
+                  votesSubmitted={votesSubmitted}
                 />
               )
             }
@@ -263,16 +283,24 @@ const Phase2 = (props) => {
           by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
         </div>
 
-        <a className='font-ob font-semibold text-magentaDD tracking-[4px] text-xl 1000px:w-1/3 text-center' href="#">FAQ</a>
+        <a className='font-ob font-semibold text-magentaDD tracking-[4px] text-xl 1000px:w-1/3 text-center' href={constants.FAQ} target='_blank'>FAQ</a>
 
         <div className='1000px:w-1/3 text-right'>
-          <a target='_blank' rel='noreferrer' href='https://twitter.com'>
+          <a target='_blank' rel='noreferrer' href={constants.Twitter}>
             <img className='inline scale-150 hover:scale-[155%]' src={twitter} alt='Twitter' />
           </a>
         </div>
       </footer>
 
-      <ProjectPopup popupStatus={popupStatus} setPopupStatus={setPopupStatus} popupDetails={popupDetails} setVotes={setVotes} votes={votes} points={props.points} setPoints={props.setPoints} />
+      <ProjectPopup
+        popupStatus={popupStatus}
+        setPopupStatus={setPopupStatus}
+        popupDetails={popupDetails}
+        setVotes={setVotes}
+        votes={votes}
+        points={props.points}
+        setPoints={props.setPoints}
+        votesSubmitted={votesSubmitted} />
     </>
   )}
 
@@ -285,14 +313,14 @@ const Project = (props) => {
   const color = colors[colorsPattern[props.index%16]]
 
   function decrement() {
-    if(props.votes && props.votes[props.id] !== 0) {
+    if(props.votesSubmitted !== 'true' && props.votes && props.votes[props.id] !== 0) {
       props.setVotes(votes => ({...votes, [props.id]: votes[props.id]-1}));
       props.setPoints(props.points+1);
     }
   }
 
   function increment() {
-    if(props.votes && props.points !==0) {
+    if(props.votesSubmitted !== 'true' && props.votes && props.points !==0) {
       props.setVotes(votes => ({...votes, [props.id]: votes[props.id]+1}));
       props.setPoints(props.points-1)
     }
@@ -327,17 +355,17 @@ const Project = (props) => {
 
 const ProjectPopup = (props) => {
   
-  const { popupStatus, setPopupStatus, popupDetails, setVotes, votes, points, setPoints } = props
+  const { popupStatus, setPopupStatus, popupDetails, setVotes, votes, points, setPoints, votesSubmitted } = props
 
   function decrement() {
-    if(votes && votes[popupDetails.id] !== 0) {
+    if(votesSubmitted !== 'true' && votes && votes[popupDetails.id] !== 0) {
       setVotes(v => ({...v, [popupDetails.id]: v[popupDetails.id]-1}));
       setPoints(points+1);
     }
   }
 
   function increment() {
-    if(votes && points !==0) {
+    if(votesSubmitted !== 'true' && votes && points !==0) {
       setVotes(v => ({...v, [popupDetails.id]: v[popupDetails.id]+1}));
       setPoints(points-1)
     }

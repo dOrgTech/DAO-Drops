@@ -26,8 +26,8 @@ mongoose
 
 const scores = JSON.parse(
   fs.readFileSync(
-    // "scoreData/SS.json",
-    "scoreData/ScoreSheet.json",
+    "scoreData/SS.json",
+    // "scoreData/ScoreSheet.json",
     "utf-8"
   )
 );

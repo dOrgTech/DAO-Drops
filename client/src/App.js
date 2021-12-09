@@ -10,9 +10,10 @@ import axios from "axios";
 const App = () => {
       
     const [address, setAddress] = useState('');
+    const [addressDetails, setAddressDetails] = useState();
     const [points, setPoints] = useState(0);
     const [walletStatus, setWalletStatus] = useState('disconnected');
-    const [phaseView, setPhaseView] = useState("2");
+    const [phaseView, setPhaseView] = useState("1");
 
     async function loadWeb3() {
       if (window.ethereum) {
@@ -23,9 +24,8 @@ const App = () => {
         setAddress(await signer.getAddress());
 
         await axios.get(`http://localhost:5000/posts/score/${await signer.getAddress()}`)
-          .then(r => setPoints(r.data["score"]))
+          .then(r => { if(r.data !== null) {setAddressDetails(r.data); setPoints(r.data["score"]);} })
           .catch(e => console.error(e));
-
 
         setWalletStatus('connected');
       }
@@ -41,8 +41,8 @@ const App = () => {
     return(
       <>
         { phaseView === '1' && <Phase1 /> }
-        { phaseView === '2' && <Phase2 loadWeb3={loadWeb3} address={address} walletStatus={walletStatus} points={points} setPoints={setPoints} setPhaseView={setPhaseView} /> }
-        { phaseView === '3' && <Phase3 loadWeb3={loadWeb3} address={address} walletStatus={walletStatus} /> }
+        { phaseView === '2' && <Phase2 loadWeb3={loadWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} points={points} setPoints={setPoints} setPhaseView={setPhaseView} /> }
+        { phaseView === '3' && <Phase3 loadWeb3={loadWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} /> }
       </>
     )
   }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as constants from '../Constants';
 import { truncate } from "../Utils";
 import logo from '../assets/logos/logo.svg'
 import dropsVideo from '../assets/video/drops.mp4'
@@ -30,23 +31,36 @@ const Phase3 = (props) => {
   const [claimed, setClaimed] = useState('check');
   const [projectsPicks, setProjectsPicks] = useState();
   const [popupDetails, setPopupDetails] = useState();
+  const [votedProjects, setVotedProjects] = useState();
 
   useEffect(() => {
     axios.get('http://localhost:5000/posts/picks/')
       .then(r => {
-        let sortedProjects = r.data.sort((a,b) => b.currentPoints - a.currentPoints)
+        let sortedProjects = r.data.sort((a,b) => b.currentScore - a.currentScore)
         setProjectsPicks(sortedProjects)
       })
       .catch(e => console.error(e));
 
   }, []);
 
+  useEffect(() => {
+    if (props.address && props.addressDetails) {
+      let voted = []
+      props.addressDetails.picks.forEach(pick => {
+        if (pick.points > 0) {
+          voted.push(pick.id)
+        }
+      });
+      setVotedProjects(voted)
+    }
+  }, [props.address, props.walletStatus]);
+
   return (
     <>
       <div className='phase2-bg px-[5%] 1000px:px-[10%]'>
 
           <header className={`flex justify-end z-30 w-full pt-4 ${props.walletStatus === 'connected' && 'fixed px-[5%] 1000px:pr-[10%] ml-[-5%] 1000px:ml-[-10%] pt-2 1000px:pt-4 bg-headerColor h-[65px]'}`}>
-            <a className={`font-ob font-semibold text-magentaDD tracking-[4px] text-xl absolute left-[5%] 1000px:left-[calc(10%+81px)] top-4 z-20 ${props.walletStatus === 'connected' && 'hidden 600px:block'}`} href="#">FAQ</a>
+            <a className={`font-ob font-semibold text-magentaDD tracking-[4px] text-xl absolute left-[5%] 1000px:left-[calc(10%+81px)] top-4 z-20 ${props.walletStatus === 'connected' && 'hidden 600px:block'}`} href={constants.FAQ} target='_blank'>FAQ</a>
             { props.walletStatus === 'connected'
               ? <div className='flex flex-col relative'>
                   <div className='border-[3px] border-aquaDD aqua-dot after:content-["•"] after:right-4 font-ob font-bold w-[21rem] px-4 pb-2 pt-1 mb-2 bg-white cursor-pointer uppercase' onClick={() => setWalletToggle(!walletToggle)}>{truncate(props.address,11)}</div>
@@ -57,8 +71,8 @@ const Phase3 = (props) => {
                           <div className='aqua-dot after:content-["•"] after:top-[2px]'>Your wallet is connected</div>
                           <div className='text-left font-ob font-normal mt-4'>Signed in as:</div>
                           <div className='break-words text-left leading-5 pb-3'>{props.address}</div>
-                          
-                          {claimed === 'winner' &&
+
+                          {(claimed === 'winner' || claimed === 'claimed') &&
                             <>
                               <hr className='-mx-4 mt-3' />
                               <div className='text-left font-ob font-normal mt-5 mb-1'>Your rewards:</div>
@@ -173,7 +187,7 @@ const Phase3 = (props) => {
               </div>
 
               <div className='1000px:mt-2.5 absolute 1000px:relative right-4 top-4 1000px:inset-0 scale-150 1000px:scale-100'>
-                <a target='_blank' rel='noreferrer' href='https://twitter.com'>
+                <a target='_blank' rel='noreferrer' href={constants.Twitter}>
                   <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
                 </a>
               </div>
@@ -195,7 +209,7 @@ const Phase3 = (props) => {
             </div>
 
             <div className='absolute right-4 top-4 scale-150'>
-              <a target='_blank' rel='noreferrer' href='https://twitter.com'>
+              <a target='_blank' rel='noreferrer' href={constants.Twitter}>
                 <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
               </a>
             </div>
@@ -203,7 +217,7 @@ const Phase3 = (props) => {
           </div>
 
           <a href='#leaderboard' className='button1-down mx-auto self-center 1000px:mx-0 1000px:self-start text-3xl w-[26rem] block 1000px:hidden'>Check Results</a>
-          <div className='mt-32 mb-8 mx-auto w-72 h-[6px] bg-[#ACBBC2] rounded-full opacity-40 1000px:hidden'></div>
+          <div className='mt-32 mb-8 mx-auto w-72 h-[6px] bg-[#ACBBC2] rounded-full opacity-40 1000px:hidden'/>
   
           <div id='leaderboard' className='mt-12 1000px:mt-32 mb-20 z-10 text-center m-auto'>
             <h3 className='text-2xl 600px:text-3xl 1000px:text-[2.6rem] mb-6 800px:mb-10'>LEADER BOARD RESULTS</h3>
@@ -226,7 +240,8 @@ const Phase3 = (props) => {
                   icon={project.icon}
                   setPopupStatus={setPopupStatus}
                   setPopupDetails={setPopupDetails}
-                  points={project.currentPoints}
+                  points={project.currentScore}
+                  votedProjects={votedProjects}
                 />
               )
             }
@@ -241,10 +256,10 @@ const Phase3 = (props) => {
           by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
         </div>
 
-        <a className='font-ob font-semibold text-magentaDD tracking-[4px] text-xl 1000px:w-1/3 text-center' href="#">FAQ</a>
+        <a className='font-ob font-semibold text-magentaDD tracking-[4px] text-xl 1000px:w-1/3 text-center' href={constants.FAQ} target='_blank'>FAQ</a>
 
         <div className='1000px:w-1/3 text-right'>
-          <a target='_blank' rel='noreferrer' href='https://twitter.com'>
+          <a target='_blank' rel='noreferrer' href={constants.Twitter}>
             <img className='inline scale-150 hover:scale-[155%]' src={twitter} alt='Twitter' />
           </a>
         </div>
@@ -278,7 +293,7 @@ const Project = (props) => {
         </>
       }
 
-      { props.voted &&
+      { props.votedProjects && props.votedProjects.includes(props.id) &&
         <div className='absolute top-2 700px:top-4 right-0 scale-75 700px:scale-100'>
           <img className='mr-3 mb-3 700px:mr-4 700px:mb-4 w-[55px] 700px:w-auto' src={heart} alt='voted' />
           <div className='absolute top-[14px] left-2 text-[10.5px] font-bold'>VOTED</div>
@@ -319,7 +334,7 @@ const ProjectPopup = (props) => {
                     <a target='_blank' rel='noreferrer' href={`https://etherscan.io/address/0x07a80533c9e5179e99c0ca60a51a552d0c38f0ca`} className='font-ibm'>0x07a80533c9e5179e99c0ca60a51a552d0c38f0ca</a>
                   </div>
 
-                  <div class='flex mt-8 justify-center'>
+                  <div className='flex mt-8 justify-center'>
                     <span className='font-ibm font-semibold text-[1.75rem] mx-4'>{popupDetails.points || '0'} Points Received</span>
                   </div>
 

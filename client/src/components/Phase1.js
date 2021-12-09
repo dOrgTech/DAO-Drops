@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import * as constants from '../Constants';
 import Countdown from 'react-countdown';
 import logo from '../assets/logos/logo.svg'
 import dropsVideo from '../assets/video/drops.mp4'
@@ -42,7 +43,7 @@ const Phase1 = () => {
   return (
     <>
       <div className='phase1-bg-mobile 1000px:phase1-bg 1800px:h-screen px-[5%] 1000px:px-[10%] pt-16'>
-          <a className='font-ob font-semibold text-magentaDD tracking-[4px] text-xl absolute right-[5%] 1000px:right-[10%] 1200px:right-16 top-6 z-20' href="#">FAQ</a>
+          <a className='font-ob font-semibold text-magentaDD tracking-[4px] text-xl absolute right-[5%] 1000px:right-[10%] 1200px:right-16 top-6 z-20' href={constants.FAQ} target='_blank'>FAQ</a>
           <div className='flex items-start relative'>
               <img src={logo} alt='DAO Drops Logo' />
               <div className='ml-8 600px:ml-12 w-full h-[31rem] 1000px:h-[38rem] border-[6px] border-indigoDD z-10 relative'>
@@ -80,7 +81,7 @@ const Phase1 = () => {
                 </div>
 
                 <div className='1000px:mt-2.5 absolute 1000px:relative right-4 top-4 1000px:inset-0 scale-150 1000px:scale-100'>
-                  <a target='_blank' rel='noreferrer' href='https://twitter.com'>
+                  <a target='_blank' rel='noreferrer' href={constants.Twitter}>
                     <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
                   </a>
                 </div>
@@ -108,8 +109,7 @@ const NominatePopup = (props) => {
 
   const submitProject = e => {
     e.preventDefault();
-    axios.post("http://localhost:5000/posts", projectData).catch(e => console.error(e));
-    SetPopupStatus('submitted');
+    axios.post("http://localhost:5000/posts", projectData).then(r => { r.status === 201 && SetPopupStatus('submitted')} ).catch(e => console.error(e));
   };
 
   useEffect(() => {
