@@ -22,5 +22,16 @@
   {
     "account": "0x639749b7b08aEe65039c21d8a411103C6ceBEBF0",
     "score": 100
+<<<<<<< HEAD
+=======
+  },
+  {
+    "account": "0x545b0f55E00330527d6fc802A91ADa9d969784D7",
+    "score": 100
+  },
+  {
+    "account": "0x8ab3bF9c40507DCF0724aF84Ab39b7aA795Ea065",
+    "score": 100
+>>>>>>> 7d075c97eb09faead32b570ea96c3141a7991308
   }
 ]

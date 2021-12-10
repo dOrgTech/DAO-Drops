@@ -34,17 +34,16 @@ const Phase3 = (props) => {
   const [votedProjects, setVotedProjects] = useState();
 
   useEffect(() => {
-    axios.get('http://localhost:5000/posts/picks/')
+    axios.get('https://daodrops4.herokuapp.com/posts/picks/')
       .then(r => {
         let sortedProjects = r.data.sort((a,b) => b.currentScore - a.currentScore)
         setProjectsPicks(sortedProjects)
       })
       .catch(e => console.error(e));
-
   }, []);
 
   useEffect(() => {
-    if (props.address && props.addressDetails) {
+    if (props.address && props.addressDetails !== 'none') {
       let voted = []
       props.addressDetails.picks.forEach(pick => {
         if (pick.points > 0) {
@@ -136,7 +135,6 @@ const Phase3 = (props) => {
                         <div className='font-obWide font-medium text-lg'>You won the</div>
                         <div className='text-xl 1000px:text-2xl'>DAO drops poap</div>
                         <img className='mx-auto mt-6' src={poap} alt='poap' />
-                        <div className='text-2xl text-center'>DDP</div>
                         <button className='button2 ml-auto text-sm mt-8 mx-auto' onClick={() => setClaimed('claimed')}>Claim Poap</button>
                       </div>
 
@@ -145,7 +143,6 @@ const Phase3 = (props) => {
                           <div className='font-obWide font-medium text-lg'>Awesome!</div>
                           <div className='text-xl 1000px:text-2xl'>DAO drops poap will now appear on your wallet.</div>
                           <img className='mx-auto mt-3' src={poap} alt='poap' />
-                          <div className='text-2xl text-center'>DDP</div>
                           <div className='font-ob font-medium text-center mt-5 text-xl'>✅ CLAIMED</div>
                         </div>
 

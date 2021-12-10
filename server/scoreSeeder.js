@@ -28,7 +28,15 @@ mongoose
   .catch(error => console.log(error.message));
 
 const scores = JSON.parse(
+<<<<<<< HEAD
   fs.readFileSync(__dirname + "/scoreData/SS.json", "utf-8")
+=======
+  fs.readFileSync(
+    "scoreData/SS.json",
+    // "scoreData/ScoreSheet.json",
+    "utf-8"
+  )
+>>>>>>> 7d075c97eb09faead32b570ea96c3141a7991308
 );
 
 const importScores = async () => {
