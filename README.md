@@ -12,18 +12,20 @@ In the server terminal run npm start to start express
 
 In the client terminal run yarn start
 
-to import a score sheet put the ScoreSheet.json into the scoreData folder inside server then
+### The following commands for seeding the database are to be run inside the server folder
 
-run `node scoreSeeder -i`
+To import a score sheet put the ScoreSheet.json into the scoreData folder inside server then run
 
-to delete the current score sheet stored in mongoDB run
+`node scoreSeeder -i`
+
+To delete the current score sheet stored in mongoDB run
 
 `node scoreSeeder -d`
 
-to import a curated list of project picks put the Picks.json into the pickData folder inside server then
+To import a curated list of project picks put the Picks.json into the pickData folder inside server then run
 
-run `node scoreSeeder -i`
+`node scoreSeeder -i`
 
-to delete the current curated list of project picks stored in mongoDB run
+To delete the current curated list of project picks stored in mongoDB run
 
 `node scoreSeeder -d`
