@@ -14,8 +14,16 @@ In the client terminal run yarn start
 
 to import a score sheet put the ScoreSheet.json into the scoreData folder inside server then
 
-run "node scoreSeeder -i"
+run `node scoreSeeder -i`
 
 to delete the current score sheet stored in mongoDB run
 
-"node scoreSeeder -d"
+`node scoreSeeder -d`
+
+to import a curated list of project picks put the Picks.json into the pickData folder inside server then
+
+run `node scoreSeeder -i`
+
+to delete the current curated list of project picks stored in mongoDB run
+
+`node scoreSeeder -d`

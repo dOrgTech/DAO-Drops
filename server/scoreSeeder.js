@@ -4,6 +4,9 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import GetScore from "./models/scores.js";
+import path from "path";
+
+const __dirname = path.resolve();
 
 const app = express();
 
@@ -25,15 +28,7 @@ mongoose
   .catch(error => console.log(error.message));
 
 const scores = JSON.parse(
-  fs.readFileSync(
-<<<<<<< HEAD
-    "/home/stan36/repos/DAO-Drops/server/scoreData/SS.json",
-=======
-    "scoreData/SS.json",
-    // "scoreData/ScoreSheet.json",
->>>>>>> 9605626d74cb1001082cb70f77f928917c43a1c5
-    "utf-8"
-  )
+  fs.readFileSync(__dirname + "/scoreData/SS.json", "utf-8")
 );
 
 const importScores = async () => {

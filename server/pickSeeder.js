@@ -4,6 +4,9 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import Picks from "./models/picks.js";
+import path from "path";
+
+const __dirname = path.resolve();
 
 const app = express();
 
@@ -25,10 +28,7 @@ mongoose
   .catch(error => console.log(error.message));
 
 const picks = JSON.parse(
-  fs.readFileSync(
-    "pickData/Picks.json",
-    "utf-8"
-  )
+  fs.readFileSync(__dirname + "pickData/Picks.json", "utf-8")
 );
 
 const importPicks = async () => {
