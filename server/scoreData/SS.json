@@ -1,6 +1,5 @@
 [
   {
-<<<<<<< HEAD
     "account": "0xAD65ba23ccaF846C229d3f8b6cF66453c3939a90",
     "score": 100
   },
@@ -23,25 +22,13 @@
   {
     "account": "0x639749b7b08aEe65039c21d8a411103C6ceBEBF0",
     "score": 100
-=======
-    "account": "0x36928500bc1dcd7af6a2b4008875cc336b927d57",
-    "score": 30
   },
   {
-    "account": "0x7e1e3334130355799f833ffec2d731bca3e68af6",
-    "score": 35
+    "account": "0x545b0f55E00330527d6fc802A91ADa9d969784D7",
+    "score": 100
   },
   {
-    "account": "0xBC514De784B49dC43282F8340EbC3aa7B86Da12A",
-    "score": 45
-  },
-  {
-    "account": "0x460c2616e452aC355A3385075A786b08E773c18F",
-    "score": 40
-  },
-  {
-    "account": "0x7fc1a3D5264a2B2563162EbAF17180ED2e5804BC",
-    "score": 50
->>>>>>> 9605626d74cb1001082cb70f77f928917c43a1c5
+    "account": "0x8ab3bF9c40507DCF0724aF84Ab39b7aA795Ea065",
+    "score": 100
   }
 ]

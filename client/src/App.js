@@ -4,16 +4,17 @@ import Phase1 from './components/Phase1';
 import Phase2 from './components/Phase2';
 import Phase3 from './components/Phase3';
 import axios from "axios";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // App Component
 // ------------------------------------------------------------------------------------------------------- //
 const App = () => {
       
     const [address, setAddress] = useState('');
-    const [addressDetails, setAddressDetails] = useState();
+    const [addressDetails, setAddressDetails] = useState('none');
     const [points, setPoints] = useState(0);
     const [walletStatus, setWalletStatus] = useState('disconnected');
-    const [phaseView, setPhaseView] = useState("1");
+    const [phaseView, setPhaseView] = useState("2");
 
     async function loadWeb3() {
       if (window.ethereum) {
@@ -23,7 +24,7 @@ const App = () => {
         const signer = provider.getSigner()
         setAddress(await signer.getAddress());
 
-        await axios.get(`http://localhost:5000/posts/score/${await signer.getAddress()}`)
+        await axios.get(`https://daodrops4.herokuapp.com/posts/score/${await signer.getAddress()}`)
           .then(r => { if(r.data !== null) {setAddressDetails(r.data); setPoints(r.data["score"]);} })
           .catch(e => console.error(e));
 
@@ -40,9 +41,18 @@ const App = () => {
 
     return(
       <>
-        { phaseView === '1' && <Phase1 /> }
-        { phaseView === '2' && <Phase2 loadWeb3={loadWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} points={points} setPoints={setPoints} setPhaseView={setPhaseView} /> }
-        { phaseView === '3' && <Phase3 loadWeb3={loadWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} /> }
+        {/*{ phaseView === '1' && <Phase1 /> }*/}
+        {/*{ phaseView === '2' && <Phase2 loadWeb3={loadWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} points={points} setPoints={setPoints} setPhaseView={setPhaseView} /> }*/}
+        {/*{ phaseView === '3' && <Phase3 loadWeb3={loadWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} /> }*/}
+
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Phase1 />} />
+            <Route path="2" element={<Phase2 loadWeb3={loadWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} points={points} setPoints={setPoints} setPhaseView={setPhaseView} />} />
+            <Route path="3" element={<Phase3 loadWeb3={loadWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} />} />
+          </Routes>
+        </BrowserRouter>
+
       </>
     )
   }
