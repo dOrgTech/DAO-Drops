@@ -109,7 +109,7 @@ const NominatePopup = (props) => {
 
   const submitProject = e => {
     e.preventDefault();
-    axios.post("http://localhost:5000/posts", projectData).then(r => { r.status === 201 && SetPopupStatus('submitted')} ).catch(e => console.error(e));
+    axios.post("https://daodrops4.herokuapp.com/posts", projectData).then(r => { r.status === 201 && SetPopupStatus('submitted')} ).catch(e => console.error(e));
   };
 
   useEffect(() => {

@@ -37,9 +37,10 @@ const Phase2 = (props) => {
   const [projectsPicks, setProjectsPicks] = useState();
   const [votes, setVotes] = useState();
   const [votesSubmitted, setVotesSubmitted] = useState('false');
+  const [sendPointsNote, setSendPointsNote] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/posts/picks/')
+    axios.get('https://daodrops4.herokuapp.com/posts/picks/')
       .then(r => {
         // let randomProjects = r.data.sort(() => Math.random() - 0.5);
         let sortedProjects = r.data.sort((a, b) => a.address.localeCompare(b.address));
@@ -51,19 +52,24 @@ const Phase2 = (props) => {
   }, []);
 
   useEffect(() => {
-    setVotesSubmitted(props.addressDetails && props.addressDetails.picks.length && props.address ? 'true' : 'false')
+    setVotesSubmitted(props.addressDetails && props.addressDetails.picks && props.addressDetails.picks.length && props.address ? 'true' : 'false')
   }, [props.address, props.walletStatus]);
 
   const submitPoints = e => {
-    e.preventDefault();
-    setVotesSubmitted('sending')
+    if (props.points === 0) {
+      setSendPointsNote(false)
+      e.preventDefault();
+      setVotesSubmitted('sending')
 
-    const picksSelected = Object.entries(votes).map(([k, v]) => ({ ["id"]: k, ["points"]: v }));
-    const picksSubmission = {score: props.points, picks: picksSelected}
+      const picksSelected = Object.entries(votes).map(([k, v]) => ({ ["id"]: k, ["points"]: v }));
+      const picksSubmission = {score: props.points, picks: picksSelected}
 
-    const url = `http://localhost:5000/posts/score/${props.addressDetails._id}`
-    axios.patch(url, picksSubmission).then(r => { r.status === 200 && setVotesSubmitted('true')} ).catch(e => console.error(e));
-
+      const url = `https://daodrops4.herokuapp.com/posts/score/${props.addressDetails._id}`
+      axios.patch(url, picksSubmission).then(r => { r.status === 200 && setVotesSubmitted('true')} ).catch(e => console.error(e));
+    }
+    else {
+      setSendPointsNote(true)
+    }
   };
 
 
@@ -94,7 +100,7 @@ const Phase2 = (props) => {
               ? <div className='uppercase flex flex-col relative w-full 1000px:w-auto'>
                   <div className='border-[3px] border-aquaDD aqua-dot font-ob font-bold w-[21rem] px-4 pb-2 pt-1 mb-2 bg-white hidden 1000px:block'>{truncate(props.address,11)}</div>
           
-                  <div className={`absolute top-[49px] z-20 bg-white hidden 1000px:block ${ (votesSubmitted === 'true' || props.points === 0) && 'grayscale pointer-events-none'} `} >
+                  <div className={`absolute top-[49px] z-20 bg-white hidden 1000px:block ${ (votesSubmitted === 'true' || props.addressDetails === 'none') && 'grayscale pointer-events-none'} `} >
                     <div className='border-4 border-aquaDD font-ob font-bold w-[21rem] p-4 text-center'>
                       <div>you have</div>
                       <div className='font-obWide font-black text-6xl pb-3'>{props.points}</div>
@@ -102,15 +108,16 @@ const Phase2 = (props) => {
                     </div>
                     <div className='border-b-4 border-r-4 border-l-4 border-aquaDD font-ob font-bold w-[21rem] p-4'>
                       <div className='button1-small text-[1.3rem] w-[16.5rem] pb-2 m-auto' style={{backgroundPosition: '100% 35%', backgroundSize: '14%'}} onClick={submitPoints}>{votesSubmitted === 'sending' ? 'Sending...' : votesSubmitted === 'true' ? 'Points Sent' : 'Send Points'}</div>
+                      { sendPointsNote && <div className={'mt-3 text-center font-ob font-medium text-sm text-magentaDD'}>Please allocate all points before sending.</div>}
                     </div>
                   </div>
 
                   <div className='flex 1000px:hidden h-[50px] bg-white border-[3px] border-aquaDD'>
-                    <div className={`flex justify-center items-center flex-1 border-aquaDD border-r-[3px] font-ob font-bold w-full uppercase px-2 600px:px-4 ${ (votesSubmitted === 'true' || props.points === 0) && 'grayscale pointer-events-none'} `} >
+                    <div className={`flex justify-center items-center flex-1 border-aquaDD border-r-[3px] font-ob font-bold w-full uppercase px-2 600px:px-4 ${ (votesSubmitted === 'true' || props.addressDetails === 'none') && 'grayscale pointer-events-none'} `} >
                       <span className='font-obWide font-black text-2xl pb-2 pr-2 w-[73px]'>{props.points} </span>
                       <span className='leading-3 700px:leading-4 text-[0.7rem] 700px:text-[0.9rem] pb-0.5'>Your Points Remaining</span>
                     </div>
-                    <div className={`flex-1 ${ (votesSubmitted === 'true' || props.points === 0) && 'grayscale pointer-events-none'} `} >
+                    <div className={`flex-1 ${ (votesSubmitted === 'true' || props.addressDetails === 'none') && 'grayscale pointer-events-none'} `} >
                       <div className='button1-small text-[0.6rem] w-[7.5rem] 700px:text-[0.8rem] 700px:w-[10rem] pb-0 m-auto border-b-4 mx-2 600px:mx-auto' style={{backgroundPosition: '100% 60%', backgroundSize: '14%'}} onClick={submitPoints}>{votesSubmitted === 'sending' ? 'Sending...' : votesSubmitted === 'true' ? 'Points Sent' : 'Send Points'}</div>
                     </div>
                     <div className='flex justify-center items-center pb-1 px-1 pr-2 flex-1 aqua-dot 700px:after:content-["•"] after:right-4 after:top-0 font-ob font-bold w-full border-aquaDD border-l-[3px] bg-white'>{truncate(props.address,4)}</div>
