@@ -40,7 +40,7 @@ const Phase2 = (props) => {
   const [sendPointsNote, setSendPointsNote] = useState(false);
 
   useEffect(() => {
-    axios.get('https://daodrops4.herokuapp.com/posts/picks/')
+    axios.get('https://dao-drops.herokuapp.com/posts/picks/')
       .then(r => {
         // let randomProjects = r.data.sort(() => Math.random() - 0.5);
         let sortedProjects = r.data.sort((a, b) => a.address.localeCompare(b.address));
@@ -64,7 +64,7 @@ const Phase2 = (props) => {
       const picksSelected = Object.entries(votes).map(([k, v]) => ({ ["id"]: k, ["points"]: v }));
       const picksSubmission = {score: props.points, picks: picksSelected}
 
-      const url = `https://daodrops4.herokuapp.com/posts/score/${props.addressDetails._id}`
+      const url = `https://dao-drops.herokuapp.com/posts/score/${props.addressDetails._id}`
       axios.patch(url, picksSubmission).then(r => { r.status === 200 && setVotesSubmitted('true')} ).catch(e => console.error(e));
     }
     else {
@@ -170,7 +170,7 @@ const Phase2 = (props) => {
                     </div>
 
                     <div className='w-[31rem] 700px:w-[32rem] h-[6.5rem] bg-white border-[7px] 700px:border-[6px] border-indigoDD font-obWide font-black text-5xl flex justify-center items-center'>
-                      <Countdown date={'2021-12-28T00:00:00.000+00:00'} renderer={renderer} />
+                      <Countdown date={'2022-11-21T00:00:00.000+00:00'} renderer={renderer} />
                     </div>
                   </div>
 

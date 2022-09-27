@@ -65,7 +65,7 @@ const Phase1 = () => {
                     </div>
 
                     <div className='w-full 800px:w-[32rem] h-[6.5rem] bg-white border-t-[6px] 800px:border-r-[6px] border-indigoDD font-obWide font-black text-5xl flex justify-center items-center'>
-                      <Countdown date={'2021-12-20T12:00:00.000+00:00'} renderer={renderer} />
+                      <Countdown date={'2022-11-31T12:00:00.000+00:00'} renderer={renderer} />
                     </div>
                   </div>
 
@@ -109,7 +109,7 @@ const NominatePopup = (props) => {
 
   const submitProject = e => {
     e.preventDefault();
-    axios.post("https://daodrops4.herokuapp.com/posts", projectData).then(r => { r.status === 201 && SetPopupStatus('submitted')} ).catch(e => console.error(e));
+    axios.post("https://dao-drops.herokuapp.com/posts", projectData).then(r => { r.status === 201 && SetPopupStatus('submitted')} ).catch(e => console.error(e));
   };
 
   useEffect(() => {

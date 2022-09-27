@@ -34,7 +34,7 @@ const Phase3 = (props) => {
   const [votedProjects, setVotedProjects] = useState();
 
   useEffect(() => {
-    axios.get('https://daodrops4.herokuapp.com/posts/picks/')
+    axios.get('https://dao-drops.herokuapp.com/posts/picks/')
       .then(r => {
         let sortedProjects = r.data.sort((a,b) => b.currentScore - a.currentScore)
         setProjectsPicks(sortedProjects)

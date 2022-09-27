@@ -24,7 +24,7 @@ const App = () => {
         const signer = provider.getSigner()
         setAddress(await signer.getAddress());
 
-        await axios.get(`https://daodrops4.herokuapp.com/posts/score/${await signer.getAddress()}`)
+        await axios.get(`https://dao-drops.herokuapp.com/posts/score/${await signer.getAddress()}`)
           .then(r => { if(r.data !== null) {setAddressDetails(r.data); setPoints(r.data["score"]);} })
           .catch(e => console.error(e));
 
