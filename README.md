@@ -24,8 +24,8 @@ To delete the current score sheet stored in mongoDB run
 
 To import a curated list of project picks put the Picks.json into the pickData folder inside server then run
 
-`node scoreSeeder -i`
+`node pickSeeder -i`
 
 To delete the current curated list of project picks stored in mongoDB run
 
-`node scoreSeeder -d`
+`node pickSeeder -d`
