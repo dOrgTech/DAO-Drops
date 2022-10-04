@@ -1,6 +1,8 @@
 import PostMessage from "../models/postMessage.js";
 import GetScore from "../models/scores.js";
 import Picks from "../models/picks.js";
+import Web3Token from "web3-token";
+import axios from "axios";
 
 export const getPosts = async (req, res) => {
   try {
@@ -13,14 +15,23 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const body = req.body;
-
   const newPost = new PostMessage(body);
 
-  try {
-    await newPost.save();
-    res.status(201).json(newPost);
-  } catch (error) {
-    res.status(409).json({ message: error.message });
+  const CAPTHCA_SECRET_KEY = "6Lco_04iAAAAAAWQaU4bb4TDIY4E84ggwqXZey6p";
+  const captchaToken = req.headers["captcha-token"];
+  const captchaResponse = await axios.post(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${CAPTHCA_SECRET_KEY}&response=${captchaToken}`
+  );
+
+  if (captchaResponse.data.success) {
+    try {
+      await newPost.save();
+      res.status(201).json(newPost);
+    } catch (error) {
+      res.status(409).json({ message: error.message });
+    }
+  } else {
+    res.status(422).json(captchaResponse.data);
   }
 };
 
@@ -37,15 +48,28 @@ export const updatePost = async (req, res) => {
 
 export const getScore = async (req, res) => {
   const { id: _id } = req.params;
-  const account = req.body;
   try {
-    const score = await GetScore.findOne({"account": _id});
-    res.status(200).json(score);
+    const token = req.headers["auth"];
+    const { address, body } = await Web3Token.verify(token);
+
+    const score = await GetScore.findOne({ account: _id });
+
+    if (
+      address.toLowerCase() == score.account.toLowerCase() &&
+      body.statement == "This is a signed message"
+    ) {
+      try {
+        res.status(200).json(score);
+      } catch (error) {
+        res.status(404).json({ message: error.message });
+      }
+    } else {
+      res.status(401).json({ message: "Anauthorized User" });
+    }
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(420).json({ message: error.message });
   }
 };
-
 export const getPicks = async (req, res) => {
   try {
     const picks = await Picks.find();
@@ -60,33 +84,45 @@ export const updateScore = async (req, res) => {
   const accountData = req.body; // should include:
   // acoount: the eth address of the account being updated
   // score: the updated remaining score of this account
+  // message: signed object array
   // object array: an array of objects containing the projects this account has allocated points to as well as how many points each received
   // object ex:
   // {
   //    id: project mongo id,
   //    points: number of points this account allocated to this project
   // }
-  const updateScore = await GetScore.findByIdAndUpdate(_id, accountData, {
+  const updatesScore = await GetScore.findByIdAndUpdate(_id, accountData, {
     new: true
   });
 
   const picksArry = accountData.picks;
   const numberofPicks = picksArry.length;
+  try {
+    const token = accountData.message;
+    const { address, body } = await Web3Token.verify(token);
+    let updatedPick;
 
-  for (let i = 0; i < numberofPicks; i++) {
-    const pick = await Picks.findOne({ _id: picksArry[i].id });
-    const oldScore = pick.currentScore;
-    let newScore = picksArry[i].points + oldScore;
-    const updatedPick = await Picks.findByIdAndUpdate(
-      picksArry[i].id,
-      { currentPoints: picksArry[i].points, currentScore: newScore },
-      {
-        new: true
+    if (
+      address.toLowerCase() == accountData.account.toLowerCase() &&
+      body.statement == JSON.stringify(picksArry)
+    ) {
+      for (let i = 0; i < numberofPicks; i++) {
+        const pick = await Picks.findOne({ _id: picksArry[i].id });
+        const oldScore = pick.currentScore;
+        let newScore = picksArry[i].points + oldScore;
+        updatedPick = await Picks.findByIdAndUpdate(
+          picksArry[i].id,
+          { currentPoints: picksArry[i].points, currentScore: newScore },
+          {
+            new: true
+          }
+        );
       }
-    );
+      res.json(updatePost);
+    } else {
+      res.status(401).json({ message: "Anauthorized User" });
+    }
+  } catch (error) {
+    res.status(420).json({ message: error.message });
   }
-
-  let updatedPick;
-
-  res.json(updatePost);
 };
