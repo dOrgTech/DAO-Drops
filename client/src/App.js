@@ -38,7 +38,7 @@ const App = () => {
           localStorage.setItem(ethAddress, token)
         }
 
-        await axios.get(SCORE + await signer.getAddress(), { headers: { auth: token }})
+        await axios.get(SCORE + (await signer.getAddress()).toLowerCase(), { headers: { auth: token }})
           .then(r => { if(r.data !== null) {setAddressDetails(r.data); setPoints(r.data['score']);} })
           .catch(e => console.error(e))
 
