@@ -36,4 +36,4 @@ To delete the post data from submissions from the mongo DB run
 
 To export submission posts from the database into a CSV file run the command
 
-'node pickSeeder -e'
+`node pickSeeder -e`
