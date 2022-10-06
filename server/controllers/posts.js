@@ -2,7 +2,7 @@ import PostMessage from "../models/postMessage.js";
 import GetScore from "../models/scores.js";
 import Picks from "../models/picks.js";
 import Web3Token from "web3-token";
-import axios from "axios";
+import fetch from "node-fetch";
 
 export const getPosts = async (req, res) => {
   try {
@@ -15,23 +15,29 @@ export const getPosts = async (req, res) => {
 
 export const createPost = async (req, res) => {
   const body = req.body;
-  const newPost = new PostMessage(body);
+  try {
+    const newPost = new PostMessage(body);
 
-  const CAPTHCA_SECRET_KEY = "6Lco_04iAAAAAAWQaU4bb4TDIY4E84ggwqXZey6p";
-  const captchaToken = req.headers["captcha-token"];
-  const captchaResponse = await axios.post(
-    `https://www.google.com/recaptcha/api/siteverify?secret=${CAPTHCA_SECRET_KEY}&response=${captchaToken}`
-  );
+    const CAPTHCA_SECRET_KEY = "6Lco_04iAAAAAAWQaU4bb4TDIY4E84ggwqXZey6p";
+    const captchaToken = req.headers["captcha-token"];
+    const response = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify?secret=${CAPTHCA_SECRET_KEY}&response=${captchaToken}`,
+      { method: "post" }
+    );
+    const captchaResponse = await response.json();
 
-  if (captchaResponse.data.success) {
-    try {
-      await newPost.save();
-      res.status(201).json(newPost);
-    } catch (error) {
-      res.status(409).json({ message: error.message });
+    if (captchaResponse.success) {
+      try {
+        await newPost.save();
+        res.status(201).json(newPost);
+      } catch (error) {
+        res.status(409).json({ message: error.message });
+      }
+    } else {
+      res.status(422).json(captchaResponse);
     }
-  } else {
-    res.status(422).json(captchaResponse.data);
+  } catch (error) {
+    res.status(420).json({ message: error.message });
   }
 };
 
@@ -70,6 +76,7 @@ export const getScore = async (req, res) => {
     res.status(420).json({ message: error.message });
   }
 };
+
 export const getPicks = async (req, res) => {
   try {
     const picks = await Picks.find();

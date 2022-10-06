@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import Picks from "./models/picks.js";
 import path from "path";
+import json2csv from "json2csv";
 
 const __dirname = path.resolve();
 
@@ -28,7 +29,7 @@ mongoose
   .catch(error => console.log(error.message));
 
 const picks = JSON.parse(
-  fs.readFileSync(__dirname + "pickData/Picks.json", "utf-8")
+  fs.readFileSync(__dirname + "/pickData/Picks.json", "utf-8")
 );
 
 const importPicks = async () => {
@@ -57,8 +58,58 @@ const deletePicks = async () => {
   }
 };
 
+const exportPicks = async () => {
+  try {
+    const picksdata = await Picks.find();
+    console.log("Picks exported from Mongo DB");
+    let cleanedPicks = [];
+    const fields = [
+      "projectName",
+      "projectDescription",
+      "website",
+      "address",
+      "contact",
+      "contactMethod"
+    ];
+    const opts = { fields };
+
+    for (let i = 0; i < picksdata.length; i++) {
+      let projectName = picksdata[i].projectName;
+      let projectDescription = picksdata[i].projectDescription;
+      let website = picksdata[i].website;
+      let address = picksdata[i].address;
+      let contact = picksdata[i].contact;
+      let contactMethod = picksdata[i].contactMethod;
+
+      let indiPick = {
+        projectName,
+        projectDescription,
+        website,
+        address,
+        contact,
+        contactMethod
+      };
+      cleanedPicks.push(indiPick);
+    }
+    try {
+      const csv = json2csv.parse(cleanedPicks, opts);
+      fs.writeFileSync("exportedPicks.csv", csv);
+
+      console.log(csv);
+    } catch (err) {
+      console.error(err);
+    }
+    process.exit();
+  } catch (err) {
+    console.log(err);
+    process.exit();
+  }
+};
+
 if (process.argv[2] === "-i") {
   importPicks();
 } else if (process.argv[2] === "-d") {
   deletePicks();
+} else if (process.argv[2] === "-e") {
+  exportPicks();
 }
