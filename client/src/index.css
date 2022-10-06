@@ -105,7 +105,6 @@
       -webkit-appearance: none;
       appearance: none;
     }
-
 }
 
 
@@ -326,4 +325,6 @@
   }
 }
 
-
+.grecaptcha-badge {
+  z-index: -1 !important;
+}
