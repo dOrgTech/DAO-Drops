@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import GetScore from "./models/scores.js";
 import PostMessage from "./models/postMessage.js";
+import json2csv from "json2csv";
 
 import path from "path";
 
@@ -92,10 +93,45 @@ const deletePosts = async () => {
   }
 };
 
+const exportParticipants = async () => {
+  try {
+    const scoredata = await GetScore.find();
+    console.log("Scores exported from Mongo DB");
+    let cleanedScores = [];
+    const fields = ["address"];
+    const opts = { fields };
+
+    for (let i = 0; i < scoredata.length; i++) {
+      console.log(scoredata[i].score);
+      if (scoredata[i].score == 0) {
+        let address = scoredata[i].account;
+        let addressOb = {
+          address
+        };
+        cleanedScores.push(addressOb);
+      }
+    }
+    try {
+      const csv = json2csv.parse(cleanedScores, opts);
+      fs.writeFileSync("exportedAccounts.csv", csv);
+
+      console.log(csv);
+    } catch (err) {
+      console.error(err);
+    }
+    process.exit();
+  } catch (err) {
+    console.log(err);
+    process.exit();
+  }
+};
+
 if (process.argv[2] === "-i") {
   importScores();
 } else if (process.argv[2] === "-d") {
   deleteScores();
 } else if (process.argv[2] === "-dp") {
   deletePosts();
+} else if (process.argv[2] === "-ep") {
+  exportParticipants();
 }

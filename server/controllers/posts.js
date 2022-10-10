@@ -125,7 +125,7 @@ export const updateScore = async (req, res) => {
           }
         );
       }
-      res.json(updatePost);
+      res.json(updatedPick);
     } else {
       res.status(401).json({ message: "Anauthorized User" });
     }
