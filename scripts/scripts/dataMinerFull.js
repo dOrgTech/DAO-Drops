@@ -1,4 +1,3 @@
-const { ethers } = require("hardhat");
 const fs = require("fs");
 const parse = require("csv-parse/lib/sync");
 
@@ -137,9 +136,11 @@ async function main() {
   // loop the json entries
   for (let i = 0; i < recordLength; i++) {
     // get the address of each deployer
-    let account = deepDAOScores[i]["Address"];
+    let account = deepDAOScores[i]['"address"'];
     // get the number of contracts trhat account has deployed
-    let count = deepDAOScores[i]["DAOs"];
+    let count = deepDAOScores[i]['"number_of_daos"'];
+
+    console.log("The DeepDAO score for account " + account + " is " + count);
 
     if (count <= 10) {
       count = 10;
@@ -507,6 +508,9 @@ async function main() {
     }
   }
 
+  ////////////////////////ETHBerlin2 Parser///////////////////////////
+  console.log("Parsing ETHBerlin2 data");
+
   const ethBerlinFileContent2 = await fs.readFileSync(
     __dirname + "/csv_src/ETHBerlin2.csv"
   );
@@ -792,6 +796,8 @@ async function main() {
       highestPOAPscore = parseInt(currentAccountScore);
     }
   }
+  //////////////////////ETHIndia2 Parser///////////////////////////
+  console.log("Parsing ETHIndia2 data");
 
   const ethIndiaFileContent2 = await fs.readFileSync(
     __dirname + "/csv_src/ETHIndia2.csv"

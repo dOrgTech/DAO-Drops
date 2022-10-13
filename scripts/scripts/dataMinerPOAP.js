@@ -1,8 +1,7 @@
-const { ethers } = require("hardhat");
 const fs = require("fs");
 const parse = require("csv-parse/lib/sync");
 
-const median = (arr) => {
+const median = arr => {
   const mid = Math.floor(arr.length / 2),
     nums = [...arr].sort((a, b) => a - b);
   return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
@@ -39,7 +38,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true,
+    rtrim: true
   });
 
   recordLength = dc1Records.length;
@@ -48,14 +47,14 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      (accountObject) => accountObject.account === poapAccount
+      accountObject => accountObject.account === poapAccount
     );
     let currentAccountScore = 0;
 
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1,
+        score: 1
       };
       accounts.push(accountObject);
       overAllScore++;
@@ -119,7 +118,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true,
+    rtrim: true
   });
 
   recordLength = dc2Records.length;
@@ -128,14 +127,14 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      (accountObject) => accountObject.account === poapAccount
+      accountObject => accountObject.account === poapAccount
     );
     let currentAccountScore = 0;
 
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1,
+        score: 1
       };
       accounts.push(accountObject);
       overAllScore++;
@@ -199,7 +198,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true,
+    rtrim: true
   });
 
   recordLength = dc3Records.length;
@@ -208,14 +207,14 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      (accountObject) => accountObject.account === poapAccount
+      accountObject => accountObject.account === poapAccount
     );
     let currentAccountScore = 0;
 
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1,
+        score: 1
       };
       accounts.push(accountObject);
       overAllScore++;
@@ -279,7 +278,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true,
+    rtrim: true
   });
 
   recordLength = dc4Records.length;
@@ -288,7 +287,7 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      (accountObject) => accountObject.account === poapAccount
+      accountObject => accountObject.account === poapAccount
     );
 
     let currentAccountScore = 0;
@@ -296,7 +295,7 @@ async function main() {
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1,
+        score: 1
       };
       accounts.push(accountObject);
       overAllScore++;
@@ -360,7 +359,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true,
+    rtrim: true
   });
 
   recordLength = dc5Records.length;
@@ -369,7 +368,7 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      (accountObject) => accountObject.account === poapAccount
+      accountObject => accountObject.account === poapAccount
     );
 
     let currentAccountScore = 0;
@@ -377,7 +376,7 @@ async function main() {
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1,
+        score: 1
       };
       accounts.push(accountObject);
       overAllScore++;
@@ -441,7 +440,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true,
+    rtrim: true
   });
 
   recordLength = ethBerlinRecords.length;
@@ -450,14 +449,14 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      (accountObject) => accountObject.account === poapAccount
+      accountObject => accountObject.account === poapAccount
     );
     let currentAccountScore = 0;
 
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1,
+        score: 1
       };
       accounts.push(accountObject);
       overAllScore++;
@@ -521,7 +520,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true,
+    rtrim: true
   });
 
   recordLength = ethBoston1Records.length;
@@ -530,14 +529,14 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      (accountObject) => accountObject.account === poapAccount
+      accountObject => accountObject.account === poapAccount
     );
     let currentAccountScore = 0;
 
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1,
+        score: 1
       };
       accounts.push(accountObject);
       overAllScore++;
@@ -597,7 +596,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true,
+    rtrim: true
   });
 
   recordLength = ethBoston2Records.length;
@@ -606,7 +605,7 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      (accountObject) => accountObject.account === poapAccount
+      accountObject => accountObject.account === poapAccount
     );
 
     let currentAccountScore = 0;
@@ -614,7 +613,7 @@ async function main() {
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1,
+        score: 1
       };
       accounts.push(accountObject);
       overAllScore++;
@@ -675,7 +674,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true,
+    rtrim: true
   });
 
   recordLength = ethBoston3Records.length;
@@ -684,7 +683,7 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      (accountObject) => accountObject.account === poapAccount
+      accountObject => accountObject.account === poapAccount
     );
 
     let currentAccountScore = 0;
@@ -692,7 +691,7 @@ async function main() {
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1,
+        score: 1
       };
       accounts.push(accountObject);
       overAllScore++;
@@ -755,7 +754,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true,
+    rtrim: true
   });
 
   recordLength = ethDenverRecords.length;
@@ -764,14 +763,14 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      (accountObject) => accountObject.account === poapAccount
+      accountObject => accountObject.account === poapAccount
     );
     let currentAccountScore = 0;
 
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1,
+        score: 1
       };
       accounts.push(accountObject);
       overAllScore++;
@@ -834,7 +833,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true,
+    rtrim: true
   });
 
   recordLength = ethIndiaRecords.length;
@@ -843,7 +842,7 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      (accountObject) => accountObject.account === poapAccount
+      accountObject => accountObject.account === poapAccount
     );
 
     let currentAccountScore = 0;
@@ -851,7 +850,7 @@ async function main() {
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1,
+        score: 1
       };
       accounts.push(accountObject);
       overAllScore++;
@@ -906,13 +905,11 @@ async function main() {
   /////////////////////////jsonifier and file system saverizor code///////////////////////////
   console.log("JSONifying data");
   var jsonData = JSON.stringify(accounts, null, 2);
-  fs.writeFileSync(
-    "./scoreSheets/ScoreSheetPOAP.json",
-    jsonData,
-    function (err) {
-      res.json({ success: true });
-    }
-  );
+  fs.writeFileSync("./scoreSheets/ScoreSheetPOAP.json", jsonData, function(
+    err
+  ) {
+    res.json({ success: true });
+  });
   console.log("Data JSONified into ScoreSheet.json!!!");
   console.log("The total number of accounts in the POAP data is: ");
   console.log(poapNumberOfAccounts);
@@ -992,7 +989,7 @@ async function main() {
 
 main()
   .then(() => process.exit(0))
-  .catch((error) => {
+  .catch(error => {
     console.error(error);
     process.exit(1);
   });

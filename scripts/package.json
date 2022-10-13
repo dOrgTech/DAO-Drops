@@ -1,35 +1,14 @@
 {
-  "name": "dao-drops-distributor",
+  "name": "scripts",
   "version": "1.0.0",
-  "description": "Repository for the DAO Drops distributor smart-contracts and merkle-tree generation scripts",
+  "description": "This account scoring script uses public data to generate activity based scores for Ethereum accounts for use in the DAO Drops project. This set of scripts can generate an overall score as well as a score based on each individual data set used. The scoring scripts and data sets can be found in the scripts folder.The data sets are in the csv_src folder found within the scripts folder. Each of the generated score sheets can be found in scoreSheets folder.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dOrgTech/DAO-Drops-Distributor.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dOrgTech/DAO-Drops-Distributor/issues"
-  },
-  "homepage": "https://github.com/dOrgTech/DAO-Drops-Distributor#readme",
-  "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.2",
-    "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "chai": "^4.3.4",
-    "ethereum-waffle": "^3.4.0",
-    "ethers": "^5.4.6",
-    "hardhat": "^2.6.2"
-  },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.3.1",
-    "axios": "^0.24.0",
-    "csv-parse": "^4.16.3",
-    "jquery-csv": "^1.0.21",
-    "merkletreejs": "^0.2.24",
-    "node-csv": "^0.1.2"
+    "csv-parse": "^5.3.1"
   }
 }

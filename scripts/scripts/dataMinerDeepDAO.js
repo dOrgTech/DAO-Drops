@@ -1,8 +1,7 @@
-const { ethers } = require("hardhat");
 const fs = require("fs");
 const parse = require("csv-parse/lib/sync");
 
-const median = (arr) => {
+const median = arr => {
   const mid = Math.floor(arr.length / 2),
     nums = [...arr].sort((a, b) => a - b);
   return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
@@ -40,7 +39,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true,
+    rtrim: true
   });
 
   // get json entries length
@@ -54,7 +53,7 @@ async function main() {
     //create object for it
     let accountObject = {
       account: deployerAccount,
-      score: parseInt(deploymentCount),
+      score: parseInt(deploymentCount)
     };
     //push object to accounst array
     accounts.push(accountObject);
@@ -104,13 +103,11 @@ async function main() {
   /////////////////////////jsonifier and file system saverizor code///////////////////////////
   console.log("JSONifying data");
   var jsonData = JSON.stringify(accounts, null, 2);
-  fs.writeFileSync(
-    "./scoreSheets/ScoreSheetDeepDAO.json",
-    jsonData,
-    function (err) {
-      res.json({ success: true });
-    }
-  );
+  fs.writeFileSync("./scoreSheets/ScoreSheetDeepDAO.json", jsonData, function(
+    err
+  ) {
+    res.json({ success: true });
+  });
   console.log("Data JSONified into ScoreSheet.json!!!");
   console.log("The total number of accounts in the DeepDAO data is: ");
   console.log(deepDAONumberOfAccounts);
@@ -190,7 +187,7 @@ async function main() {
 
 main()
   .then(() => process.exit(0))
-  .catch((error) => {
+  .catch(error => {
     console.error(error);
     process.exit(1);
   });

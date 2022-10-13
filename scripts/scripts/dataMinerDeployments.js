@@ -1,8 +1,7 @@
-const { ethers } = require("hardhat");
 const fs = require("fs");
 const parse = require("csv-parse/lib/sync");
 
-const median = (arr) => {
+const median = arr => {
   const mid = Math.floor(arr.length / 2),
     nums = [...arr].sort((a, b) => a - b);
   return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
@@ -39,7 +38,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true,
+    rtrim: true
   });
 
   // get CSV entries length
@@ -55,7 +54,7 @@ async function main() {
     //create onject for it
     let accountObject = {
       account: deployerAccount,
-      score: parseInt(deploymentCount),
+      score: parseInt(deploymentCount)
     };
     //push new account object to sheet
     accounts.push(accountObject);
@@ -107,7 +106,7 @@ async function main() {
   fs.writeFileSync(
     "./scoreSheets/ScoreSheetDeployment.json",
     jsonData,
-    function (err) {
+    function(err) {
       res.json({ success: true });
     }
   );
@@ -193,7 +192,7 @@ async function main() {
 
 main()
   .then(() => process.exit(0))
-  .catch((error) => {
+  .catch(error => {
     console.error(error);
     process.exit(1);
   });
