@@ -507,6 +507,52 @@ async function main() {
     }
   }
 
+  const ethBerlinFileContent2 = await fs.readFileSync(
+    __dirname + "/csv_src/ETHBerlin2.csv"
+  );
+  const ethBerlinRecords2 = parse(ethBerlinFileContent2, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = ethBerlinRecords2.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = ethBerlinRecords2[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+
   ////////////////////////ETHBoston Parser///////////////////////////
   console.log("Parsing ETHBoston data");
 
@@ -714,6 +760,53 @@ async function main() {
   recordLength = ethIndiaRecords.length;
   for (let i = 0; i < recordLength; i++) {
     let poapAccount = ethIndiaRecords[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+
+  const ethIndiaFileContent2 = await fs.readFileSync(
+    __dirname + "/csv_src/ETHIndia2.csv"
+  );
+  const ethIndiaRecords2 = parse(ethIndiaFileContent2, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = ethIndiaRecords2.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = ethIndiaRecords2[i]['"Collection"'];
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
