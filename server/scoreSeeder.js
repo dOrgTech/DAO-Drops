@@ -6,19 +6,20 @@ import cors from "cors";
 import GetScore from "./models/scores.js";
 import PostMessage from "./models/postMessage.js";
 import json2csv from "json2csv";
+import * as dotenv from "dotenv";
 
 import path from "path";
 
 const __dirname = path.resolve();
 
 const app = express();
+dotenv.config();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-const CONNECTION_URL =
-  "mongodb+srv://DAOdropsApp:PEGEl0PVqFQobYce@cluster0.xp7yw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const CONNECTION_URL = process.env.ATLAS_URL;
 
 const PORT = process.env.PORT || 5000;
 
