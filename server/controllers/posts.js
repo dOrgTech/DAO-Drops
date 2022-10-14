@@ -98,9 +98,6 @@ export const updateScore = async (req, res) => {
   //    id: project mongo id,
   //    points: number of points this account allocated to this project
   // }
-  const updatesScore = await GetScore.findByIdAndUpdate(_id, accountData, {
-    new: true
-  });
 
   const picksArry = accountData.picks;
   const numberofPicks = picksArry.length;
@@ -108,6 +105,9 @@ export const updateScore = async (req, res) => {
     const token = accountData.message;
     const { address, body } = await Web3Token.verify(token);
     let updatedPick;
+    const updatesScore = await GetScore.findByIdAndUpdate(_id, accountData, {
+      new: true
+    });
 
     if (
       address.toLowerCase() == accountData.account.toLowerCase() &&

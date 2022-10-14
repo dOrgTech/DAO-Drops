@@ -140,8 +140,6 @@ async function main() {
     // get the number of contracts trhat account has deployed
     let count = deepDAOScores[i]['"number_of_daos"'];
 
-    console.log("The DeepDAO score for account " + account + " is " + count);
-
     if (count <= 10) {
       count = 10;
     }

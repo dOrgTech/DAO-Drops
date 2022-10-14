@@ -127,6 +127,45 @@ const exportParticipants = async () => {
   }
 };
 
+const exportVerifiedPoints = async () => {
+  try {
+    const scoredata = await GetScore.find();
+    console.log("Scores exported from Mongo DB");
+    let cleanedPointData = [];
+    const fields = ["address", "picks", "message"];
+    const opts = { fields };
+
+    for (let i = 0; i < scoredata.length; i++) {
+      console.log(scoredata[i].score);
+      console.log(scoredata[i].picks);
+      console.log(scoredata[i].message);
+      if (scoredata[i].score == 0) {
+        let address = scoredata[i].account;
+        let picks = scoredata[i].picks;
+        let message = scoredata[i].message;
+        let addressOb = {
+          address,
+          picks,
+          message
+        };
+        cleanedPointData.push(addressOb);
+      }
+    }
+    try {
+      const csv = json2csv.parse(cleanedPointData, opts);
+      fs.writeFileSync("exportedPointData.csv", csv);
+
+      console.log(csv);
+    } catch (err) {
+      console.error(err);
+    }
+    process.exit();
+  } catch (err) {
+    console.log(err);
+    process.exit();
+  }
+};
+
 if (process.argv[2] === "-i") {
   importScores();
 } else if (process.argv[2] === "-d") {
@@ -135,4 +174,6 @@ if (process.argv[2] === "-i") {
   deletePosts();
 } else if (process.argv[2] === "-ep") {
   exportParticipants();
+} else if (process.argv[2] === "-evp") {
+  exportVerifiedPoints();
 }

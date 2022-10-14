@@ -41,3 +41,7 @@ To export submission posts from the database into a CSV file run the command
 To export the addresses of the accounts who participated into a CSV file use
 
 `node scoreSeeder -ep`
+
+To export the account point allocation verification data into a CSV file run
+
+`node scoreSeeder -evp`
