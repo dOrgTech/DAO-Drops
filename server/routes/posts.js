@@ -3,7 +3,6 @@ import express from "express";
 import {
   getPosts,
   createPost,
-  updatePost,
   getScore,
   updateScore,
   getPicks
@@ -15,7 +14,6 @@ const router = express.Router();
 
 router.get("/", getPosts);
 router.post("/", createPost);
-router.patch("/:id", updatePost);
 router.get("/score/:id", getScore);
 router.patch("/score/:id", updateScore);
 router.get("/picks/", getPicks);

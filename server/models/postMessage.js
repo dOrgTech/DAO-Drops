@@ -10,7 +10,7 @@ const postSchema = mongoose.Schema({
   image: String,
   createdAt: {
     type: Date,
-    default: new Date()
+    default: new Date("<YYYY-mm-ddTHH:MM:ss>")
   }
 });
 
