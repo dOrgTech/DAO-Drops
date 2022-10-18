@@ -22,5 +22,8 @@
     "node-fetch": "^3.2.10",
     "nodemon": "^2.0.12",
     "web3-token": "^1.0.2"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.11"
   }
 }

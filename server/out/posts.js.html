@@ -1,4 +1,32 @@
-import PostMessage from "../models/postMessage.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: posts.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: posts.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import PostMessage from "../models/postMessage.js";
 import GetScore from "../models/scores.js";
 import Picks from "../models/picks.js";
 import Web3Token from "web3-token";
@@ -8,7 +36,7 @@ import * as dotenv from "dotenv";
 /**
  * Allows for all submitted projects to be retrieved
  * @async
- * @return {Promise<object>} Returns the list of submitted projects
+ * @return {Promise&lt;object>} Returns the list of submitted projects
  */
 export const getPosts = async (req, res) => {
   try {
@@ -23,7 +51,7 @@ export const getPosts = async (req, res) => {
  * Allows an end user to submit a project for consideration during phase one
  * @async
  * @param {object} req - request object header is a captcha token, body is object containing submitted project information
- * @return {Promise<object>} Returns the project information
+ * @return {Promise&lt;object>} Returns the project information
  */
 export const createPost = async (req, res) => {
   const body = req.body;
@@ -32,7 +60,7 @@ export const createPost = async (req, res) => {
 
     const captchaToken = req.headers["captcha-token"];
     const response = await fetch(
-      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.CAPTHCA_SECRET_KEY}&response=${captchaToken}`,
+      `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.CAPTHCA_SECRET_KEY}&amp;response=${captchaToken}`,
       { method: "post" }
     );
     const captchaResponse = await response.json();
@@ -56,7 +84,7 @@ export const createPost = async (req, res) => {
  * Allows the front end to retrieve the score of a user by their injected web3 account address
  * @async
  * @param {object} req - request object header is a web3 token, body is a string
- * @return {Promise<object>} Returns an object containing the accounts score
+ * @return {Promise&lt;object>} Returns an object containing the accounts score
  */
 export const getScore = async (req, res) => {
   const { id: _id } = req.params;
@@ -67,7 +95,7 @@ export const getScore = async (req, res) => {
     const score = await GetScore.findOne({ account: _id });
 
     if (
-      address.toLowerCase() == score.account.toLowerCase() &&
+      address.toLowerCase() == score.account.toLowerCase() &amp;&amp;
       body.statement == "This is a signed message"
     ) {
       try {
@@ -86,7 +114,7 @@ export const getScore = async (req, res) => {
 /**
  * Allows the front end to retrieve the list of currated projects
  * @async
- * @return {Promise<object>} Returns the currated projects
+ * @return {Promise&lt;object>} Returns the currated projects
  */
 export const getPicks = async (req, res) => {
   try {
@@ -101,7 +129,7 @@ export const getPicks = async (req, res) => {
  * Allows an end user to submit their point allocations and updates the scores of projects accordingly
  * @async
  * @param {object} req - request object header is a web3 token, body is account data inluding a lsit of selected projects and how an accounts point are allocated
- * @return {Promise<object>} Returns an object containing the updated project scores
+ * @return {Promise&lt;object>} Returns an object containing the updated project scores
  */
 export const updateScore = async (req, res) => {
   const { id: _id } = req.params;
@@ -122,13 +150,13 @@ export const updateScore = async (req, res) => {
   }
 
   if (
-    add == accountData.account.toLowerCase() &&
+    add == accountData.account.toLowerCase() &amp;&amp;
     bod == JSON.stringify(picksArry)
   ) {
     const updatesScore = await GetScore.findByIdAndUpdate(_id, accountData, {
       new: true
     });
-    for (let i = 0; i < numberofPicks; i++) {
+    for (let i = 0; i &lt; numberofPicks; i++) {
       const pick = await Picks.findOne({ _id: picksArry[i].id });
       const oldScore = pick.currentScore;
       let newScore = picksArry[i].points + oldScore;
@@ -145,3 +173,26 @@ export const updateScore = async (req, res) => {
     res.status(401).json({ message: "Anauthorized User" });
   }
 };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#createPost">createPost</a></li><li><a href="global.html#getPicks">getPicks</a></li><li><a href="global.html#getPosts">getPosts</a></li><li><a href="global.html#getScore">getScore</a></li><li><a href="global.html#updateScore">updateScore</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.11</a> on Tue Oct 18 2022 17:23:15 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
