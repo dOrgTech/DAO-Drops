@@ -86,7 +86,7 @@ const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus
                     : winner === 'winner'
                     ? <div className='px-8 1000px:px-12 my-auto flex flex-col'>
                         <img className='mx-auto' src={poap} alt='poap' />
-                        <div className='font-obWide font-medium text-xl text-center mt-4'>Awesome! You were aidropped the DAO drops POAP</div>
+                        <div className='font-obWide font-medium text-xl text-center mt-4'>Awesome! You were airdropped the DAO drops POAP</div>
                       </div>
 
                     : winner === 'not-winner'

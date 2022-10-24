@@ -31,7 +31,7 @@ const Project = ({index, id, name, desc, website, paddress, icon, setPopupStatus
   
     return (
       <div className={`w-52 h-48 700px:w-72 700px:h-64 rounded-[1.75rem] p-2 px-5 700px:p-4 700px:px-7 relative ${color}`}>
-        <div className={`font-ob font-extrabold text-[1.65rem] 700px:text-[34px] leading-8 700px:leading-10 pt-1 ellipsis h-[68px] 700px:h-[84px] break-words ${ votes && votes[id] > 0 && 'w-[74%] 700px:w-[79%]' }`}>{name}</div>
+        <div className={`font-ob font-extrabold text-[1.4rem] 700px:text-[32px] leading-8 700px:leading-10 pt-1 ellipsis h-[68px] 700px:h-[84px] break-words ${ votes && votes[id] > 0 && 'w-[74%] 700px:w-[79%]' }`}>{name}</div>
         <div className='mt-3 700px:mt-4 z-10 details-button' onClick={ () => { setPopupStatus('visible'); setPopupDetails({ name: name, message: desc, link: website, paddress: paddress, image: icon, id: id }); } }>view details</div>
    
           <div className='flex mt-6 700px:mt-10 items-center'>

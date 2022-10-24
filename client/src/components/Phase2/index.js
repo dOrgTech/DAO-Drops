@@ -45,12 +45,13 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
         // let sortedProjects = r.data.sort((a, b) => a.address.localeCompare(b.address))
         let projects = r.data.map(a => ({...a}));
         shuffle(projects)
-        setProjectsPicks(projects)
 
         if (address) {
           let votesStorage = localStorage.getItem(`votes_${address}`)
           votesStorage ? setVotes(JSON.parse(votesStorage)) : r.data.map( project => setVotes(votes => ({...votes, [project._id]: 0})) )
         }
+
+        setProjectsPicks(projects)
       })
       .catch(e => console.error(e))
   }, [address])
@@ -197,8 +198,8 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
              <>
                 <h3 className='text-2xl 600px:text-3xl 1000px:text-[2.3rem] my-12 1000px:mt-32 1000px:mb-14 text-center 1000px:text-left'>YOUR DROPS</h3>
                 <div className={`flex flex-wrap justify-center gap-6 700px:gap-10 pb-16 ${ walletStatus !== 'connected' && 'grayscale pointer-events-none'} `}>
-                  { projectsPicks && votes
-                    ? projectsPicks.filter(project => votes[project._id] > 0).map((project, index) =>
+                  { projectsPicks
+                    ? projectsPicks.filter(project => votes && votes[project._id] > 0).map((project, index) =>
                         <Project
                           key={index}
                           index={index}
@@ -226,8 +227,8 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
 
           { votesSubmitted === 'true' && <h3 className='text-2xl 600px:text-3xl 1000px:text-[2.3rem] mt-16 mb-12 1000px:mt-16 1000px:mb-14 text-center 1000px:text-left'>OTHER NOMINEES</h3> }
           <div className={`flex flex-wrap justify-center gap-6 700px:gap-10 pb-16 ${ walletStatus !== 'connected' && 'grayscale pointer-events-none'} `}>
-            { projectsPicks && votes
-              ? projectsPicks.filter(project => votesSubmitted === 'true' ? votes[project._id] === 0 : project._id).map((project, index) =>
+            { projectsPicks
+              ? projectsPicks.filter(project => (votes && votesSubmitted === 'true') ? votes[project._id] === 0 : project._id).map((project, index) =>
                 <Project
                   key={index}
                   index={index}
