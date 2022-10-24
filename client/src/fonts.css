@@ -1,49 +1,49 @@
 /* IBM Plex Mono */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
-
+@import url("https://use.typekit.net/diz0pux.css");
 
 /* Obviously Demo */
 /* ---------------------------------------------------------------------- */
 
 /* Regular */
-@font-face {
+/* @font-face {
     font-family: 'Obviously Demo';
     src: url('./assets/fonts/ObviouslyDemo-Regu.woff2') format('woff2'),
         url('./assets/fonts/ObviouslyDemo-Regu.woff') format('woff');
     font-weight: 400;
-}
+} */
 
 /* Medium */
-@font-face {
+/* @font-face {
     font-family: 'Obviously Demo';
     src: url('./assets/fonts/ObviouslyDemo-Medi.woff2') format('woff2'),
         url('./assets/fonts/ObviouslyDemo-Medi.woff') format('woff');
     font-weight: 500;
-}
+} */
 
 /* Semibold */
-@font-face {
+/* @font-face {
     font-family: 'Obviously Demo';
     src: url('./assets/fonts/ObviouslyDemo-Semi.woff2') format('woff2'),
         url('./assets/fonts/ObviouslyDemo-Semi.woff') format('woff');
     font-weight: 600;
-}
+} */
 
 /* Bold */
-@font-face {
+/* @font-face {
     font-family: 'Obviously Demo';
     src: url('./assets/fonts/ObviouslyDemo-Bold.woff2') format('woff2'),
         url('./assets/fonts/ObviouslyDemo-Bold.woff') format('woff');
     font-weight: 700;
-}
+} */
 
 /* Black */
-@font-face {
+/* @font-face {
     font-family: 'Obviously Demo';
     src: url('./assets/fonts/ObviouslyDemo-Blck.woff2') format('woff2'),
         url('./assets/fonts/ObviouslyDemo-Blck.woff') format('woff');
     font-weight: 900;
-}
+} */
 /* ---------------------------------------------------------------------- */
 
 
@@ -51,36 +51,36 @@
 /* ---------------------------------------------------------------------- */
 
 /* Medium */
-@font-face {
+/* @font-face {
     font-family: 'Obviously Demo Wide';
     src: url('./assets/fonts/ObviouslyDemo-WideMedi.woff2') format('woff2'),
         url('./assets/fonts/ObviouslyDemo-WideMedi.woff') format('woff');
     font-weight: 500;
-}
+} */
 
 /* Semibold */
-@font-face {
+/* @font-face {
     font-family: 'Obviously Demo Wide';
     src: url('./assets/fonts/ObviouslyDemo-WideSemi.woff2') format('woff2'),
         url('./assets/fonts/ObviouslyDemo-WideSemi.woff') format('woff');
     font-weight: 600;
-}
+} */
 
 /* Bold */
-@font-face {
+/* @font-face {
     font-family: 'Obviously Demo Wide';
     src: url('./assets/fonts/ObviouslyDemo-WideBold.woff2') format('woff2'),
         url('./assets/fonts/ObviouslyDemo-WideBold.woff') format('woff');
     font-weight: 700;
-}
+} */
 
 /* Black */
-@font-face {
+/* @font-face {
     font-family: 'Obviously Demo Wide';
     src: url('./assets/fonts/ObviouslyDemo-WideBlck.woff2') format('woff2'),
         url('./assets/fonts/ObviouslyDemo-WideBlck.woff') format('woff');
     font-weight: 900;
-}
+} */
 /* ---------------------------------------------------------------------- */
 
 
@@ -88,12 +88,12 @@
 /* ---------------------------------------------------------------------- */
 
 /* Semibold */
-@font-face {
+/* @font-face {
     font-family: 'Obviously Demo Extended';
     src: url('./assets/fonts/ObviouslyDemo-ExtdSemi.woff2') format('woff2'),
         url('./assets/fonts/ObviouslyDemo-ExtdSemi.woff') format('woff');
     font-weight: 600;
-}
+} */
 /* ---------------------------------------------------------------------- */
 
 

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import Project from './Project'
 import ProjectPopup from './ProjectPopup'
-import * as constants from '../../Constants';
+import * as constants from '../../Constants'
 import logo from '../../assets/logos/logo.svg'
 import dropsVideo from '../../assets/video/drops.mp4'
 import dropsVideoOGG from '../../assets/video/drops.ogg'
@@ -15,22 +15,21 @@ import twitter from '../../assets/icons/twitter.svg'
 import dots3 from '../../assets/phase2/dots3.svg'
 import squiggle2 from '../../assets/phase2/squiggle2.svg'
 import poap from '../../assets/phase3/poap.png'
-import axios from 'axios';
-
-const PICKS = 'https://dao-drops.herokuapp.com/posts/picks/'
+import axios from 'axios'
 
 
 // Phase3 Component
 // ------------------------------------------------------------------------------------------------------- //
-const Phase3 = ({loadWeb3, address, addressDetails, walletStatus}) => {
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const onLoadedData = () => setIsVideoLoaded(true);
-  const [popupStatus, setPopupStatus] = useState('hidden');
-  const [connectToggle, setConnectToggle] = useState(false);
-  const [claimed, setClaimed] = useState('check');
-  const [projectsPicks, setProjectsPicks] = useState();
-  const [popupDetails, setPopupDetails] = useState();
-  const [votedProjects, setVotedProjects] = useState();
+const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus}) => {
+  
+  const PICKS = 'https://dao-drops.herokuapp.com/posts/picks/'
+
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
+  const [popupStatus, setPopupStatus] = useState('hidden')
+  const [winner, setWinner] = useState('check')
+  const [projectsPicks, setProjectsPicks] = useState()
+  const [popupDetails, setPopupDetails] = useState()
+  const [votedProjects, setVotedProjects] = useState()
 
   useEffect(() => {
     axios.get(PICKS)
@@ -38,8 +37,8 @@ const Phase3 = ({loadWeb3, address, addressDetails, walletStatus}) => {
         let sortedProjects = r.data.sort((a,b) => b.currentScore - a.currentScore)
         setProjectsPicks(sortedProjects)
       })
-      .catch(e => console.error(e));
-  }, []);
+      .catch(e => console.error(e))
+  }, [])
 
   useEffect(() => {
     if (address && addressDetails !== 'none') {
@@ -48,10 +47,10 @@ const Phase3 = ({loadWeb3, address, addressDetails, walletStatus}) => {
         if (pick.points > 0) {
           voted.push(pick.id)
         }
-      });
+      })
       setVotedProjects(voted)
     }
-  }, [address, walletStatus]);
+  }, [address, walletStatus])
 
   return (
     <>
@@ -59,52 +58,41 @@ const Phase3 = ({loadWeb3, address, addressDetails, walletStatus}) => {
 
           <Header
             loadWeb3={loadWeb3}
+            disconnectWeb3={disconnectWeb3}
             address={address}
             walletStatus={walletStatus}
-            setConnectToggle={setConnectToggle}
-            connectToggle={connectToggle}
-            claimed= {claimed}
+            winner= {winner}
           />
 
-          <div className={`flex items-end relative ${connectToggle && walletStatus !== 'connected' && '1000px:mt-[3.375rem]'} ${walletStatus === 'connected' ? 'pt-[5.55rem] 700px:pt-[6.9rem] 1000px:pt-[4.375rem] mt-0' : 'mt-8 700px:mt-12 1000px:mt-2'}`}>
+          <div className={`flex items-end relative ${walletStatus === 'connected' ? 'pt-[5.55rem] 700px:pt-[6.9rem] 1000px:pt-[4.375rem] mt-0' : 'mt-8 700px:mt-12 1000px:mt-2'}`}>
               <img className='mt-6 700px:mt-0 self-start' src={logo} alt='DAO Drops Logo' />
               
               <div className='ml-4 1000px:ml-8 mb-16 1000px:mb-0 1000px:mt-8 z-20 scale-75 1000px:scale-100 absolute 1000px:relative'>
                 <div className='w-48 h-10 bg-white border-t-[6px] border-l-[6px] border-indigoDD text-lg font-ob font-bold uppercase flex justify-center items-center endsin-line phase2'>
-                  <div className='absolute pb-1 pl-1'>PHASE 3 THE END</div>
+                  <div className='absolute pb-1 pl-1'>LAST PHASE</div>
                 </div>
 
-                <div className='w-[24rem] 1000px:w-[28rem] h-[31.1rem] bg-white border-[6px] border-indigoDD font-obWide font-black text-5xl flex flex-col'>
+                <div className='w-[24rem] 1000px:w-[28rem] !min-h-[29.1rem] !max-h-[45.1rem] 1000px:h-[calc(100vh-310px)] bg-white border-[6px] border-indigoDD font-obWide font-extrabold text-5xl flex flex-col'>
                   <div className='border-b-[6px] w-full pb-6 pt-3 text-center border-indigoDD text-4xl 1000px:text-5xl'>REWARDS</div>
 
 
-                  { claimed === 'check'
-                    ? <div className='px-8 py-12 flex flex-col'>
-                        <div className='font-obWide font-medium text-lg'>If you participated as an allocator you have a reward!</div>
-                        <button className='button2 text-sm my-8 uppercase w-60' style={{backgroundPosition: '90% 50%'}} onClick={walletStatus === 'connected' ? () => setClaimed('winner') : () => setConnectToggle(true)}>Check Rewards</button>
-                        <div className='font-obWide font-medium text-lg'>You can check the leader board results below.</div>
+                  { winner === 'check'
+                    ? <div className='px-12 my-auto flex flex-col'>
+                        <div className='font-ibm font-semibold text-xl mb-6 1000px:mb-10'>If you participated as an allocator you have a reward!</div>
+                        <div className='font-ibm font-semibold text-xl mb-8 1000px:mb-12'>You can check the leader board results below.</div>
+                        <button className='button2 text-sm uppercase w-full' style={{backgroundPosition: '90% 50%'}} onClick={walletStatus === 'connected' ? () => setWinner('winner') : () => loadWeb3('click')}>Check Rewards</button>
                       </div>
 
-                    : claimed === 'winner'
-                    ? <div className='px-8 py-10 flex flex-col'>
-                        <div className='font-obWide font-medium text-lg'>You won the</div>
-                        <div className='text-xl 1000px:text-2xl'>DAO drops poap</div>
-                        <img className='mx-auto mt-6' src={poap} alt='poap' />
-                        <button className='button2 ml-auto text-sm mt-8 mx-auto' onClick={() => setClaimed('claimed')}>Claim Poap</button>
+                    : winner === 'winner'
+                    ? <div className='px-8 1000px:px-12 my-auto flex flex-col'>
+                        <img className='mx-auto' src={poap} alt='poap' />
+                        <div className='font-obWide font-medium text-xl text-center mt-4'>Awesome! You were aidropped the DAO drops POAP</div>
                       </div>
 
-                    : claimed === 'claimed'
-                      ? <div className='px-8 py-6 flex flex-col'>
-                          <div className='font-obWide font-medium text-lg'>Awesome!</div>
-                          <div className='text-xl 1000px:text-2xl'>DAO drops poap will now appear on your wallet.</div>
-                          <img className='mx-auto mt-3' src={poap} alt='poap' />
-                          <div className='font-ob font-medium text-center mt-5 text-xl'>✅ CLAIMED</div>
-                        </div>
-
-                    : claimed === 'not-winner'
-                      ? <div className='pl-8 pr-16 py-12 flex flex-col'>
-                          <div className='font-obWide font-medium text-xl mb-10'>You don’t have any rewards to claim but be sure to participate on the next DAO Drops!</div>
-                          <div className='font-obWide font-medium text-xl'>You can check the leader board results below.</div>
+                    : winner === 'not-winner'
+                      ? <div className='px-8 1000px:px-10 my-auto flex flex-col'>
+                        <div className='font-ibm font-semibold text-lg mb-8 1000px:mb-10'>You don’t have any rewards to claim but be sure to participate on the next Dao Drops round!</div>
+                        <div className='font-ibm font-semibold text-lg 1000px:mb-12'>You can check the leader board results below.</div>
                       </div>
                     : null
                   }
@@ -114,10 +102,10 @@ const Phase3 = ({loadWeb3, address, addressDetails, walletStatus}) => {
               </div>
               
               <div className='flex flex-col items-end ml-12 1000px:ml-0 w-full 1000px:w-full'>
-                <h3 className='text-3xl 1000px:text-3xl 1200px:text-[calc(1.3rem+1vw)] 1200px:leading-10 1000px:pl-6 1200px:pl-12 pr-[5%] 1200px:pr-[25%] mb-20 mt-8 1000px:my-0 self-start 1000px:self-end -ml-4 1000px:ml-0'>we made it rain for you  too! ☔</h3>
-                <div className='w-full h-[25rem] 1000px:h-[21rem] mt-24 1000px:mt-8 border-[6px] 1000px:border-l-0 border-indigoDD z-10 relative'>
+                <h3 className='text-3xl 1000px:text-3xl 1200px:text-[calc(1.3rem+1vw)] 1200px:leading-10 1000px:pl-6 1200px:pl-12 pr-[5%] 1200px:pr-[25%] mb-16 mt-8 1000px:my-0 self-start 1000px:self-end -ml-4 1000px:ml-0'>we made it rain for you  too! ☔</h3>
+                <div className='w-full !min-h-[23.5rem] !max-h-[39.5rem] 1000px:h-[calc(100vh-400px)] mt-24 1000px:mt-[18px] border-[6px] 1000px:border-l-0 border-indigoDD z-10 relative'>
                     <img className={`h-full w-full object-cover absolute transition-opacity ease-in duration-300 z-10 ${isVideoLoaded ? 'opacity-0' : 'opacity-100' }`} src={dropsThumbnail} alt='Drops Thumbnail' />
-                    <video className={`h-full w-full object-cover absolute z-10 ${isVideoLoaded ? 'opacity-100' : 'opacity-0' }`} autoPlay loop playsInline muted onLoadedData={onLoadedData}>
+                    <video className={`h-full w-full object-cover absolute z-10 ${isVideoLoaded ? 'opacity-100' : 'opacity-0' }`} autoPlay loop playsInline muted onLoadedData={() => setIsVideoLoaded(true)}>
                       <source src={dropsVideo} type='video/mp4'/>
                       <source src={dropsVideoOGG} type='video/ogg'/>
                       <source src={dropsVideoWEBM} type='video/webm'/>
@@ -173,7 +161,8 @@ const Phase3 = ({loadWeb3, address, addressDetails, walletStatus}) => {
   
           <div id='leaderboard' className='mt-12 1000px:mt-32 mb-20 z-10 text-center m-auto'>
             <h3 className='text-2xl 600px:text-3xl 1000px:text-[2.6rem] mb-6 800px:mb-10'>LEADER BOARD RESULTS</h3>
-            <div className='subtitle2 text-base 600px:text-lg 800px:text-xl 1000px:text-2xl mb-10 1200px:px-[14%]'>Each project will receive funds in proportion to the points they were given. Thanks for being part of DAO drops community and helping other projects to grow!</div>
+
+            <div className='font-ibm text-base 600px:text-lg 800px:text-xl 1800px:text-2xl 1000px:px-[13%] mb-10 m-auto'>Each project will receive funds in proportion to the points they were given.<br/>Thanks for being part of DAO drops community and helping other projects to grow!</div>
           </div>
 
           <div className={`flex flex-wrap justify-center gap-6 700px:gap-10 pb-16`}>
@@ -208,7 +197,7 @@ const Phase3 = ({loadWeb3, address, addressDetails, walletStatus}) => {
           by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
         </div>
 
-        <a className='font-ob font-semibold text-magentaDD tracking-[4px] text-xl 1000px:w-1/3 text-center' href={constants.FAQ} target='_blank'>FAQ</a>
+        <a className='font-ob font-semibold text-magentaDD tracking-[4px] text-xl 1000px:w-1/3 text-center hover:text-magentaDD4' href={constants.FAQ} target='_blank' rel='noreferrer'>FAQ</a>
 
         <div className='1000px:w-1/3 text-right'>
           <a target='_blank' rel='noreferrer' href={constants.Twitter}>

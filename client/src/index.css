@@ -46,27 +46,27 @@
 
     /* Headings & Subtitles */
     h1{
-      @apply font-obWide font-black text-6xl;
+      @apply font-obWide font-extrabold text-6xl;
     }
 
     h2{
-      @apply font-obWide font-black text-5xl;
+      @apply font-obWide font-extrabold text-5xl;
     }
 
     h3{
-      @apply font-obWide font-black text-4xl;
+      @apply font-obWide font-extrabold text-4xl;
     }
     
     h4{
-      @apply font-ob font-black text-2xl;
+      @apply font-ob font-extrabold text-2xl;
     }
     
     h5{
-      @apply font-ob font-black text-lg;
+      @apply font-ob font-extrabold text-lg;
     }
     
     h6{
-      @apply font-obExtd font-semibold text-sm;
+      @apply font-ob font-semibold text-sm;
     }
 
     .subtitle1{
@@ -125,7 +125,7 @@
   }
 
   .button1{
-    @apply subtitle1 600px:text-3xl 1200px:text-4xl 600px:w-[28rem] 1200px:w-[33.5rem] uppercase cursor-pointer border-b-8 border-aquaDD pb-5 hover:translate-x-1 transition-transform;
+    @apply subtitle1 600px:text-3xl 1200px:text-4xl 600px:w-[28rem] 1200px:w-[33.5rem] uppercase cursor-pointer border-b-8 border-aquaDD hover:border-aquaDD2 hover:text-indigoDD2 pb-5 hover:translate-x-1 transition-transform;
     background-image: url( './assets/icons/arrow-magenta.svg' );
     background-repeat: no-repeat;
     background-position: 100% 20%;
@@ -144,7 +144,7 @@
   }
   
   .button1-down{
-    @apply subtitle1 text-3xl 1000px:text-4xl w-[29rem] 1000px:w-[33.5rem] uppercase cursor-pointer border-b-8 border-aquaDD pb-5 hover:translate-y-1 transition-transform;
+    @apply subtitle1 text-3xl 1000px:text-4xl w-[29rem] 1000px:w-[33.5rem] uppercase cursor-pointer border-b-8 border-aquaDD hover:border-aquaDD2 hover:text-indigoDD2 pb-5 hover:translate-y-1 transition-transform;
     background-image: url( './assets/icons/arrow-magenta-down.svg' );
     background-repeat: no-repeat;
     background-position: 100% 20%;
@@ -176,6 +176,10 @@
     @apply text-center w-[6.25rem] text-5xl;
   }
 
+  .note{
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
   .popup{
     @apply relative mx-[5%];
     background: url( './assets/phase1/popup-bg.png') no-repeat top;
@@ -192,15 +196,19 @@
   }
 
   .project-popup{
-    @apply relative scale-75 600px:scale-100;
+    @apply relative scale-75 800px:scale-100;
     background: url( './assets/phase2/aqua-box2.svg') no-repeat top;
     background-size: contain;
     width: 550px;
-    height: 900px;
+    height: auto;
     box-shadow: 6.5px 2.5px 20px rgba(0, 0, 0, 0.2);
   }
 
-  @media screen and (max-height: 920px) {
+  .project-popup-bg{
+    background: radial-gradient(132.53% 132.53% at 3.28% 0%, #FFFFFF 0%, #EAFEFC 100%);
+  }
+
+  @media screen and (max-height: 900px) {
     .project-popup{
       @apply scale-75;
     }
@@ -254,7 +262,7 @@
   }
 
   .aqua-dot:after{
-    @apply text-aquaDD text-4xl absolute -top-1 right-3;
+    @apply text-aquaDD text-4xl absolute -top-1.5 right-3 mr-0.5 font-medium;
     content: '•';
   }
 
@@ -282,7 +290,7 @@
   }
 
   .details-button-custom{
-    @apply font-ob font-bold text-[12px] 700px:text-[15px] w-[7.5rem] 700px:w-[10rem] uppercase cursor-pointer border-b-4 pb-1 hover:translate-x-1 transition-transform;
+    @apply font-ob font-bold text-[12px] 700px:text-[15px] w-[7.5rem] 700px:w-[10rem] uppercase cursor-pointer border-b-4 pb-1 hover:translate-x-1 transition-transform hover:text-indigoDD2;
     background-repeat: no-repeat;
     background-position: 100% 40%;
     background-size: 12%;
@@ -327,4 +335,9 @@
 
 .grecaptcha-badge {
   z-index: -1 !important;
+  visibility: hidden;
+}
+
+.web3modal-modal-lightbox{
+  z-index: 99 !important;
 }

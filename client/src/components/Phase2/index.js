@@ -3,6 +3,7 @@ import Header from './Header'
 import Project from './Project'
 import ProjectPopup from './ProjectPopup'
 import * as constants from '../../Constants'
+import { shuffle } from '../../Utils'
 import Countdown from 'react-countdown'
 import axios from 'axios'
 
@@ -22,32 +23,37 @@ import twitter from '../../assets/icons/twitter.svg'
 import dots3 from '../../assets/phase2/dots3.svg'
 import squiggle2 from '../../assets/phase2/squiggle2.svg'
 
-const PICKS = 'https://dao-drops.herokuapp.com/posts/picks/'
-
 
 // Phase2 Component
 // ------------------------------------------------------------------------------------------------------- //
-const Phase2 = ({loadWeb3, address, addressDetails, walletStatus, points, setPoints, setPhaseView}) => {
+const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, walletStatus, points, setPoints, votes, setVotes, setPhaseView}) => {
+  
+  const PICKS = 'https://dao-drops.herokuapp.com/posts/picks/'
+
   const [isVideoLoaded, setIsVideoLoaded] = useState(false)
-  const onLoadedData = () => setIsVideoLoaded(true)
   const [popupStatus, setPopupStatus] = useState('hidden')
   const [popupDetails, setPopupDetails] = useState()
-  const [connectToggle, setConnectToggle] = useState(false)
   const [projectsPicks, setProjectsPicks] = useState()
-  const [votes, setVotes] = useState()
   const [votesSubmitted, setVotesSubmitted] = useState('false')
   const phase2End = '2022-11-21T00:00:00.000+00:00'
+  // const phase2End = Date.now() + 10000
   
   useEffect(() => {
     axios.get(PICKS)
       .then(r => {
         // let randomProjects = r.data.sort(() => Math.random() - 0.5)
-        let sortedProjects = r.data.sort((a, b) => a.address.localeCompare(b.address))
-        setProjectsPicks(sortedProjects)
-        r.data.map( project => setVotes(votes => ({...votes, [project._id]: 0})) )
+        // let sortedProjects = r.data.sort((a, b) => a.address.localeCompare(b.address))
+        let projects = r.data.map(a => ({...a}));
+        shuffle(projects)
+        setProjectsPicks(projects)
+
+        if (address) {
+          let votesStorage = localStorage.getItem(`votes_${address}`)
+          votesStorage ? setVotes(JSON.parse(votesStorage)) : r.data.map( project => setVotes(votes => ({...votes, [project._id]: 0})) )
+        }
       })
       .catch(e => console.error(e))
-  }, [])
+  }, [address])
 
   const renderer = ({
     formatted: { days, hours, minutes, seconds },
@@ -72,6 +78,8 @@ const Phase2 = ({loadWeb3, address, addressDetails, walletStatus, points, setPoi
 
           <Header
             loadWeb3={loadWeb3}
+            disconnectWeb3={disconnectWeb3}
+            signer={signer}
             address={address}
             addressDetails={addressDetails}
             walletStatus={walletStatus}
@@ -79,16 +87,14 @@ const Phase2 = ({loadWeb3, address, addressDetails, walletStatus, points, setPoi
             votes={votes}
             setVotesSubmitted={setVotesSubmitted}
             votesSubmitted={votesSubmitted}
-            setConnectToggle={setConnectToggle}
-            connectToggle={connectToggle}
           />
 
-          <div className={`flex items-start relative ${connectToggle && walletStatus !== 'connected' && '1000px:mt-[3.375rem]'} ${walletStatus === 'connected' ? 'pt-[5.55rem] 700px:pt-[6.9rem] 1000px:pt-[4.375rem] mt-0' : 'mt-8 700px:mt-12 1000px:mt-2'}`}>
+          <div className={`flex items-start relative ${walletStatus === 'connected' ? 'pt-[5.55rem] 700px:pt-[6.9rem] 1000px:pt-[4.375rem] mt-0' : 'mt-8 700px:mt-12 1000px:mt-2'}`}>
               <img className='mt-6 700px:mt-0' src={logo} alt='DAO Drops Logo' />
 
-              <div className='ml-12 w-full h-[25rem] 1000px:h-[28rem] mt-16 1000px:mt-32 border-[6px] border-indigoDD z-10 relative'>
+              <div className='ml-12 w-full !min-h-[30rem] 1000px:!min-h-[21rem] 1000px:!max-h-[38rem] 1000px:h-[calc(100vh-500px)] mt-16 1000px:mt-32 border-[6px] border-indigoDD z-10 relative'>
                   <img className={`h-full w-full object-cover absolute transition-opacity ease-in duration-300 z-10 ${isVideoLoaded ? 'opacity-0' : 'opacity-100' }`} src={dropsThumbnail} alt='Drops Thumbnail' />
-                  <video className={`h-full w-full object-cover absolute z-10 ${isVideoLoaded ? 'opacity-100' : 'opacity-0' }`} autoPlay loop playsInline muted onLoadedData={onLoadedData}>
+                  <video className={`h-full w-full object-cover absolute z-10 ${isVideoLoaded ? 'opacity-100' : 'opacity-0' }`} autoPlay loop playsInline muted onLoadedData={() => setIsVideoLoaded(true)}>
                     <source src={dropsVideo} type='video/mp4'/>
                     <source src={dropsVideoOGG} type='video/ogg'/>
                     <source src={dropsVideoWEBM} type='video/webm'/>
@@ -101,14 +107,13 @@ const Phase2 = ({loadWeb3, address, addressDetails, walletStatus, points, setPoi
 
                   <div className='absolute top-[-5.5rem] left-[-6.7rem] 700px:-top-24 700px:-left-10 1000px:-left-1.5 z-20 scale-75 700px:scale-100'>
                     <div className='w-48 h-10 bg-white border-t-[6px] border-l-[6px] border-indigoDD text-lg font-ob font-bold uppercase flex justify-center items-center endsin-line phase2'>
-                      <div className='absolute pb-1 pl-1'>PHASE 2 ENDS IN:</div>
+                      <div className='absolute pb-1 pl-1'>PHASE ENDS IN:</div>
                     </div>
 
-                    <div className='w-[31rem] 700px:w-[32rem] h-[6.5rem] bg-white border-[7px] 700px:border-[6px] border-indigoDD font-obWide font-black text-5xl flex justify-center items-center'>
+                    <div className='w-[31rem] 700px:w-[32rem] h-[6.5rem] bg-white border-[7px] 700px:border-[6px] border-indigoDD font-obWide font-extrabold text-5xl flex justify-center items-center'>
                       <Countdown date={phase2End} renderer={renderer} />
                     </div>
                   </div>
-
               </div>
 
               <img className='absolute bottom-[-9.125rem] right-[-1px] z-0 scale-100 hidden 1000px:block' src={aquaBox} alt='Aqua Box' />
@@ -116,12 +121,11 @@ const Phase2 = ({loadWeb3, address, addressDetails, walletStatus, points, setPoi
           </div>
 
           <div className='flex pb-8 1000px:p-0 1000px:ml-24 justify-between relative'>
-            
             { walletStatus === 'connected' 
               ? <div  className='flex flex-col'>
                   <div className='mt-4 1000px:mt-10 z-10 pr-[6.3rem] 1000px:pr-6 pl-8 1000px:pl-0'>
-                    <h3 className='text-3xl 600px:text-4xl 1000px:text-[calc(1.4rem+1vw)] mb-5 700px:mb-10'>You are now part of the DAO</h3>
-                    <div className='subtitle2 text-[calc(0.7rem+1vw)] leading-6 800px:leading-7 1000px:leading-8 1200px:leading-10 mb-10'>Drop your points and make it rain ☔ ️</div>
+                    <h3 className='text-3xl h870px:text-[calc(1.15rem+1vw)] 600px:text-4xl 1000px:text-[calc(1.4rem+1vw)] mb-5 700px:mb-8'>You are now part of the DAO</h3>
+                    <div className='subtitle2 text-[calc(0.7rem+1vw)] leading-6 800px:leading-7 1000px:leading-8 1200px:leading-10 mb-14 1000px:mb-10'>Drop your points and make it rain ☔ ️</div>
                   </div>
                   <a href='#drop-points' className='button1-down mx-auto self-center 1000px:mx-0 1000px:self-start text-3xl w-[24rem] block'>Drop Points</a>
                 </div>
@@ -147,10 +151,9 @@ const Phase2 = ({loadWeb3, address, addressDetails, walletStatus, points, setPoi
             { projectsPicks &&
               <>
                 <img className='absolute top-[83rem] left-[80%] z-0 hidden 1000px:block' src={dots3} alt='Dots' />
-                <img className='absolute top-[90rem] left-[10%] z-0 hidden 1000px:block' src={squiggle2} alt='Squiggle' />
+                <img className='absolute top-[94rem] left-[10%] z-0 hidden 1000px:block' src={squiggle2} alt='Squiggle' />
               </>
             }
-
           </div>
           
           { walletStatus !== 'connected'
@@ -161,8 +164,8 @@ const Phase2 = ({loadWeb3, address, addressDetails, walletStatus, points, setPoi
                       <div className='absolute pb-1'>To Play</div>
                     </div>
 
-                    <div className='w-full 800px:w-[43rem] h-[7.5rem] 800px:h-[8.5rem] bg-white border-[6px] border-indigoDD font-obWide font-black text-5xl flex justify-center items-center'>
-                      <div className='button1-small w-[24rem] text-[1.5rem] 800px:button1 800px:w-[32rem] 800px:text-[2rem]' onClick={() => setConnectToggle(!connectToggle)}>Connect Wallet</div>
+                    <div className='w-full 800px:w-[43rem] h-[7.5rem] 800px:h-[8.5rem] bg-white border-[6px] border-indigoDD font-obWide font-extrabold text-5xl flex justify-center items-center'>
+                      <div className='button1-small w-[24rem] text-[1.5rem] 800px:button1 800px:w-[32rem] 800px:text-[2rem]' onClick={() => loadWeb3('click')}>Connect Wallet</div>
                     </div>
                   </div>
                 </div>
@@ -183,18 +186,48 @@ const Phase2 = ({loadWeb3, address, addressDetails, walletStatus, points, setPoi
                 </div>
               </>
 
-            : <div id='drop-points' className='mt-12 1000px:mt-32 mb-20 z-10 text-center m-auto'>
+            : <div id='drop-points' className='mt-12 1000px:mt-[6.5rem] mb-20 z-10 text-center m-auto'>
                 <h3 className='text-2xl 600px:text-3xl 1000px:text-[2.6rem] mb-6 800px:mb-10'>HOW TO DROP POINTS</h3>
-                <div className='subtitle2 text-base 600px:text-lg 800px:text-xl 1000px:text-2xl mb-10 1200px:px-[13%]'>Distribute your points in the projects that you think they should receive fundings. You can modify your points until Phase 2 ends and it will always be automatically saved.</div>
+                <div className='font-ibm text-base 600px:text-lg 800px:text-xl 1800px:text-2xl 1000px:px-[13%] mb-10 m-auto'>Distribute your points in the projects you think should receive funding.<br/>Once you are finished, press submit to send them.</div>
                 <div className='mt-16 mb-8 mx-auto w-72 h-[6px] bg-[#ACBBC2] rounded-full opacity-40 1000px:hidden'/>
               </div>
           }
 
-          <div className={`flex flex-wrap justify-center gap-6 700px:gap-10 pb-16 ${ walletStatus !== 'connected' && 'grayscale pointer-events-none'} `}>
+          { votesSubmitted === 'true' &&
+             <>
+                <h3 className='text-2xl 600px:text-3xl 1000px:text-[2.3rem] my-12 1000px:mt-32 1000px:mb-14 text-center 1000px:text-left'>YOUR DROPS</h3>
+                <div className={`flex flex-wrap justify-center gap-6 700px:gap-10 pb-16 ${ walletStatus !== 'connected' && 'grayscale pointer-events-none'} `}>
+                  { projectsPicks && votes
+                    ? projectsPicks.filter(project => votes[project._id] > 0).map((project, index) =>
+                        <Project
+                          key={index}
+                          index={index}
+                          id={project._id}
+                          name={project.projectName}
+                          desc={project.projectDescription}
+                          website={project.website}
+                          paddress={project.address}
+                          icon={project.icon}
+                          setPopupStatus={setPopupStatus}
+                          setPopupDetails={setPopupDetails}
+                          setVotes={setVotes}
+                          votes={votes}
+                          points={points}
+                          setPoints={setPoints}
+                          votesSubmitted={votesSubmitted}
+                          address={address}
+                        />
+                    )
+                    : <h4 className='text-5xl mb-20' >Loading Your Drops...</h4>
+                  }
+                </div>
+              </>
+          }
 
-            { !projectsPicks
-              ? <h4 className='text-5xl mb-20' >Loading Projects...</h4>
-              : projectsPicks.map((project, index) =>
+          { votesSubmitted === 'true' && <h3 className='text-2xl 600px:text-3xl 1000px:text-[2.3rem] mt-16 mb-12 1000px:mt-16 1000px:mb-14 text-center 1000px:text-left'>OTHER NOMINEES</h3> }
+          <div className={`flex flex-wrap justify-center gap-6 700px:gap-10 pb-16 ${ walletStatus !== 'connected' && 'grayscale pointer-events-none'} `}>
+            { projectsPicks && votes
+              ? projectsPicks.filter(project => votesSubmitted === 'true' ? votes[project._id] === 0 : project._id).map((project, index) =>
                 <Project
                   key={index}
                   index={index}
@@ -211,10 +244,11 @@ const Phase2 = ({loadWeb3, address, addressDetails, walletStatus, points, setPoi
                   points={points}
                   setPoints={setPoints}
                   votesSubmitted={votesSubmitted}
+                  address={address}
                 />
               )
+              : <h4 className='text-5xl mb-20' >{votesSubmitted === 'true' ? 'Loading Other Nominees...' : 'Loading Projects...' }</h4>
             }
-
           </div>
 
       </div>
@@ -225,7 +259,7 @@ const Phase2 = ({loadWeb3, address, addressDetails, walletStatus, points, setPoi
           by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
         </div>
 
-        <a className='font-ob font-semibold text-magentaDD tracking-[4px] text-xl 1000px:w-1/3 text-center' href={constants.FAQ} target='_blank'>FAQ</a>
+        <a className='font-ob font-semibold text-magentaDD tracking-[4px] text-xl 1000px:w-1/3 text-center hover:text-magentaDD4' href={constants.FAQ} target='_blank' rel='noreferrer'>FAQ</a>
 
         <div className='1000px:w-1/3 text-right'>
           <a target='_blank' rel='noreferrer' href={constants.Twitter}>
@@ -242,7 +276,9 @@ const Phase2 = ({loadWeb3, address, addressDetails, walletStatus, points, setPoi
         votes={votes}
         points={points}
         setPoints={setPoints}
-        votesSubmitted={votesSubmitted} />
+        votesSubmitted={votesSubmitted} 
+      />
+
     </>
   )}
 
