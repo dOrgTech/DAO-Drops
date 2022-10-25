@@ -6,6 +6,7 @@ import * as dotenv from "dotenv";
 import helmet from "helmet";
 import compression from "compression";
 import rateLimit from "express-rate-limit";
+import mongoSanatize from "express-mongo-sanitize";
 
 import postRoutes from "./routes/posts.js";
 
@@ -24,6 +25,7 @@ const limiter = rateLimit({
 //   origin: isProduction ? "https://www.daodrops.io" : "*"
 // };
 
+app.use(mongoSanatize());
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());

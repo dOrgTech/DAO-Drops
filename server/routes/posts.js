@@ -1,6 +1,5 @@
 import express from "express";
-import check from "express-validator";
-
+import validator from "express-validator";
 import {
   getPosts,
   createPost,
@@ -10,6 +9,7 @@ import {
 } from "../controllers/posts.js";
 
 const router = express.Router();
+const { check, validationResult } = validator;
 
 //reached at: localhost:5000/posts
 
@@ -22,30 +22,24 @@ router.post(
     check("name")
       .not()
       .isEmpty()
-      .isLength({ min: 5 })
       .trim()
-      .escape()
       .withMessage("Name must have more than 5 characters"),
     check("message", "Message should be a string")
       .not()
       .isEmpty(),
     check("address", "address left blank")
       .optional()
-      .trim()
-      .escape(),
+      .trim(),
     check("link", "link left blank")
       .optional()
-      .trim()
-      .escape(),
+      .trim(),
     check("contact", "contact left blank").optional(),
     check("contactMethod", "contactMethod left blank")
       .optional()
-      .trim()
-      .escape(),
+      .trim(),
     check("image", "image left blank")
       .optional()
       .trim()
-      .escape()
   ],
   createPost
 );
@@ -55,16 +49,13 @@ router.patch(
     check("account")
       .not()
       .isEmpty()
-      .isLength({ min: 5 })
       .trim()
-      .escape()
       .withMessage("Name must have more than 5 characters"),
     check("score", "address left blank")
       .isNumeric()
       .not()
       .isEmpty()
-      .trim()
-      .escape(),
+      .trim(),
     check("picks", "picks cannot be left blank")
       .isArray()
       .not()

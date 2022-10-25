@@ -111,6 +111,10 @@ export const updateScore = async (req, res) => {
   let updatedPick;
   let add;
   let bod;
+  let submittedUscore;
+  let accountInfo = await GetScore.findOne({
+    account: accountData.account.toLowerCase()
+  });
 
   try {
     const token = accountData.message;
@@ -125,22 +129,32 @@ export const updateScore = async (req, res) => {
     add == accountData.account.toLowerCase() &&
     bod == JSON.stringify(picksArry)
   ) {
-    const updatesScore = await GetScore.findByIdAndUpdate(_id, accountData, {
-      new: true
-    });
     for (let i = 0; i < numberofPicks; i++) {
-      const pick = await Picks.findOne({ _id: picksArry[i].id });
-      const oldScore = pick.currentScore;
-      let newScore = picksArry[i].points + oldScore;
-      updatedPick = await Picks.findByIdAndUpdate(
-        picksArry[i].id,
-        { currentPoints: picksArry[i].points, currentScore: newScore },
-        {
-          new: true
-        }
-      );
+      submittedUscore = picksArry[i].points + submittedUscore;
     }
-    res.json(updatedPick);
+
+    if (accountInfo.score != submittedUscore) {
+      res
+        .status(403)
+        .json({ message: "Submitted score doesnt match DB Score for user" });
+    } else {
+      const updatedScore = await GetScore.findByIdAndUpdate(_id, accountData, {
+        new: true
+      });
+      for (let i = 0; i < numberofPicks; i++) {
+        const pick = await Picks.findOne({ _id: picksArry[i].id });
+        const oldScore = pick.currentScore;
+        let newScore = picksArry[i].points + oldScore;
+        updatedPick = await Picks.findByIdAndUpdate(
+          picksArry[i].id,
+          { currentPoints: picksArry[i].points, currentScore: newScore },
+          {
+            new: true
+          }
+        );
+      }
+      res.json(updatedScore);
+    }
   } else {
     res.status(401).json({ message: "Anauthorized User" });
   }

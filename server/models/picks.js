@@ -9,7 +9,8 @@ const picksSchema = mongoose.Schema({
   contact: String,
   contactMethod: String,
   currentScore: Number,
-  currentPoints: Array
+  currentPoints: Array,
+  usdcAmount: Number
 });
 
 const Picks = mongoose.model("Picks", picksSchema);
