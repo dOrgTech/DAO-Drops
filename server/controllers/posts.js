@@ -111,10 +111,7 @@ export const updateScore = async (req, res) => {
   let updatedPick;
   let add;
   let bod;
-  let submittedUscore;
-  let accountInfo = await GetScore.findOne({
-    account: accountData.account.toLowerCase()
-  });
+  let submittedUscore = 0;
 
   try {
     const token = accountData.message;
@@ -125,15 +122,19 @@ export const updateScore = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 
+  let accountInfo = await GetScore.findOne({ account: add });
   if (
     add == accountData.account.toLowerCase() &&
     bod == JSON.stringify(picksArry)
   ) {
     for (let i = 0; i < numberofPicks; i++) {
-      submittedUscore = picksArry[i].points + submittedUscore;
+      submittedUscore = parseInt(picksArry[i].points) + submittedUscore;
     }
 
     if (accountInfo.score != submittedUscore) {
+      console.log(accountInfo.score);
+      console.log(submittedUscore);
+
       res
         .status(403)
         .json({ message: "Submitted score doesnt match DB Score for user" });
