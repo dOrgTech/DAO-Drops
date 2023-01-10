@@ -9,10 +9,10 @@ import axios from 'axios'
 
 // Header Component (Phase2)
 // ------------------------------------------------------------------------------------------------------- //
-const Header = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, walletStatus, points, votes, setVotesSubmitted, votesSubmitted}) => {
+const Header = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, walletStatus, points, votes, setVotesSubmitted, votesSubmitted, setErrorPopupStatus}) => {
 
     const SCORE = 'https://dao-drops.herokuapp.com/posts/score/'
-    
+
     const [sendPointsNote, setSendPointsNote] = useState('false')
     const [walletToggle, setWalletToggle] = useState(false);
     const [donePopupStatus, setDonePopupStatus] = useState(false)
@@ -37,8 +37,20 @@ const Header = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
         const picksSubmission = {account: address.toLowerCase(), message: token, score: points, picks: picksSelected}
 
         const url = SCORE + addressDetails._id
-        axios.patch(url, picksSubmission).then(r => { r.status === 200 && setVotesSubmitted('true')} ).catch(e => console.error(e))
-        setDonePopupStatus(true)
+        // const url = 'https://httpstat.us/500'
+
+        axios.patch(url, picksSubmission)
+             .then(r => { r.status === 200 && setVotesSubmitted('true') && setDonePopupStatus(true)} )
+             .catch(function (error) {
+              if (error.response && error.response.status === 500) {
+                setVotesSubmitted('false')
+                disconnectWeb3()
+                setErrorPopupStatus(true)
+              } else {
+                console.error('Error', error.message)
+              }
+              // console.log(error.config)
+            })
       }
       else if (votesSubmitted === 'true') {
         setSendPointsNote('done')
@@ -86,10 +98,18 @@ const Header = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
                                 </div>
                                 <div className='text-xs mt-[3px]'>Vote Credits</div>
                               </div>
-                              <div className={`flex items-center justify-center py-1 px-5 h-full bg-aquaDD hover:bg-aquaDD2 hover:text-indigoDD2 cursor-pointer min-w-[157px] ${(points > 0 || votesSubmitted === 'true') && 'grayscale brightness-150 hover:brightness-125'}`} onClick={submitPoints}>
+                              <div className={`flex items-center justify-center py-1 px-5 h-full bg-aquaDD hover:bg-aquaDD2 hover:text-indigoDD2 cursor-pointer min-w-[157px] 
+                                  ${points > 0 && 'grayscale brightness-150 hover:brightness-125'} 
+                                  ${votesSubmitted === 'true' && 'grayscale brightness-110 hover:brightness-110 hover:bg-aquaDD hover:text-indigoDD3'}`} 
+                                  onClick={submitPoints}>
                                 <div className='text-xl'>{votesSubmitted === 'sending' ? 'Sending' : votesSubmitted === 'true' ? 'Done' : 'Submit'}</div>
                               </div>
                             </div>
+                            { votesSubmitted !== 'true' && points === 0 && 
+                              <div className={'flex justify-center items-center px-1 text-center font-ibm font-bold text-[11px] text-indigoDD normal-case h-8 border-4 border-t-0 border-indigoDD'}>
+                                <span>By submitting you agree to&nbsp;<a target='_blank' rel='noreferrer' href='/terms' className='underline'>terms and conditions</a></span>
+                              </div>
+                            }
                             { sendPointsNote === 'all' && <div className={'note flex justify-center items-center pt-0.5 text-center font-ibm font-semibold text-sm text-[#181818] normal-case h-9'}>Distribute all your points to submit!</div>}
                             { sendPointsNote === 'done' && <div className={'note flex justify-center items-center pt-0.5 text-center font-ibm font-semibold text-sm text-[#181818] normal-case h-9'}>All your points were sent!</div>}
                           </div>

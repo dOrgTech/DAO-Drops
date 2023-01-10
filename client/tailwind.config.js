@@ -8,6 +8,7 @@ module.exports = {
         indigoDD: '#3c1dfe',
         indigoDD2: '#2713A5',
         indigoDD3: '#361AE5',
+        indigoDD4: '#21108C',
         aquaDD: '#2bfae1',
         aquaDD2: '#14CDB7',
         magentaDD: '#ff6ce1',
@@ -39,6 +40,7 @@ module.exports = {
       screens: {
         'xs': '400px',
         '500px': '500px',
+        '550px': '550px',
         '600px': '600px',
         '700px': '700px',
         '800px': '800px',

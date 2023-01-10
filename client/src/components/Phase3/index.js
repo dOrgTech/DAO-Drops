@@ -30,12 +30,14 @@ const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus
   const [projectsPicks, setProjectsPicks] = useState()
   const [popupDetails, setPopupDetails] = useState()
   const [votedProjects, setVotedProjects] = useState()
+  const [pointsSum, setPointsSum] = useState(0)
 
   useEffect(() => {
     axios.get(PICKS)
       .then(r => {
         let sortedProjects = r.data.sort((a,b) => b.currentScore - a.currentScore)
         setProjectsPicks(sortedProjects)
+        setPointsSum(sortedProjects.reduce((a, b) => a + b.currentScore, 0))
       })
       .catch(e => console.error(e))
   }, [])
@@ -122,7 +124,7 @@ const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus
           <div className='flex pb-8 1000px:p-0 1000px:ml-20 justify-between relative'>
             <div className='mt-8 relative right-0 hidden 1000px:block'>
               <div className='font-ob text-magentaDD text-xl 1000px:text-sm border-b border-magentaDD pb-4 w-full 1000px:w-[19rem]'>
-                Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and funded<br/>
+                Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and supported<br/>
                 by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
               </div>
 
@@ -133,18 +135,18 @@ const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus
               </div>
             </div>
 
-            { projectsPicks &&
-            <>
-              <img className='absolute top-[83rem] left-[80%] z-0 hidden 1000px:block' src={dots3} alt='Dots' />
-              <img className='absolute top-[90rem] left-[10%] z-0 hidden 1000px:block' src={squiggle2} alt='Squiggle' />
-            </>
+            { projectsPicks && projectsPicks.length > 6 &&
+              <>
+                <img className={`absolute ${projectsPicks.length > 18 ? 'top-[83rem]' : 'top-[49rem]'} left-[80%] z-0 hidden 1000px:block`} src={dots3} alt='Dots' />
+                <img className={`absolute ${projectsPicks.length > 18 ? 'top-[90rem]' : 'top-[55rem]'} left-[10%] z-0 hidden 1000px:block`} src={squiggle2} alt='Squiggle' />
+              </>
             }
           </div>
           
 
           <div className='mb-20 w-full relative block 1000px:hidden'>
             <div className='font-ob text-magentaDD text-xl border-b border-magentaDD pb-4 w-full '>
-              Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and funded<br/>
+              Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and supported<br/>
               by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
             </div>
 
@@ -156,7 +158,7 @@ const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus
 
           </div>
 
-          <a href='#leaderboard' className='button1-down mx-auto self-center 1000px:mx-0 1000px:self-start text-3xl w-[26rem] block 1000px:hidden'>Check Results</a>
+          <a href='#leaderboard' className='button1-down mx-auto self-center 1000px:mx-0 1000px:self-start text-2xl w-[21rem] 600px:text-3xl 600px:w-[26rem] block 1000px:hidden'>Check Results</a>
           <div className='mt-32 mb-8 mx-auto w-72 h-[6px] bg-[#ACBBC2] rounded-full opacity-40 1000px:hidden'/>
   
           <div id='leaderboard' className='mt-12 1000px:mt-32 mb-20 z-10 text-center m-auto'>
@@ -179,10 +181,13 @@ const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus
                   website={project.website}
                   paddress={project.address}
                   icon={project.icon}
+                  points={project.currentScore}
+                  usdcAmount={project.usdcAmount}
                   setPopupStatus={setPopupStatus}
                   setPopupDetails={setPopupDetails}
-                  points={project.currentScore}
                   votedProjects={votedProjects}
+                  walletStatus={walletStatus}
+                  pointsSum={pointsSum}
                 />
               )
             }
@@ -193,7 +198,7 @@ const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus
 
       <footer className='w-full h-24 px-[4%] flex justify-between items-center bg-footerColor'>
         <div className='font-ob text-magentaDD text-base 600px:text-lg 1000px:w-1/3'>
-          Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and funded<br/>
+          Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and supported<br/>
           by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
         </div>
 
