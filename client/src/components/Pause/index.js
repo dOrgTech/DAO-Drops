@@ -36,7 +36,7 @@ const Pause = () => {
               <div className='flex flex-col'>
                 <div className='ml-8 600px:ml-12 mt-10 z-10'>
                   <h3 className='text-3xl h870px:text-[calc(1.1rem+1vw)] 600px:text-4xl 1000px:text-[calc(1.4rem+1vw)] mb-6 leading-10'>pause time</h3>
-                  <div className='font-obWide font-medium text-base 1000px:text-[calc(0.5rem+0.55vw)] leading-snug 1000px:w-[70%]'>we received all the amazing nominations and now they are being curated. Stay tuned for the next phase in: <a className='underline hover:text-indigoDD2 font-semibold' href={constants.Twitter} target='_blank' rel='noreferrer'> DAO drops twitter.</a></div>
+                  <div className='font-obWide font-medium text-base 1000px:text-[calc(0.5rem+0.55vw)] leading-snug 1000px:w-[70%]'>we received all the amazing nominations and now they are being curated. Stay tuned for the next phase in: <a className='underline text-magentaDD5 hover:text-magentaDD4 font-semibold' href={constants.Twitter} target='_blank' rel='noreferrer'> DAO drops twitter.</a></div>
                 </div>
 
                 <div className='ml-8 600px:ml-12 w-auto border-[6px] border-indigoDD z-10 relative !min-h-[20.5rem] mt-14' style={{height: `calc(100vh - ${height+350}px)`}}>
@@ -58,13 +58,13 @@ const Pause = () => {
           </div>
 
           <div className='flex pb-8 1000px:p-0 flex-wrap 1000px:flex-nowrap' ref={ref}>
-            <div className='mt-44 1000px:mt-[6.25rem] order-2 1000px:order-1 w-full 1000px:w-auto relative'>
-                <div className='font-ob text-magentaDD text-xl 1000px:text-sm border-b border-magentaDD pb-4 w-full 1000px:w-[19rem]'>
-                  Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and funded<br/>
+            <div className='mt-44 1000px:mt-[6.25rem] order-2 1000px:order-1 w-auto relative'>
+                <div className='font-ob text-magentaDD text-sm border-b border-magentaDD pb-4 w-[19rem]'>
+                  Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and supported<br/>
                   by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
                 </div>
 
-                <div className='1000px:mt-2.5 absolute 1000px:relative right-4 top-4 1000px:inset-0 scale-150 1000px:scale-100'>
+                <div className='mt-2.5 relative inset-0'>
                   <a target='_blank' rel='noreferrer' href={constants.Twitter}>
                     <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
                   </a>
