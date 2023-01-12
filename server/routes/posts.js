@@ -1,7 +1,7 @@
 import express from "express";
 import validator from "express-validator";
 import {
-  getPosts,
+  // getPosts,
   createPost,
   getScore,
   updateScore,
