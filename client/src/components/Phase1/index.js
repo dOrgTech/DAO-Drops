@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import NominatePopup from './NominatePopup'
+import ErrorPopup from '../ErrorPopup'
 import * as constants from '../../Constants'
 import Countdown from 'react-countdown'
 
@@ -19,9 +20,11 @@ import twitter from '../../assets/icons/twitter.svg'
 // Phase1 Component
 // ------------------------------------------------------------------------------------------------------- //
 const Phase1 = ({setPhaseView}) => {
+  const [errorPopupStatus, setErrorPopupStatus] = useState(false)
+
   const [isVideoLoaded, setIsVideoLoaded] = useState(false)
   const [popupStatus, setPopupStatus] = useState('hidden')
-  const phase1End = '2022-11-30T00:00:00.000+00:00'
+  const phase1End = '2023-02-03T00:00:00.000+00:00'
   // const phase1End = Date.now() + 10000
 
   const [height, setHeight] = useState(0)
@@ -69,7 +72,7 @@ const Phase1 = ({setPhaseView}) => {
 
                   <div className='absolute bottom-0 z-20 w-full 800px:w-auto'>
                     <div className='w-48 h-10 bg-white border-t-[6px] border-indigoDD text-lg font-ob font-bold uppercase flex justify-center items-center endsin-line'>
-                      <div className='absolute pb-0.5'>PHASE ENDS IN:</div>
+                      <div className='absolute pb-0.5 uppercase text-[15px]'>nomination phase:</div>
                     </div>
 
                     <div className='w-full 800px:w-[32rem] h-[6.5rem] bg-white border-t-[6px] 800px:border-r-[6px] border-indigoDD font-obWide font-extrabold text-5xl flex justify-center items-center'>
@@ -82,13 +85,13 @@ const Phase1 = ({setPhaseView}) => {
           </div>
 
           <div className='flex pb-8 1000px:p-0 flex-wrap 1000px:flex-nowrap' ref={ref}>
-            <div className='mt-20 1000px:mt-[6.25rem] order-2 1000px:order-1 w-full 1000px:w-auto relative'>
-                <div className='font-ob text-magentaDD text-xl 1000px:text-sm border-b border-magentaDD pb-4 w-full 1000px:w-[19rem]'>
-                  Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and funded<br/>
+            <div className='mt-20 1000px:mt-[6.25rem] order-2 1000px:order-1 w-auto relative'>
+                <div className='font-ob text-magentaDD text-sm border-b border-magentaDD pb-4 w-[19rem]'>
+                  Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and supported<br/>
                   by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
                 </div>
 
-                <div className='1000px:mt-2.5 absolute 1000px:relative right-4 top-4 1000px:inset-0 scale-150 1000px:scale-100'>
+                <div className='mt-2.5 relative inset-0'>
                   <a target='_blank' rel='noreferrer' href={constants.Twitter}>
                     <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
                   </a>
@@ -98,13 +101,15 @@ const Phase1 = ({setPhaseView}) => {
             <div className='1000px:ml-16 mt-32 1000px:mt-7 z-10 order-1 1000px:order-2'>
               <h3 className='text-3xl h870px:text-[calc(1rem+1vw)] 600px:text-4xl 1000px:text-[calc(1.4rem+1vw)] mb-6 leading-10'>something big is about to drop.</h3>
               <div className='subtitle2 hidden 1000px:block text-[calc(0.4rem+1vw)] leading-snug'>know a project or someone deserving?</div>
+              {/* <div className='subtitle2 text-[calc(0.7rem+1vw)] leading-6 800px:leading-7 1000px:leading-snug 1000px:text-[calc(0.4rem+1vw)]'>know a project or someone deserving?</div> */}
               <div className='button1-small 600px:button1 mt-6 1000px:mt-7 1000px:mb-8 h870px:button1-small' onClick={ () => { setPopupStatus('nominate'); } }>Nominate Them</div>
             </div>
           </div>
 
       </div>
 
-      <NominatePopup popupStatus={popupStatus} setPopupStatus={setPopupStatus} />
+      <NominatePopup popupStatus={popupStatus} setPopupStatus={setPopupStatus} setErrorPopupStatus={setErrorPopupStatus} />
+      {errorPopupStatus && <ErrorPopup setErrorPopupStatus={setErrorPopupStatus} />}
     </>
   )}
 // ------------------------------------------------------------------------------------------------------- //

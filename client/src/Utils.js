@@ -33,3 +33,6 @@ export const shuffle = (array) => {
 }
 
 export const withHttp = url => !/^https?:\/\//i.test(url) ? `http://${url}` : url;
+
+export const numberWithCommas = x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     

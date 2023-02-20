@@ -5,19 +5,19 @@ import Web3Token from "web3-token";
 import fetch from "node-fetch";
 import * as dotenv from "dotenv";
 
-/**
- * Allows for all submitted projects to be retrieved
- * @async
- * @return {Promise<object>} Returns the list of submitted projects
- */
-export const getPosts = async (req, res) => {
-  try {
-    const postMessages = await PostMessage.find();
-    res.status(200).json(postMessages);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
+// /**
+//  * Allows for all submitted projects to be retrieved
+//  * @async
+//  * @return {Promise<object>} Returns the list of submitted projects
+//  */
+// export const getPosts = async (req, res) => {
+//   try {
+//     const postMessages = await PostMessage.find();
+//     res.status(200).json(postMessages);
+//   } catch (error) {
+//     res.status(404).json({ message: error.message });
+//   }
+// };
 
 /**
  * Allows an end user to submit a project for consideration during phase one

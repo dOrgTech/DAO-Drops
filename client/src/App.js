@@ -3,8 +3,9 @@ import Phase1 from './components/Phase1'
 import Phase2 from './components/Phase2'
 import Phase3 from './components/Phase3'
 import Pause from './components/Pause'
+import Terms from './components/Terms'
 import axios from 'axios'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { providers } from 'ethers'
 import Web3Token from 'web3-token'
 import Web3Modal from 'web3modal'
@@ -31,38 +32,38 @@ const App = () => {
     const [phaseView, setPhaseView] = useState('1')
   
     useEffect(() => {
-      address && points !== null && localStorage.setItem(`points_${address}`, points)
+      address && points !== null && localStorage.setItem(`points_${address}`, parseInt(points))
     }, [address, points])
 
     useEffect(() => {
       address && votes !== null && localStorage.setItem(`votes_${address}`, JSON.stringify(votes))
     }, [address, votes])
 
-    useEffect(() => {
-      const providerOptions = {
-        walletconnect: {
-          package: WalletConnectProvider,
-          options: {
-            infuraId: INFURA_ID,
-          }
-        },
-      }
+    // useEffect(() => {
+    //   const providerOptions = {
+    //     walletconnect: {
+    //       package: WalletConnectProvider,
+    //       options: {
+    //         infuraId: INFURA_ID,
+    //       }
+    //     },
+    //   }
   
-      const newWeb3Modal = new Web3Modal({
-        cacheProvider: true,
-        network: 'mainnet',
-        providerOptions,
-        // theme: 'dark',
-      })
+    //   const newWeb3Modal = new Web3Modal({
+    //     cacheProvider: true,
+    //     network: 'mainnet',
+    //     providerOptions,
+    //     // theme: 'dark',
+    //   })
   
-      setWeb3Modal(newWeb3Modal)
-    }, [])
+    //   setWeb3Modal(newWeb3Modal)
+    // }, [])
   
-    useEffect(() => {
-      if(web3Modal && web3Modal.cachedProvider){
-        loadWeb3('load')
-      }
-    }, [web3Modal])
+    // useEffect(() => {
+    //   if(web3Modal && web3Modal.cachedProvider){
+    //     loadWeb3('load')
+    //   }
+    // }, [web3Modal])
   
     async function sign(token, eSigner) {
       token = await Web3Token.sign(async msg => await eSigner.signMessage(msg), {
@@ -102,7 +103,7 @@ const App = () => {
               setAddressDetails(r.data)
 
               let pointsStorage = localStorage.getItem(`points_${ethAddress}`)
-              pointsStorage ? setPoints(pointsStorage) : setPoints(r.data['score'])
+              pointsStorage ? setPoints(parseInt(pointsStorage)) : setPoints(parseInt(r.data['score']))
 
               r.data.picks.length && r.data.picks.map( pick => setVotes(votes => ({...votes, [pick.id]: pick.points})) )
           }
@@ -113,6 +114,16 @@ const App = () => {
         })
 
       setWalletStatus('connected')
+    }
+
+    function clearAddress() {
+      setAddress('')
+      setPoints(null)
+      setVotes(null)
+      localStorage.removeItem(address)
+      localStorage.removeItem(`points_${address}`)
+      localStorage.removeItem(`votes_${address}`)
+      setWalletStatus('disconnected')
     }
 
     async function addListeners(web3ModalProvider) {
@@ -130,11 +141,7 @@ const App = () => {
       
       web3ModalProvider.on('disconnect', (error) => {
         web3Modal.clearCachedProvider()
-        localStorage.removeItem(address)
-        localStorage.removeItem(`points_${address}`)
-        localStorage.removeItem(`votes_${address}`)
-        setAddress('')
-        setWalletStatus('disconnected')
+        clearAddress()
         // window.location.reload()
         console.log(error)
       })
@@ -142,11 +149,7 @@ const App = () => {
 
     async function disconnectWeb3() {
       await web3Modal.clearCachedProvider()
-      localStorage.removeItem(address)
-      localStorage.removeItem(`points_${address}`)
-      localStorage.removeItem(`votes_${address}`)
-      setAddress('')
-      setWalletStatus('disconnected')
+      clearAddress()
     }
 
     return(
@@ -158,10 +161,12 @@ const App = () => {
 
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<Phase1 setPhaseView={setPhaseView} />} />
-            <Route path='2' element={<Phase2 loadWeb3={loadWeb3} disconnectWeb3={disconnectWeb3} signer={signer} address={address} addressDetails={addressDetails} walletStatus={walletStatus} points={points} setPoints={setPoints} votes={votes} setVotes={setVotes} setPhaseView={setPhaseView} />} />
-            <Route path='3' element={<Phase3 loadWeb3={loadWeb3} disconnectWeb3={disconnectWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} />} />
-            <Route path='/p' element={<Pause />} />
+            <Route path='/' element={phaseView === '1' ? <Phase1 setPhaseView={setPhaseView} /> : phaseView === 'p' ? <Pause /> : <Phase1 setPhaseView={setPhaseView} /> } />
+            {/* <Route path='2' element={<Phase2 loadWeb3={loadWeb3} disconnectWeb3={disconnectWeb3} signer={signer} address={address} addressDetails={addressDetails} walletStatus={walletStatus} points={points} setPoints={setPoints} votes={votes} setVotes={setVotes} setPhaseView={setPhaseView} />} /> */}
+            {/* <Route path='3' element={<Phase3 loadWeb3={loadWeb3} disconnectWeb3={disconnectWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} />} /> */}
+            {/* <Route path='/p' element={<Pause />} /> */}
+            <Route path='/terms' element={<Terms />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </BrowserRouter>
 

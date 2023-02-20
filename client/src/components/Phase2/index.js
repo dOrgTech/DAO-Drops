@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import Project from './Project'
 import ProjectPopup from './ProjectPopup'
+import ErrorPopup from '../ErrorPopup'
 import * as constants from '../../Constants'
 import { shuffle } from '../../Utils'
 import Countdown from 'react-countdown'
@@ -27,7 +28,8 @@ import squiggle2 from '../../assets/phase2/squiggle2.svg'
 // Phase2 Component
 // ------------------------------------------------------------------------------------------------------- //
 const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, walletStatus, points, setPoints, votes, setVotes, setPhaseView}) => {
-  
+  const [errorPopupStatus, setErrorPopupStatus] = useState(false)
+
   const PICKS = 'https://dao-drops.herokuapp.com/posts/picks/'
 
   const [isVideoLoaded, setIsVideoLoaded] = useState(false)
@@ -35,7 +37,7 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
   const [popupDetails, setPopupDetails] = useState()
   const [projectsPicks, setProjectsPicks] = useState()
   const [votesSubmitted, setVotesSubmitted] = useState('false')
-  const phase2End = '2022-11-21T00:00:00.000+00:00'
+  const phase2End = '2023-02-28T00:00:00.000+00:00'
   // const phase2End = Date.now() + 10000
   
   useEffect(() => {
@@ -88,6 +90,7 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
             votes={votes}
             setVotesSubmitted={setVotesSubmitted}
             votesSubmitted={votesSubmitted}
+            setErrorPopupStatus={setErrorPopupStatus}
           />
 
           <div className={`flex items-start relative ${walletStatus === 'connected' ? 'pt-[5.55rem] 700px:pt-[6.9rem] 1000px:pt-[4.375rem] mt-0' : 'mt-8 700px:mt-12 1000px:mt-2'}`}>
@@ -108,7 +111,7 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
 
                   <div className='absolute top-[-5.5rem] left-[-6.7rem] 700px:-top-24 700px:-left-10 1000px:-left-1.5 z-20 scale-75 700px:scale-100'>
                     <div className='w-48 h-10 bg-white border-t-[6px] border-l-[6px] border-indigoDD text-lg font-ob font-bold uppercase flex justify-center items-center endsin-line phase2'>
-                      <div className='absolute pb-1 pl-1'>PHASE ENDS IN:</div>
+                      <div className='absolute pb-1 pl-1 uppercase text-[15px]'>allocation phase:</div>
                     </div>
 
                     <div className='w-[31rem] 700px:w-[32rem] h-[6.5rem] bg-white border-[7px] 700px:border-[6px] border-indigoDD font-obWide font-extrabold text-5xl flex justify-center items-center'>
@@ -138,7 +141,7 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
 
             <div className='mt-[10.5rem] relative right-0 hidden 1000px:block'>
               <div className='font-ob text-magentaDD text-xl 1000px:text-sm border-b border-magentaDD pb-4 w-full 1000px:w-[19rem]'>
-                Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and funded<br/>
+                Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and supported<br/>
                 by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
               </div>
 
@@ -149,10 +152,10 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
               </div>
             </div>
 
-            { projectsPicks &&
+            { projectsPicks && projectsPicks.length > 6 &&
               <>
-                <img className='absolute top-[83rem] left-[80%] z-0 hidden 1000px:block' src={dots3} alt='Dots' />
-                <img className='absolute top-[94rem] left-[10%] z-0 hidden 1000px:block' src={squiggle2} alt='Squiggle' />
+                <img className={`absolute ${projectsPicks.length > 18 ? 'top-[83rem]' : 'top-[49rem]'} left-[80%] z-0 hidden 1000px:block`} src={dots3} alt='Dots' />
+                <img className={`absolute ${projectsPicks.length > 18 ? 'top-[90rem]' : 'top-[55rem]'} left-[10%] z-0 hidden 1000px:block`} src={squiggle2} alt='Squiggle' />
               </>
             }
           </div>
@@ -173,7 +176,7 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
 
                 <div className='mb-20 w-full relative block 1000px:hidden'>
                   <div className='font-ob text-magentaDD text-xl border-b border-magentaDD pb-4 w-full '>
-                    Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and funded<br/>
+                    Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and supported<br/>
                     by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
                   </div>
 
@@ -256,7 +259,7 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
 
       <footer className='w-full h-24 px-[4%] flex justify-between items-center bg-footerColor'>
         <div className='font-ob text-magentaDD text-base 600px:text-lg 1000px:w-1/3'>
-          Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and funded<br/>
+          Built by <a target='_blank' rel='noreferrer' href='https://www.dorg.tech' className='font-semibold hover:underline'>dOrg</a> and supported<br/>
           by the <a target='_blank' rel='noreferrer' href='https://ethereum.foundation' className='font-semibold hover:underline'>Ethereum Foundation</a>
         </div>
 
@@ -280,6 +283,7 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
         votesSubmitted={votesSubmitted} 
       />
 
+      {errorPopupStatus && <ErrorPopup setErrorPopupStatus={setErrorPopupStatus} />}
     </>
   )}
 

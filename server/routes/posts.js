@@ -1,7 +1,7 @@
 import express from "express";
 import validator from "express-validator";
 import {
-  getPosts,
+  // getPosts,
   createPost,
   getScore,
   updateScore,
@@ -13,7 +13,7 @@ const { check, validationResult } = validator;
 
 //reached at: localhost:5000/posts
 
-router.get("/", getPosts);
+// router.get("/", getPosts);
 router.get("/score/:id", getScore);
 router.get("/picks/", getPicks);
 router.post(
