@@ -48,10 +48,8 @@ async function main() {
   for (let i = 0; i < recordLength; i++) {
     // get the address of each deployer
     let deployerAccount = deepDAOScores[i]["address"];
-    console.log(deployerAccount);
     // get the number of contracts trhat account has deployed
     let deploymentCount = deepDAOScores[i]["number_of_daos"];
-    console.log(deploymentCount);
     //create object for it
     let accountObject = {
       account: deployerAccount,
