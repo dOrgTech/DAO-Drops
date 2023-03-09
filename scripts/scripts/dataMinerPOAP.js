@@ -1,7 +1,7 @@
 const fs = require("fs");
 const parse = require("csv-parse/lib/sync");
 
-const median = arr => {
+const median = (arr) => {
   const mid = Math.floor(arr.length / 2),
     nums = [...arr].sort((a, b) => a - b);
   return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
@@ -15,16 +15,7 @@ async function main() {
   let poapNumberOfAccounts = 0;
   let totalScorePOAP = 0;
   let highestPOAPscore = 0;
-  let numberOfAccountsAbove10 = 0;
-  let numberOfAccountsAbove20 = 0;
-  let numberOfAccountsAbove30 = 0;
-  let numberOfAccountsAbove50 = 0;
-  let numberOfAccountsAbove75 = 0;
-  let numberOfAccountsAbove100 = 0;
-  let numberOfAccountsAbove125 = 0;
-  let numberOfAccountsAbove150 = 0;
-  let numberOfAccountsAbove175 = 0;
-  let numberOfAccountsAbove200 = 0;
+
   ////////////////////////Devcon1 Parser///////////////////////////
   console.log("Parsing DevCon 1 data");
 
@@ -38,7 +29,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true
+    rtrim: true,
   });
 
   recordLength = dc1Records.length;
@@ -47,20 +38,20 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      accountObject => accountObject.account === poapAccount
+      (accountObject) => accountObject.account === poapAccount
     );
     let currentAccountScore = 0;
 
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1
+        score: 19,
       };
       accounts.push(accountObject);
       overAllScore++;
-      currentAccountScore = 1;
+      currentAccountScore = 100;
     } else {
-      existingAccount.score += 1;
+      existingAccount.score += 10;
       overAllScore++;
       currentAccountScore = existingAccount.score;
     }
@@ -73,37 +64,6 @@ async function main() {
     totalScorePOAP += parseInt(currentAccountScore);
     if (highestPOAPscore < parseInt(currentAccountScore)) {
       highestPOAPscore = parseInt(currentAccountScore);
-    }
-
-    if (currentAccountScore >= 10) {
-      numberOfAccountsAbove10++;
-    }
-    if (currentAccountScore >= 20) {
-      numberOfAccountsAbove20++;
-    }
-    if (currentAccountScore >= 30) {
-      numberOfAccountsAbove30++;
-    }
-    if (currentAccountScore >= 50) {
-      numberOfAccountsAbove50++;
-    }
-    if (currentAccountScore >= 75) {
-      numberOfAccountsAbove75++;
-    }
-    if (currentAccountScore >= 100) {
-      numberOfAccountsAbove100++;
-    }
-    if (currentAccountScore >= 125) {
-      numberOfAccountsAbove125++;
-    }
-    if (currentAccountScore >= 150) {
-      numberOfAccountsAbove150++;
-    }
-    if (currentAccountScore >= 175) {
-      numberOfAccountsAbove175++;
-    }
-    if (currentAccountScore >= 200) {
-      numberOfAccountsAbove200++;
     }
   }
 
@@ -118,7 +78,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true
+    rtrim: true,
   });
 
   recordLength = dc2Records.length;
@@ -127,20 +87,20 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      accountObject => accountObject.account === poapAccount
+      (accountObject) => accountObject.account === poapAccount
     );
     let currentAccountScore = 0;
 
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1
+        score: 10,
       };
       accounts.push(accountObject);
       overAllScore++;
-      currentAccountScore = 1;
+      currentAccountScore = 10;
     } else {
-      existingAccount.score += 1;
+      existingAccount.score += 10;
       overAllScore++;
       currentAccountScore = existingAccount.score;
     }
@@ -153,37 +113,6 @@ async function main() {
     totalScorePOAP += parseInt(currentAccountScore);
     if (highestPOAPscore < parseInt(currentAccountScore)) {
       highestPOAPscore = parseInt(currentAccountScore);
-    }
-
-    if (currentAccountScore >= 10) {
-      numberOfAccountsAbove10++;
-    }
-    if (currentAccountScore >= 20) {
-      numberOfAccountsAbove20++;
-    }
-    if (currentAccountScore >= 30) {
-      numberOfAccountsAbove30++;
-    }
-    if (currentAccountScore >= 50) {
-      numberOfAccountsAbove50++;
-    }
-    if (currentAccountScore >= 75) {
-      numberOfAccountsAbove75++;
-    }
-    if (currentAccountScore >= 100) {
-      numberOfAccountsAbove100++;
-    }
-    if (currentAccountScore >= 125) {
-      numberOfAccountsAbove125++;
-    }
-    if (currentAccountScore >= 150) {
-      numberOfAccountsAbove150++;
-    }
-    if (currentAccountScore >= 175) {
-      numberOfAccountsAbove175++;
-    }
-    if (currentAccountScore >= 200) {
-      numberOfAccountsAbove200++;
     }
   }
 
@@ -198,7 +127,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true
+    rtrim: true,
   });
 
   recordLength = dc3Records.length;
@@ -207,20 +136,20 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      accountObject => accountObject.account === poapAccount
+      (accountObject) => accountObject.account === poapAccount
     );
     let currentAccountScore = 0;
 
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1
+        score: 10,
       };
       accounts.push(accountObject);
       overAllScore++;
-      currentAccountScore = 1;
+      currentAccountScore = 10;
     } else {
-      existingAccount.score += 1;
+      existingAccount.score += 10;
       overAllScore++;
       currentAccountScore = existingAccount.score;
     }
@@ -233,37 +162,6 @@ async function main() {
     totalScorePOAP += parseInt(currentAccountScore);
     if (highestPOAPscore < parseInt(currentAccountScore)) {
       highestPOAPscore = parseInt(currentAccountScore);
-    }
-
-    if (currentAccountScore >= 10) {
-      numberOfAccountsAbove10++;
-    }
-    if (currentAccountScore >= 20) {
-      numberOfAccountsAbove20++;
-    }
-    if (currentAccountScore >= 30) {
-      numberOfAccountsAbove30++;
-    }
-    if (currentAccountScore >= 50) {
-      numberOfAccountsAbove50++;
-    }
-    if (currentAccountScore >= 75) {
-      numberOfAccountsAbove75++;
-    }
-    if (currentAccountScore >= 100) {
-      numberOfAccountsAbove100++;
-    }
-    if (currentAccountScore >= 125) {
-      numberOfAccountsAbove125++;
-    }
-    if (currentAccountScore >= 150) {
-      numberOfAccountsAbove150++;
-    }
-    if (currentAccountScore >= 175) {
-      numberOfAccountsAbove175++;
-    }
-    if (currentAccountScore >= 200) {
-      numberOfAccountsAbove200++;
     }
   }
 
@@ -278,7 +176,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true
+    rtrim: true,
   });
 
   recordLength = dc4Records.length;
@@ -287,7 +185,7 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      accountObject => accountObject.account === poapAccount
+      (accountObject) => accountObject.account === poapAccount
     );
 
     let currentAccountScore = 0;
@@ -295,13 +193,13 @@ async function main() {
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1
+        score: 10,
       };
       accounts.push(accountObject);
       overAllScore++;
-      currentAccountScore = 1;
+      currentAccountScore = 10;
     } else {
-      existingAccount.score += 1;
+      existingAccount.score += 10;
       overAllScore++;
       currentAccountScore = existingAccount.score;
     }
@@ -314,37 +212,6 @@ async function main() {
     totalScorePOAP += parseInt(currentAccountScore);
     if (highestPOAPscore < parseInt(currentAccountScore)) {
       highestPOAPscore = parseInt(currentAccountScore);
-    }
-
-    if (currentAccountScore >= 10) {
-      numberOfAccountsAbove10++;
-    }
-    if (currentAccountScore >= 20) {
-      numberOfAccountsAbove20++;
-    }
-    if (currentAccountScore >= 30) {
-      numberOfAccountsAbove30++;
-    }
-    if (currentAccountScore >= 50) {
-      numberOfAccountsAbove50++;
-    }
-    if (currentAccountScore >= 75) {
-      numberOfAccountsAbove75++;
-    }
-    if (currentAccountScore >= 100) {
-      numberOfAccountsAbove100++;
-    }
-    if (currentAccountScore >= 125) {
-      numberOfAccountsAbove125++;
-    }
-    if (currentAccountScore >= 150) {
-      numberOfAccountsAbove150++;
-    }
-    if (currentAccountScore >= 175) {
-      numberOfAccountsAbove175++;
-    }
-    if (currentAccountScore >= 200) {
-      numberOfAccountsAbove200++;
     }
   }
 
@@ -359,7 +226,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true
+    rtrim: true,
   });
 
   recordLength = dc5Records.length;
@@ -368,7 +235,7 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      accountObject => accountObject.account === poapAccount
+      (accountObject) => accountObject.account === poapAccount
     );
 
     let currentAccountScore = 0;
@@ -376,13 +243,13 @@ async function main() {
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1
+        score: 10,
       };
       accounts.push(accountObject);
       overAllScore++;
-      currentAccountScore = 1;
+      currentAccountScore = 10;
     } else {
-      existingAccount.score += 1;
+      existingAccount.score += 10;
       overAllScore++;
       currentAccountScore = existingAccount.score;
     }
@@ -395,37 +262,6 @@ async function main() {
     totalScorePOAP += parseInt(currentAccountScore);
     if (highestPOAPscore < parseInt(currentAccountScore)) {
       highestPOAPscore = parseInt(currentAccountScore);
-    }
-
-    if (currentAccountScore >= 10) {
-      numberOfAccountsAbove10++;
-    }
-    if (currentAccountScore >= 20) {
-      numberOfAccountsAbove20++;
-    }
-    if (currentAccountScore >= 30) {
-      numberOfAccountsAbove30++;
-    }
-    if (currentAccountScore >= 50) {
-      numberOfAccountsAbove50++;
-    }
-    if (currentAccountScore >= 75) {
-      numberOfAccountsAbove75++;
-    }
-    if (currentAccountScore >= 100) {
-      numberOfAccountsAbove100++;
-    }
-    if (currentAccountScore >= 125) {
-      numberOfAccountsAbove125++;
-    }
-    if (currentAccountScore >= 150) {
-      numberOfAccountsAbove150++;
-    }
-    if (currentAccountScore >= 175) {
-      numberOfAccountsAbove175++;
-    }
-    if (currentAccountScore >= 200) {
-      numberOfAccountsAbove200++;
     }
   }
 
@@ -440,7 +276,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true
+    rtrim: true,
   });
 
   recordLength = ethBerlinRecords.length;
@@ -449,20 +285,20 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      accountObject => accountObject.account === poapAccount
+      (accountObject) => accountObject.account === poapAccount
     );
     let currentAccountScore = 0;
 
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1
+        score: 10,
       };
       accounts.push(accountObject);
       overAllScore++;
-      currentAccountScore = 1;
+      currentAccountScore = 10;
     } else {
-      existingAccount.score += 1;
+      existingAccount.score += 10;
       overAllScore++;
       currentAccountScore = existingAccount.score;
     }
@@ -476,36 +312,54 @@ async function main() {
     if (highestPOAPscore < parseInt(currentAccountScore)) {
       highestPOAPscore = parseInt(currentAccountScore);
     }
+  }
 
-    if (currentAccountScore >= 10) {
-      numberOfAccountsAbove10++;
+  ////////////////////////ETHBerlin2 Parser///////////////////////////
+  console.log("Parsing ETHBerlin2 data");
+
+  const ethBerlinFileContent2 = await fs.readFileSync(
+    __dirname + "/csv_src/ETHBerlin2.csv"
+  );
+  const ethBerlinRecords2 = parse(ethBerlinFileContent2, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = ethBerlinRecords2.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = ethBerlinRecords2[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
     }
-    if (currentAccountScore >= 20) {
-      numberOfAccountsAbove20++;
-    }
-    if (currentAccountScore >= 30) {
-      numberOfAccountsAbove30++;
-    }
-    if (currentAccountScore >= 50) {
-      numberOfAccountsAbove50++;
-    }
-    if (currentAccountScore >= 75) {
-      numberOfAccountsAbove75++;
-    }
-    if (currentAccountScore >= 100) {
-      numberOfAccountsAbove100++;
-    }
-    if (currentAccountScore >= 125) {
-      numberOfAccountsAbove125++;
-    }
-    if (currentAccountScore >= 150) {
-      numberOfAccountsAbove150++;
-    }
-    if (currentAccountScore >= 175) {
-      numberOfAccountsAbove175++;
-    }
-    if (currentAccountScore >= 200) {
-      numberOfAccountsAbove200++;
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
     }
   }
 
@@ -520,7 +374,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true
+    rtrim: true,
   });
 
   recordLength = ethBoston1Records.length;
@@ -529,20 +383,20 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      accountObject => accountObject.account === poapAccount
+      (accountObject) => accountObject.account === poapAccount
     );
     let currentAccountScore = 0;
 
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1
+        score: 10,
       };
       accounts.push(accountObject);
       overAllScore++;
-      currentAccountScore = 1;
+      currentAccountScore = 10;
     } else {
-      existingAccount.score += 1;
+      existingAccount.score += 10;
       overAllScore++;
       currentAccountScore = existingAccount.score;
     }
@@ -555,36 +409,6 @@ async function main() {
     totalScorePOAP += parseInt(currentAccountScore);
     if (highestPOAPscore < parseInt(currentAccountScore)) {
       highestPOAPscore = parseInt(currentAccountScore);
-    }
-    if (currentAccountScore >= 10) {
-      numberOfAccountsAbove10++;
-    }
-    if (currentAccountScore >= 20) {
-      numberOfAccountsAbove20++;
-    }
-    if (currentAccountScore >= 30) {
-      numberOfAccountsAbove30++;
-    }
-    if (currentAccountScore >= 50) {
-      numberOfAccountsAbove50++;
-    }
-    if (currentAccountScore >= 75) {
-      numberOfAccountsAbove75++;
-    }
-    if (currentAccountScore >= 100) {
-      numberOfAccountsAbove100++;
-    }
-    if (currentAccountScore >= 125) {
-      numberOfAccountsAbove125++;
-    }
-    if (currentAccountScore >= 150) {
-      numberOfAccountsAbove150++;
-    }
-    if (currentAccountScore >= 175) {
-      numberOfAccountsAbove175++;
-    }
-    if (currentAccountScore >= 200) {
-      numberOfAccountsAbove200++;
     }
   }
 
@@ -596,7 +420,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true
+    rtrim: true,
   });
 
   recordLength = ethBoston2Records.length;
@@ -605,7 +429,7 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      accountObject => accountObject.account === poapAccount
+      (accountObject) => accountObject.account === poapAccount
     );
 
     let currentAccountScore = 0;
@@ -613,13 +437,13 @@ async function main() {
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1
+        score: 10,
       };
       accounts.push(accountObject);
       overAllScore++;
-      currentAccountScore = 1;
+      currentAccountScore = 10;
     } else {
-      existingAccount.score += 1;
+      existingAccount.score += 10;
       overAllScore++;
       currentAccountScore = existingAccount.score;
     }
@@ -632,37 +456,6 @@ async function main() {
     totalScorePOAP += parseInt(currentAccountScore);
     if (highestPOAPscore < parseInt(currentAccountScore)) {
       highestPOAPscore = parseInt(currentAccountScore);
-    }
-
-    if (currentAccountScore >= 10) {
-      numberOfAccountsAbove10++;
-    }
-    if (currentAccountScore >= 20) {
-      numberOfAccountsAbove20++;
-    }
-    if (currentAccountScore >= 30) {
-      numberOfAccountsAbove30++;
-    }
-    if (currentAccountScore >= 50) {
-      numberOfAccountsAbove50++;
-    }
-    if (currentAccountScore >= 75) {
-      numberOfAccountsAbove75++;
-    }
-    if (currentAccountScore >= 100) {
-      numberOfAccountsAbove100++;
-    }
-    if (currentAccountScore >= 125) {
-      numberOfAccountsAbove125++;
-    }
-    if (currentAccountScore >= 150) {
-      numberOfAccountsAbove150++;
-    }
-    if (currentAccountScore >= 175) {
-      numberOfAccountsAbove175++;
-    }
-    if (currentAccountScore >= 200) {
-      numberOfAccountsAbove200++;
     }
   }
 
@@ -674,7 +467,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true
+    rtrim: true,
   });
 
   recordLength = ethBoston3Records.length;
@@ -683,7 +476,7 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      accountObject => accountObject.account === poapAccount
+      (accountObject) => accountObject.account === poapAccount
     );
 
     let currentAccountScore = 0;
@@ -691,13 +484,13 @@ async function main() {
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1
+        score: 10,
       };
       accounts.push(accountObject);
       overAllScore++;
-      currentAccountScore = 1;
+      currentAccountScore = 10;
     } else {
-      existingAccount.score += 1;
+      existingAccount.score += 10;
       overAllScore++;
       currentAccountScore = existingAccount.score;
     }
@@ -711,117 +504,9 @@ async function main() {
     if (highestPOAPscore < parseInt(currentAccountScore)) {
       highestPOAPscore = parseInt(currentAccountScore);
     }
-
-    if (currentAccountScore >= 10) {
-      numberOfAccountsAbove10++;
-    }
-    if (currentAccountScore >= 20) {
-      numberOfAccountsAbove20++;
-    }
-    if (currentAccountScore >= 30) {
-      numberOfAccountsAbove30++;
-    }
-    if (currentAccountScore >= 50) {
-      numberOfAccountsAbove50++;
-    }
-    if (currentAccountScore >= 75) {
-      numberOfAccountsAbove75++;
-    }
-    if (currentAccountScore >= 100) {
-      numberOfAccountsAbove100++;
-    }
-    if (currentAccountScore >= 125) {
-      numberOfAccountsAbove125++;
-    }
-    if (currentAccountScore >= 150) {
-      numberOfAccountsAbove150++;
-    }
-    if (currentAccountScore >= 175) {
-      numberOfAccountsAbove175++;
-    }
-    if (currentAccountScore >= 200) {
-      numberOfAccountsAbove200++;
-    }
   }
-  ////////////////////////ETHDenver Parser///////////////////////////
-  console.log("Parsing ETHDenver data");
+  //////////////////////ETHDenver Parser///////////////////////////
 
-  const ethDenverFileContent = await fs.readFileSync(
-    __dirname + "/csv_src/ETHDenver.csv"
-  );
-  const ethDenverRecords = parse(ethDenverFileContent, {
-    columns: true,
-    quote: "",
-    delimiter: ",",
-    ltrim: true,
-    rtrim: true
-  });
-
-  recordLength = ethDenverRecords.length;
-  for (let i = 0; i < recordLength; i++) {
-    let poapAccount = ethDenverRecords[i]['"Collection"'];
-
-    poapAccount = poapAccount.replace(/"/g, "");
-    let existingAccount = accounts.find(
-      accountObject => accountObject.account === poapAccount
-    );
-    let currentAccountScore = 0;
-
-    if (existingAccount === undefined) {
-      let accountObject = {
-        account: poapAccount,
-        score: 1
-      };
-      accounts.push(accountObject);
-      overAllScore++;
-      currentAccountScore = 1;
-    } else {
-      existingAccount.score += 1;
-      overAllScore++;
-      currentAccountScore = existingAccount.score;
-    }
-    //push score into scores array
-    scores.push(currentAccountScore);
-    // push score into poapScoresArray array
-    poapScoresArray.push(currentAccountScore);
-    //track overall data for scoring adjustments
-    poapNumberOfAccounts += recordLength;
-    totalScorePOAP += parseInt(currentAccountScore);
-    if (highestPOAPscore < parseInt(currentAccountScore)) {
-      highestPOAPscore = parseInt(currentAccountScore);
-    }
-
-    if (currentAccountScore >= 10) {
-      numberOfAccountsAbove10++;
-    }
-    if (currentAccountScore >= 20) {
-      numberOfAccountsAbove20++;
-    }
-    if (currentAccountScore >= 30) {
-      numberOfAccountsAbove30++;
-    }
-    if (currentAccountScore >= 50) {
-      numberOfAccountsAbove50++;
-    }
-    if (currentAccountScore >= 75) {
-      numberOfAccountsAbove75++;
-    }
-    if (currentAccountScore >= 100) {
-      numberOfAccountsAbove100++;
-    }
-    if (currentAccountScore >= 125) {
-      numberOfAccountsAbove125++;
-    }
-    if (currentAccountScore >= 150) {
-      numberOfAccountsAbove150++;
-    }
-    if (currentAccountScore >= 175) {
-      numberOfAccountsAbove175++;
-    }
-    if (currentAccountScore >= 200) {
-      numberOfAccountsAbove200++;
-    }
-  }
   //////////////////////ETHIndia Parser///////////////////////////
   console.log("Parsing ETHIndia data");
 
@@ -833,7 +518,7 @@ async function main() {
     quote: "",
     delimiter: ",",
     ltrim: true,
-    rtrim: true
+    rtrim: true,
   });
 
   recordLength = ethIndiaRecords.length;
@@ -842,7 +527,7 @@ async function main() {
 
     poapAccount = poapAccount.replace(/"/g, "");
     let existingAccount = accounts.find(
-      accountObject => accountObject.account === poapAccount
+      (accountObject) => accountObject.account === poapAccount
     );
 
     let currentAccountScore = 0;
@@ -850,13 +535,13 @@ async function main() {
     if (existingAccount === undefined) {
       let accountObject = {
         account: poapAccount,
-        score: 1
+        score: 10,
       };
       accounts.push(accountObject);
       overAllScore++;
-      currentAccountScore = 1;
+      currentAccountScore = 10;
     } else {
-      existingAccount.score += 1;
+      existingAccount.score += 10;
       overAllScore++;
       currentAccountScore = existingAccount.score;
     }
@@ -870,46 +555,806 @@ async function main() {
     if (highestPOAPscore < parseInt(currentAccountScore)) {
       highestPOAPscore = parseInt(currentAccountScore);
     }
+  }
+  //////////////////////ETHIndia2 Parser///////////////////////////
+  console.log("Parsing ETHIndia2 data");
 
-    if (currentAccountScore >= 10) {
-      numberOfAccountsAbove10++;
+  const ethIndiaFileContent2 = await fs.readFileSync(
+    __dirname + "/csv_src/ETHIndia2.csv"
+  );
+  const ethIndiaRecords2 = parse(ethIndiaFileContent2, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = ethIndiaRecords2.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = ethIndiaRecords2[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
     }
-    if (currentAccountScore >= 20) {
-      numberOfAccountsAbove20++;
-    }
-    if (currentAccountScore >= 30) {
-      numberOfAccountsAbove30++;
-    }
-    if (currentAccountScore >= 50) {
-      numberOfAccountsAbove50++;
-    }
-    if (currentAccountScore >= 75) {
-      numberOfAccountsAbove75++;
-    }
-    if (currentAccountScore >= 100) {
-      numberOfAccountsAbove100++;
-    }
-    if (currentAccountScore >= 125) {
-      numberOfAccountsAbove125++;
-    }
-    if (currentAccountScore >= 150) {
-      numberOfAccountsAbove150++;
-    }
-    if (currentAccountScore >= 175) {
-      numberOfAccountsAbove175++;
-    }
-    if (currentAccountScore >= 200) {
-      numberOfAccountsAbove200++;
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
     }
   }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  //////////////////////ETHIndia3 Parser///////////////////////////
+  console.log("Parsing ETHIndia3 data");
+
+  const ethIndiaFileContent3 = await fs.readFileSync(
+    __dirname + "/csv_src/ETHIndia3.csv"
+  );
+  const ethIndiaRecords3 = parse(ethIndiaFileContent3, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = ethIndiaRecords3.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = ethIndiaRecords3[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  //////////////////////Dappcon 2019 Parser///////////////////////////
+  console.log("Parsing Dappcon 2019 data");
+
+  const dappCon19File = await fs.readFileSync(
+    __dirname + "/csv_src/Dappcon_2019.csv"
+  );
+  const dappCon19Records = parse(dappCon19File, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = dappCon19Records.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = dappCon19Records[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  //////////////////////Dappcon 2019 Parser///////////////////////////
+  console.log("Parsing Dappcon  data");
+
+  const dappConFile = await fs.readFileSync(__dirname + "/csv_src/DappCon.csv");
+  const dappConRecords = parse(dappConFile, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = dappConRecords.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = dappConRecords[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  ////////////////////DevCon Bogota Parser///////////////////////////
+  console.log("Parsing DevCon Bogota data");
+
+  const devcon_bogotaFile = await fs.readFileSync(
+    __dirname + "/csv_src/Devcon_Bogota.csv"
+  );
+  const devcon_bogotaRecords = parse(devcon_bogotaFile, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = devcon_bogotaRecords.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = devcon_bogotaRecords[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  //////////////////////EDCON 1 Parser///////////////////////////
+  console.log("Parsing EDCON 1 data");
+
+  const edcon1File = await fs.readFileSync(__dirname + "/csv_src/EDCON1.csv");
+  const edcon1Records = parse(edcon1File, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = edcon1Records.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = edcon1Records[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  ////////////////////EDCON 2 Parser///////////////////////////
+  console.log("Parsing EDCON 2 data");
+
+  const edcon2File = await fs.readFileSync(__dirname + "/csv_src/EDCON2.csv");
+  const edcon2Records = parse(edcon2File, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = edcon2Records.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = edcon2Records[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  //////////////////////ETHBerlinZwei Parser///////////////////////////
+  console.log("Parsing ETHBerlinZwei data");
+
+  const ebzwFile = await fs.readFileSync(
+    __dirname + "/csv_src/ETHBerlinZwei.csv"
+  );
+  const ebzwRecords = parse(ebzwFile, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = ebzwRecords.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = ebzwRecords[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  //////////////////////ETHCapeTown Parser///////////////////////////
+  console.log("Parsing ETHCapeTown data");
+
+  const ectFile = await fs.readFileSync(__dirname + "/csv_src/ETHCAPETOWN.csv");
+  const ectRecords = parse(ectFile, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = ectRecords.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = ectRecords[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  //////////////////////EthCC Parser///////////////////////////
+  console.log("Parsing EthCC data");
+
+  const ethccFile = await fs.readFileSync(__dirname + "/csv_src/EthCC.csv");
+  const ethccRecords = parse(ethccFile, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = ethccRecords.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = ethccRecords[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  //////////////////////EthCC1 Parser///////////////////////////
+  console.log("Parsing EthCC1 data");
+
+  const ethcc1File = await fs.readFileSync(__dirname + "/csv_src/EthCC1.csv");
+  const ethcc1Records = parse(ethcc1File, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = ethcc1Records.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = ethcc1Records[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  ////////////////////EthCC4 Parser///////////////////////////
+  console.log("Parsing EthCC4 data");
+
+  const ethcc4File = await fs.readFileSync(__dirname + "/csv_src/EthCC4.csv");
+  const ethcc4Records = parse(ethcc4File, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = ethcc4Records.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = ethcc4Records[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  //////////////////////ETHNewYork Parser///////////////////////////
+  console.log("Parsing ETHNewYork data");
+
+  const enyFile = await fs.readFileSync(__dirname + "/csv_src/ETHNewYork.csv");
+  const enyRecords = parse(enyFile, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = enyRecords.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = enyRecords[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  //////////////////////ETHParis Parser///////////////////////////
+  console.log("Parsing ETHParis data");
+
+  const epFile = await fs.readFileSync(__dirname + "/csv_src/ETHParis.csv");
+  const epRecords = parse(epFile, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = epRecords.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = epRecords[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
+
+  //////////////////////ETHWaterloo Parser///////////////////////////
+  console.log("Parsing ETHWaterloo data");
+
+  const ewFile = await fs.readFileSync(__dirname + "/csv_src/ETHWaterloo.csv");
+  const ewRecords = parse(ewFile, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  recordLength = ewRecords.length;
+  for (let i = 0; i < recordLength; i++) {
+    let poapAccount = ewRecords[i]['"Collection"'];
+
+    poapAccount = poapAccount.replace(/"/g, "");
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === poapAccount
+    );
+
+    let currentAccountScore = 0;
+
+    if (existingAccount === undefined) {
+      let accountObject = {
+        account: poapAccount,
+        score: 10,
+      };
+      accounts.push(accountObject);
+      overAllScore++;
+      currentAccountScore = 10;
+    } else {
+      existingAccount.score += 10;
+      overAllScore++;
+      currentAccountScore = existingAccount.score;
+    }
+    //push score into scores array
+    scores.push(currentAccountScore);
+    // push score into poapScoresArray array
+    poapScoresArray.push(currentAccountScore);
+    //track overall data for scoring adjustments
+    poapNumberOfAccounts += recordLength;
+    totalScorePOAP += parseInt(currentAccountScore);
+    if (highestPOAPscore < parseInt(currentAccountScore)) {
+      highestPOAPscore = parseInt(currentAccountScore);
+    }
+  }
+  //calculate average score
+  averageScorePOAP = totalScorePOAP / poapNumberOfAccounts;
+  // calculate median score
+  medianScorePOAP = median(poapScoresArray);
   /////////////////////////jsonifier and file system saverizor code///////////////////////////
   console.log("JSONifying data");
   var jsonData = JSON.stringify(accounts, null, 2);
-  fs.writeFileSync("./scoreSheets/ScoreSheetPOAP.json", jsonData, function(
-    err
-  ) {
-    res.json({ success: true });
-  });
+  fs.writeFileSync(
+    "./scoreSheets/ScoreSheetPOAP.json",
+    jsonData,
+    function (err) {
+      res.json({ success: true });
+    }
+  );
   console.log("Data JSONified into ScoreSheet.json!!!");
   console.log("The total number of accounts in the POAP data is: ");
   console.log(poapNumberOfAccounts);
@@ -921,75 +1366,11 @@ async function main() {
   console.log(overAllScore / accounts.length);
   console.log("The median score for the POAP data is: ");
   console.log(median(scores));
-
-  let n175 = numberOfAccountsAbove175 - numberOfAccountsAbove200;
-  let n150 = numberOfAccountsAbove150 - n175;
-  let n125 = numberOfAccountsAbove125 - n150;
-  let n100 = numberOfAccountsAbove100 - n125;
-  let n75 = numberOfAccountsAbove75 - n100;
-  let n50 = numberOfAccountsAbove50 - n75;
-  let n30 = numberOfAccountsAbove30 - n50;
-  let n20 = numberOfAccountsAbove20 - n30;
-  let n10 = numberOfAccountsAbove10 - n20;
-  let totalAbove10 =
-    n10 +
-    n20 +
-    n30 +
-    n50 +
-    n75 +
-    n100 +
-    n125 +
-    n150 +
-    n175 +
-    numberOfAccountsAbove200;
-
-  console.log(
-    "The number of accounts with a score above 10 but less than 20: "
-  );
-  console.log(n10);
-  console.log(
-    "The number of accounts with a score above 20 but less than 30: "
-  );
-  console.log(n20);
-  console.log(
-    "The number of accounts with a score above 30 but less than 50: "
-  );
-  console.log(n30);
-  console.log(
-    "The number of accounts with a score above 50 but less than 75: "
-  );
-  console.log(n50);
-  console.log(
-    "The number of accounts with a score above 75 but less than 100: "
-  );
-  console.log(n75);
-  console.log(
-    "The number of accounts with a score above 100 but less than 125: "
-  );
-  console.log(n100);
-  console.log(
-    "The number of accounts with a score above 125 but less than 150: "
-  );
-  console.log(n125);
-  console.log(
-    "The number of accounts with a score above 150 but less than 175: "
-  );
-  console.log(n150);
-  console.log(
-    "The number of accounts with a score above 175 but less than 200: "
-  );
-  console.log(n175);
-  console.log("The number of accounts with a score above 200: ");
-  console.log(numberOfAccountsAbove200);
-  console.log("The number of accounts with a score above 10: ");
-  console.log(totalAbove10);
-  console.log("The total number of accounts with a score less than 10: ");
-  console.log(poapNumberOfAccounts - totalAbove10);
 }
 
 main()
   .then(() => process.exit(0))
-  .catch(error => {
+  .catch((error) => {
     console.error(error);
     process.exit(1);
   });
