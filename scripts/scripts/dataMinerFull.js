@@ -112,61 +112,56 @@ async function main() {
     // deploymentCount = deploymentCount.replace(/"/g, "");
     //create onject for it
 
-    // Score Normalizastion Code
+    if (deploymentCount > 3) {
+      // Score Normalizastion Code
+      if (deploymentCount <= 30) {
+        deploymentCount = 30;
+      }
+      if (deploymentCount > 30 && deploymentCount <= 40) {
+        deploymentCount = 40;
+      }
+      if (deploymentCount > 40 && deploymentCount <= 50) {
+        deploymentCount = 50;
+      }
+      if (deploymentCount > 50 && deploymentCount <= 60) {
+        deploymentCount = 60;
+      }
+      if (deploymentCount > 60 && deploymentCount <= 70) {
+        deploymentCount = 70;
+      }
+      if (deploymentCount > 70 && deploymentCount <= 80) {
+        deploymentCount = 80;
+      }
+      if (deploymentCount > 80 && deploymentCount <= 90) {
+        deploymentCount = 90;
+      }
+      if (deploymentCount > 90) {
+        deploymentCount = 100;
+      }
 
-    if (deploymentCount > 3 && deploymentCount <= 10) {
-      deploymentCount = 10;
-    }
-    if (deploymentCount > 10 && deploymentCount <= 20) {
-      deploymentCount = 20;
-    }
-    if (deploymentCount > 20 && deploymentCount <= 30) {
-      deploymentCount = 30;
-    }
-    if (deploymentCount > 30 && deploymentCount <= 40) {
-      deploymentCount = 40;
-    }
-    if (deploymentCount > 40 && deploymentCount <= 50) {
-      deploymentCount = 50;
-    }
-    if (deploymentCount > 50 && deploymentCount <= 60) {
-      deploymentCount = 60;
-    }
-    if (deploymentCount > 60 && deploymentCount <= 70) {
-      deploymentCount = 70;
-    }
-    if (deploymentCount > 70 && deploymentCount <= 80) {
-      deploymentCount = 80;
-    }
-    if (deploymentCount > 80 && deploymentCount <= 90) {
-      deploymentCount = 90;
-    }
-    if (deploymentCount > 90) {
-      deploymentCount = 100;
-    }
-
-    let accountObject = {
-      account: deployerAccount,
-      score: parseInt(deploymentCount),
-    };
-    //push new account object to sheet
-    accounts.push(accountObject);
-    //push score into scores array
-    scores.push(parseInt(deploymentCount));
-    // push score into deploymentScores array
-    deploymentScores.push(parseInt(deploymentCount));
-    //add its score to the current overall score
-    overAllScore += parseInt(deploymentCount);
-    contractDeployerNumberOfAccounts = recordLength;
-    totalScoreContractDeployer += parseInt(deploymentCount);
-    if (highestContractDeployerScore < parseInt(deploymentCount)) {
-      highestContractDeployerScore = parseInt(deploymentCount);
+      let accountObject = {
+        account: deployerAccount,
+        score: parseInt(deploymentCount) * 10,
+      };
+      //push new account object to sheet
+      accounts.push(accountObject);
+      //push score into scores array
+      scores.push(parseInt(deploymentCount));
+      // push score into deploymentScores array
+      deploymentScores.push(parseInt(deploymentCount));
+      //add its score to the current overall score
+      overAllScore += parseInt(deploymentCount);
+      contractDeployerNumberOfAccounts = accounts.length;
+      totalScoreContractDeployer += parseInt(deploymentCount);
+      if (highestContractDeployerScore < parseInt(deploymentCount)) {
+        highestContractDeployerScore = parseInt(deploymentCount);
+      }
+      //calculate average score
+      averageScoreDeployer = totalScoreContractDeployer / recordLength;
+      // calculate median score
+      medianScoreDeployer = median(deploymentScores);
     }
   }
-  //calculate average score
-  averageScoreDeployer = totalScoreContractDeployer / recordLength;
-  // calculate median score
-  medianScoreDeployer = median(deploymentScores);
 
   ///////////////////////////DeepDAO Score parser code///////////////
   console.log("Parsing DeepDAO data");
