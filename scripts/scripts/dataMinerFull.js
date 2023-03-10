@@ -12,6 +12,8 @@ let highestContractDeployerScore = 0;
 let averageScoreDeployer = 0;
 let medianScoreDeployer = 0;
 
+let numberDouplicate = 0;
+
 let deepDAONumberOfAccounts = 0;
 let totalScoreDeepDAO = 0;
 let highestDeepDAOscore = 0;
@@ -85,60 +87,8 @@ const generalizedPOAPparse = async (fileLocation) => {
 
 async function main() {
   console.log("dataminer starting");
-  ///////////////////////////blockchain contract deployment parser code///////////////
-  const deployerFileContent = await fs.readFileSync(
-    __dirname + "/csv_src/ContractDeployer.csv"
-  );
-
-  console.log("Parsing contract deployment data");
-  const deployerRecords = await parse(deployerFileContent, {
-    columns: true,
-    quote: "",
-    delimiter: ",",
-    ltrim: true,
-    rtrim: true,
-  });
-
-  let deploymentScores = [];
-  // get CSV entries length
-  let recordLength = deployerRecords.length;
-  // loop the CSV entries
-  for (let i = 0; i < recordLength; i++) {
-    // get the address of each deployer
-    let deployerAccount = deployerRecords[i]["coder"];
-    // get the number of contracts trhat account has deployed
-    let deploymentCount = deployerRecords[i]["unique_contract"];
-    // add ("") around the address
-    // deploymentCount = deploymentCount.replace(/"/g, "");
-    //create onject for it
-
-    if (deploymentCount > 3) {
-      let accountObject = {
-        account: deployerAccount,
-        score: parseInt(deploymentCount) * 10,
-      };
-      //push new account object to sheet
-      accounts.push(accountObject);
-      //push score into scores array
-      scores.push(parseInt(deploymentCount));
-      // push score into deploymentScores array
-      deploymentScores.push(parseInt(deploymentCount));
-      //add its score to the current overall score
-      overAllScore += parseInt(deploymentCount);
-      contractDeployerNumberOfAccounts = accounts.length;
-      totalScoreContractDeployer += parseInt(deploymentCount);
-      if (highestContractDeployerScore < parseInt(deploymentCount)) {
-        highestContractDeployerScore = parseInt(deploymentCount);
-      }
-      //calculate average score
-      averageScoreDeployer = totalScoreContractDeployer / recordLength;
-      // calculate median score
-      medianScoreDeployer = median(deploymentScores);
-    }
-  }
-
-  ///////////////////////////DeepDAO Score parser code///////////////
-  console.log("Parsing DeepDAO data");
+  ///////////////////////////DeepDAO Tx Score parser code///////////////
+  console.log("Parsing DeepDAO TX data");
 
   const deepDAOFileContent = await fs.readFileSync(
     __dirname + "/csv_src/DeepDAO.csv"
@@ -153,7 +103,7 @@ async function main() {
 
   let deepDAOScoresArray = [];
   // get json entries length
-  recordLength = deepDAOScores.length;
+  let recordLength = deepDAOScores.length;
   // loop the json entries
   for (let i = 0; i < recordLength; i++) {
     // get the address of each deployer
@@ -197,6 +147,117 @@ async function main() {
   averageScoreDeepDAO = totalScoreDeepDAO / recordLength;
   // calculate median score
   medianScoreDeepDAO = median(deepDAOScoresArray);
+
+  ///////////////////////////DeepDAO DAO Participation Score parser code///////////////
+  console.log("Parsing DeepDAO DAO Participation data");
+
+  const deepDAOFileContent1 = await fs.readFileSync(
+    __dirname + "/csv_src/DeepDAO1.csv"
+  );
+
+  const deepDAOScores1 = await parse(deepDAOFileContent1, {
+    columns: true,
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  // get json entries length
+  recordLength = deepDAOScores1.length;
+  // loop the json entries
+  for (let i = 0; i < recordLength; i++) {
+    // get the address of each deployer
+    let account = deepDAOScores1[i]["address"];
+    // get the number of contracts trhat account has deployed
+    let count = deepDAOScores1[i]["number_of_daos"];
+
+    //check if account is in the accounts array already
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === account
+    );
+    //if the account isnt in the accounts array
+    if (existingAccount === undefined) {
+      //create object for it
+      let accountObject = {
+        account: account,
+        score: parseInt(count),
+      };
+      //push object to accounst array
+      accounts.push(accountObject);
+      //push score into scores array
+      scores.push(parseInt(count));
+      // push score into deepDAOScoresArray array
+      deepDAOScoresArray.push(parseInt(count));
+
+      //add its score to the current overall score
+      overAllScore += parseInt(count);
+      //track overall data for scoring adjustments
+      deepDAONumberOfAccounts = recordLength;
+      totalScoreDeepDAO += parseInt(count);
+      if (highestDeepDAOscore < parseInt(count)) {
+        highestDeepDAOscore = parseInt(count);
+      }
+    } else {
+      //if address already exists from other data set skip adding it
+      numberDouplicate++;
+    }
+  }
+  //calculate average score
+  averageScoreDeepDAO = totalScoreDeepDAO / recordLength;
+  // calculate median score
+  medianScoreDeepDAO = median(deepDAOScoresArray);
+
+  ///////////////////////////blockchain contract deployment parser code///////////////
+  const deployerFileContent = await fs.readFileSync(
+    __dirname + "/csv_src/ContractDeployer.csv"
+  );
+
+  console.log("Parsing contract deployment data");
+  const deployerRecords = await parse(deployerFileContent, {
+    columns: true,
+    quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  let deploymentScores = [];
+  // get CSV entries length
+  recordLength = deployerRecords.length;
+  // loop the CSV entries
+  for (let i = 0; i < recordLength; i++) {
+    // get the address of each deployer
+    let deployerAccount = deployerRecords[i]["coder"];
+    // get the number of contracts trhat account has deployed
+    let deploymentCount = deployerRecords[i]["unique_contract"];
+    // add ("") around the address
+    // deploymentCount = deploymentCount.replace(/"/g, "");
+    //create onject for it
+
+    if (deploymentCount > 3) {
+      let accountObject = {
+        account: deployerAccount,
+        score: parseInt(deploymentCount) * 10,
+      };
+      //push new account object to sheet
+      accounts.push(accountObject);
+      //push score into scores array
+      scores.push(parseInt(deploymentCount));
+      // push score into deploymentScores array
+      deploymentScores.push(parseInt(deploymentCount));
+      //add its score to the current overall score
+      overAllScore += parseInt(deploymentCount);
+      contractDeployerNumberOfAccounts = accounts.length;
+      totalScoreContractDeployer += parseInt(deploymentCount);
+      if (highestContractDeployerScore < parseInt(deploymentCount)) {
+        highestContractDeployerScore = parseInt(deploymentCount);
+      }
+      //calculate average score
+      averageScoreDeployer = totalScoreContractDeployer / recordLength;
+      // calculate median score
+      medianScoreDeployer = median(deploymentScores);
+    }
+  }
 
   ////////////////////////Devcon1 Parser///////////////////////////
   await generalizedPOAPparse("DevCon1.csv");
@@ -267,7 +328,7 @@ async function main() {
       accounts[i].score = 80;
     } else if (accounts[i].score > 80 && accounts[i].score < 90) {
       accounts[i].score = 90;
-    } else if (accounts[i].score > 100) {
+    } else if (accounts[i].score > 90) {
       accounts[i].score = 100;
     }
   }
@@ -332,6 +393,11 @@ async function main() {
   console.log(averageScorePOAP);
   console.log("The median score for the POAP data is: ");
   console.log(medianScorePOAP);
+
+  console.log(
+    "The amount of dublicated data inside the Deep DAO Participation data:"
+  );
+  console.log(numberDouplicate);
 }
 
 main()

@@ -26,6 +26,8 @@ async function main() {
   let numberOfAccountsAbove175 = 0;
   let numberOfAccountsAbove200 = 0;
 
+  let numberDouplicate = 0;
+
   ///////////////////////////DeepDAO Score parser code///////////////
   console.log("Parsing DeepDAO data");
 
@@ -100,6 +102,94 @@ async function main() {
     }
   }
 
+  ///////////////////////////DeepDAO Score parser code///////////////
+  console.log("Parsing DeepDAO data");
+
+  const deepDAOFileContent1 = await fs.readFileSync(
+    __dirname + "/csv_src/DeepDAO1.csv"
+  );
+
+  console.log("Parsing contract deployment data");
+  const deepDAOScores1 = await parse(deepDAOFileContent1, {
+    columns: true,
+    // quote: "",
+    delimiter: ",",
+    ltrim: true,
+    rtrim: true,
+  });
+
+  // get json entries length
+  recordLength = deepDAOScores1.length;
+
+  let deepDAOScoresArray = [];
+
+  // loop the json entries
+  for (let i = 0; i < recordLength; i++) {
+    // get the address of each deployer
+    let deployerAccount = deepDAOScores1[i]["address"];
+    // get the number of contracts trhat account has deployed
+    let deploymentCount = deepDAOScores1[i]["number_of_daos"];
+    //check if account is in the accounts array already
+    let existingAccount = accounts.find(
+      (accountObject) => accountObject.account === deployerAccount
+    );
+    //if the account isnt in the accounts array
+    if (existingAccount === undefined) {
+      //create object for it
+      let accountObject = {
+        account: deployerAccount,
+        score: parseInt(deploymentCount),
+      };
+      //push object to accounst array
+      accounts.push(accountObject);
+      //push score into scores array
+      scores.push(parseInt(deploymentCount));
+      // push score into deepDAOScoresArray array
+      deepDAOScoresArray.push(parseInt(deploymentCount));
+
+      //add its score to the current overall score
+      overAllScore += parseInt(deploymentCount);
+      //track overall data for scoring adjustments
+      deepDAONumberOfAccounts = recordLength;
+      totalScoreDeepDAO += parseInt(deploymentCount);
+      if (highestDeepDAOscore < parseInt(deploymentCount)) {
+        highestDeepDAOscore = parseInt(deploymentCount);
+      }
+      if (deploymentCount >= 10) {
+        numberOfAccountsAbove10++;
+      }
+      if (deploymentCount >= 20) {
+        numberOfAccountsAbove20++;
+      }
+      if (deploymentCount >= 30) {
+        numberOfAccountsAbove30++;
+      }
+      if (deploymentCount >= 50) {
+        numberOfAccountsAbove50++;
+      }
+      if (deploymentCount >= 75) {
+        numberOfAccountsAbove75++;
+      }
+      if (deploymentCount >= 100) {
+        numberOfAccountsAbove100++;
+      }
+      if (deploymentCount >= 125) {
+        numberOfAccountsAbove125++;
+      }
+      if (deploymentCount >= 150) {
+        numberOfAccountsAbove150++;
+      }
+      if (deploymentCount >= 175) {
+        numberOfAccountsAbove175++;
+      }
+      if (deploymentCount >= 200) {
+        numberOfAccountsAbove200++;
+      }
+    } else {
+      //if address already exists from other data set skip adding it
+      numberDouplicate++;
+    }
+  }
   /////////////////////////jsonifier and file system saverizor code///////////////////////////
   console.log("JSONifying data");
   var jsonData = JSON.stringify(accounts, null, 2);
@@ -185,6 +275,10 @@ async function main() {
   console.log(totalAbove10);
   console.log("The total number of accounts with a score less than 10: ");
   console.log(deepDAONumberOfAccounts - totalAbove10);
+  console.log(
+    "The amount of dublicated data inside the Deep DAO Participation data:"
+  );
+  console.log(numberDouplicate);
 }
 
 main()
