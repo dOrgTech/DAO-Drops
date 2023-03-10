@@ -30,15 +30,7 @@ Allocation power is determined using a script that assigns points to every
 qualified address based on on-chain activity. For Drop 1, the allocators are
 comprised of these three sets of addresses:
 
-1. Galaxy.eco’s Shadowy Super Coder list. That is comprised of 110,294 Ethereum
-   addresses who have deployed at least 1 contract on Ethereum mainnet before
-   August 1st, 2021, and deployed contracts that had at least 2 different
-   addresses interacted.
-2. POAPs for all past DevCon’s, ETHCC, ETH Paris, and ETH Denver.
-3. DeepDAO’s data set of participants in DAOs.
-
-Score Normalization Code logic: For the Contracts Deployers and DeepDAO Data,
-we added an if based logic block that rounds up an accounts score to the
-nearest ten up to 100. It then rounds everything over 100 down to 100 (there
-were few outliers that high). The POAP data was adjusted to one POAP == 10
-points.
+1. Galaxy.eco’s Shadowy Super Coder list for any addresses that deployed at least 3 contracts on Ethereum mainnet before
+   2023, and deployed contracts that had at least 2 different addresses interacted
+2. POAPs for past DevCons, ETHCC, ETH Paris, ETH Denver, ETH Berlin, ETH Boston, ETH Waterloo, EDCON, ETH CapeTown, ETH India, and Dappcon.
+3. DeepDAO’s data set of top 1,000 participants in DAOs by participation score and top 10,000 by number of DAOs participated in.
