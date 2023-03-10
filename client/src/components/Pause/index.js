@@ -13,6 +13,7 @@ import dots from '../../assets/phase1/dots.svg'
 import smallDots from '../../assets/phase1/dots-small.svg'
 import aquaBox from '../../assets/phase1/aqua-box.svg'
 import twitter from '../../assets/icons/twitter.svg'
+import github from '../../assets/icons/github.svg'
 
 
 // Pause Component
@@ -35,8 +36,16 @@ const Pause = () => {
 
               <div className='flex flex-col'>
                 <div className='ml-8 600px:ml-12 mt-10 z-10'>
-                  <h3 className='text-3xl h870px:text-[calc(1.1rem+1vw)] 600px:text-4xl 1000px:text-[calc(1.4rem+1vw)] mb-6 leading-10'>pause time</h3>
-                  <div className='font-obWide font-medium text-base 1000px:text-[calc(0.5rem+0.55vw)] leading-snug 1000px:w-[70%]'>we received all the amazing nominations and now they are being curated. Stay tuned for the next phase in: <a className='underline text-magentaDD5 hover:text-magentaDD4 font-semibold' href={constants.Twitter} target='_blank' rel='noreferrer'> DAO drops twitter.</a></div>
+                  <h3 className='text-3xl h870px:text-[calc(1.1rem+1vw)] 600px:text-4xl 1000px:text-[calc(1.4rem+1vw)] mb-6 leading-10'>
+                    {/* pause time */}
+                    stay tuned
+                    </h3>
+                  <div className='font-obWide font-medium text-base 1000px:text-[calc(0.5rem+0.55vw)] leading-snug 1000px:w-[70%]'>
+                    {/* we received all the amazing nominations and now they are being curated. Stay tuned for the next phase in:  */}
+                    check back here soon to see the results of the distribution. follow us on&nbsp; 
+                    <a className='underline text-magentaDD5 hover:text-magentaDD4 font-semibold' href={constants.Twitter} target='_blank' rel='noreferrer'>DAO drops twitter</a>
+                    &nbsp;to see the announcement.
+                    </div>
                 </div>
 
                 <div className='ml-8 600px:ml-12 w-auto border-[6px] border-indigoDD z-10 relative !min-h-[20.5rem] mt-14' style={{height: `calc(100vh - ${height+350}px)`}}>
@@ -67,6 +76,9 @@ const Pause = () => {
                 <div className='mt-2.5 relative inset-0'>
                   <a target='_blank' rel='noreferrer' href={constants.Twitter}>
                     <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
+                  </a>
+                  <a target='_blank' rel='noreferrer' href={constants.Github}>
+                    <img className='inline hover:scale-105 ml-3 w-[23px] h-[23px]' src={github} alt='Twitter' />
                   </a>
                 </div>
             </div>

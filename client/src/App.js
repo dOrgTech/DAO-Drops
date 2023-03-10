@@ -29,7 +29,7 @@ const App = () => {
     const [points, setPoints] = useState(null)
     const [votes, setVotes] = useState(null)
     const [walletStatus, setWalletStatus] = useState('disconnected')
-    const [phaseView, setPhaseView] = useState('1')
+    const [phaseView, setPhaseView] = useState('2')
   
     useEffect(() => {
       address && points !== null && localStorage.setItem(`points_${address}`, parseInt(points))
@@ -39,31 +39,31 @@ const App = () => {
       address && votes !== null && localStorage.setItem(`votes_${address}`, JSON.stringify(votes))
     }, [address, votes])
 
-    // useEffect(() => {
-    //   const providerOptions = {
-    //     walletconnect: {
-    //       package: WalletConnectProvider,
-    //       options: {
-    //         infuraId: INFURA_ID,
-    //       }
-    //     },
-    //   }
+    useEffect(() => {
+      const providerOptions = {
+        walletconnect: {
+          package: WalletConnectProvider,
+          options: {
+            infuraId: INFURA_ID,
+          }
+        },
+      }
   
-    //   const newWeb3Modal = new Web3Modal({
-    //     cacheProvider: true,
-    //     network: 'mainnet',
-    //     providerOptions,
-    //     // theme: 'dark',
-    //   })
+      const newWeb3Modal = new Web3Modal({
+        cacheProvider: true,
+        network: 'mainnet',
+        providerOptions,
+        // theme: 'dark',
+      })
   
-    //   setWeb3Modal(newWeb3Modal)
-    // }, [])
+      setWeb3Modal(newWeb3Modal)
+    }, [])
   
-    // useEffect(() => {
-    //   if(web3Modal && web3Modal.cachedProvider){
-    //     loadWeb3('load')
-    //   }
-    // }, [web3Modal])
+    useEffect(() => {
+      if(web3Modal && web3Modal.cachedProvider){
+        loadWeb3('load')
+      }
+    }, [web3Modal])
   
     async function sign(token, eSigner) {
       token = await Web3Token.sign(async msg => await eSigner.signMessage(msg), {
@@ -96,7 +96,8 @@ const App = () => {
         localStorage.setItem(ethAddress, token)
         setAddress(ethAddress)
       }
-
+      
+      // await axios.get('https://httpstat.us/500', { headers: { auth: token }})
       await axios.get(SCORE + (await signer.getAddress()).toLowerCase(), { headers: { auth: token }})
         .then(r => 
           { if (r.data !== null) {
@@ -161,7 +162,8 @@ const App = () => {
 
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={phaseView === '1' ? <Phase1 setPhaseView={setPhaseView} /> : phaseView === 'p' ? <Pause /> : <Phase1 setPhaseView={setPhaseView} /> } />
+            <Route path='/' element={phaseView === '2' ? <Phase2 loadWeb3={loadWeb3} disconnectWeb3={disconnectWeb3} signer={signer} address={address} addressDetails={addressDetails} walletStatus={walletStatus} points={points} setPoints={setPoints} votes={votes} setVotes={setVotes} setPhaseView={setPhaseView} /> : phaseView === 'p' && <Pause /> } />
+            {/* <Route path='/' element={phaseView === '1' ? <Phase1 setPhaseView={setPhaseView} /> : phaseView === 'p' ? <Pause /> : <Phase1 setPhaseView={setPhaseView} /> } /> */}
             {/* <Route path='2' element={<Phase2 loadWeb3={loadWeb3} disconnectWeb3={disconnectWeb3} signer={signer} address={address} addressDetails={addressDetails} walletStatus={walletStatus} points={points} setPoints={setPoints} votes={votes} setVotes={setVotes} setPhaseView={setPhaseView} />} /> */}
             {/* <Route path='3' element={<Phase3 loadWeb3={loadWeb3} disconnectWeb3={disconnectWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} />} /> */}
             {/* <Route path='/p' element={<Pause />} /> */}
