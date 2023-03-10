@@ -113,32 +113,6 @@ async function main() {
     //create onject for it
 
     if (deploymentCount > 3) {
-      // Score Normalizastion Code
-      if (deploymentCount <= 30) {
-        deploymentCount = 30;
-      }
-      if (deploymentCount > 30 && deploymentCount <= 40) {
-        deploymentCount = 40;
-      }
-      if (deploymentCount > 40 && deploymentCount <= 50) {
-        deploymentCount = 50;
-      }
-      if (deploymentCount > 50 && deploymentCount <= 60) {
-        deploymentCount = 60;
-      }
-      if (deploymentCount > 60 && deploymentCount <= 70) {
-        deploymentCount = 70;
-      }
-      if (deploymentCount > 70 && deploymentCount <= 80) {
-        deploymentCount = 80;
-      }
-      if (deploymentCount > 80 && deploymentCount <= 90) {
-        deploymentCount = 90;
-      }
-      if (deploymentCount > 90) {
-        deploymentCount = 100;
-      }
-
       let accountObject = {
         account: deployerAccount,
         score: parseInt(deploymentCount) * 10,
@@ -186,37 +160,6 @@ async function main() {
     let account = deepDAOScores[i]["address"];
     // get the number of contracts trhat account has deployed
     let count = deepDAOScores[i]["number_of_daos"];
-
-    if (count <= 10) {
-      count = 10;
-    }
-    if (count > 10 && count <= 20) {
-      count = 20;
-    }
-    if (count > 20 && count <= 30) {
-      count = 30;
-    }
-    if (count > 30 && count <= 40) {
-      count = 40;
-    }
-    if (count > 40 && count <= 50) {
-      count = 50;
-    }
-    if (count > 50 && count <= 60) {
-      count = 60;
-    }
-    if (count > 60 && count <= 70) {
-      count = 70;
-    }
-    if (count > 70 && count <= 80) {
-      count = 80;
-    }
-    if (count > 80 && count <= 90) {
-      count = 90;
-    }
-    if (count > 90) {
-      count = 100;
-    }
 
     //check if account is in the accounts array already
     let existingAccount = accounts.find(
@@ -305,6 +248,29 @@ async function main() {
   await generalizedPOAPparse("ETHWaterloo.csv");
   /////////////////////////jsonifier and file system saverizor code///////////////////////////
   console.log("JSONifying data");
+  for (let i = 0; i < accounts.length; i++) {
+    if (accounts[i].score < 10) {
+      accounts[i].score = 30;
+    } else if (accounts[i].score > 10 && accounts[i].score < 20) {
+      accounts[i].score = 30;
+    } else if (accounts[i].score > 20 && accounts[i].score < 30) {
+      accounts[i].score = 30;
+    } else if (accounts[i].score > 30 && accounts[i].score < 40) {
+      accounts[i].score = 40;
+    } else if (accounts[i].score > 40 && accounts[i].score < 50) {
+      accounts[i].score = 50;
+    } else if (accounts[i].score > 50 && accounts[i].score < 60) {
+      accounts[i].score = 60;
+    } else if (accounts[i].score > 60 && accounts[i].score < 70) {
+      accounts[i].score = 70;
+    } else if (accounts[i].score > 70 && accounts[i].score < 80) {
+      accounts[i].score = 80;
+    } else if (accounts[i].score > 80 && accounts[i].score < 90) {
+      accounts[i].score = 90;
+    } else if (accounts[i].score > 100) {
+      accounts[i].score = 100;
+    }
+  }
   var jsonData = JSON.stringify(accounts, null, 2);
   fs.writeFileSync("./scoreSheets/ScoreSheet.json", jsonData, function (err) {
     res.json({ success: true });

@@ -38,27 +38,6 @@ const scores = JSON.parse(
 const importScores = async () => {
   try {
     for (let i = 0; i < scores.length; i++) {
-      if (scores[i].score < 10) {
-        scores[i].score = 10;
-      } else if (scores[i].score > 10 && scores[i].score < 20) {
-        scores[i].score = 20;
-      } else if (scores[i].score > 20 && scores[i].score < 30) {
-        scores[i].score = 30;
-      } else if (scores[i].score > 30 && scores[i].score < 40) {
-        scores[i].score = 40;
-      } else if (scores[i].score > 40 && scores[i].score < 50) {
-        scores[i].score = 50;
-      } else if (scores[i].score > 50 && scores[i].score < 60) {
-        scores[i].score = 60;
-      } else if (scores[i].score > 60 && scores[i].score < 70) {
-        scores[i].score = 70;
-      } else if (scores[i].score > 70 && scores[i].score < 80) {
-        scores[i].score = 80;
-      } else if (scores[i].score > 80 && scores[i].score < 90) {
-        scores[i].score = 90;
-      } else if (scores[i].score > 100) {
-        scores[i].score = 100;
-      }
       scores[i].account = scores[i].account.toLowerCase();
       await GetScore.create(scores[i]);
       console.log("entry added to mongoDB");
