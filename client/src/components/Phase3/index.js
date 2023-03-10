@@ -16,7 +16,7 @@ import dots3 from '../../assets/phase2/dots3.svg'
 import squiggle2 from '../../assets/phase2/squiggle2.svg'
 import poap from '../../assets/phase3/poap.png'
 import axios from 'axios'
-
+import github from '../../assets/icons/github.svg'
 
 // Phase3 Component
 // ------------------------------------------------------------------------------------------------------- //
@@ -154,6 +154,9 @@ const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus
               <a target='_blank' rel='noreferrer' href={constants.Twitter}>
                 <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
               </a>
+              <a target='_blank' rel='noreferrer' href={constants.Github}>
+                <img className='inline hover:scale-105 ml-3 w-[23px] h-[23px]' src={github} alt='Twitter' />
+              </a>
             </div>
 
           </div>
@@ -207,6 +210,9 @@ const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus
         <div className='1000px:w-1/3 text-right'>
           <a target='_blank' rel='noreferrer' href={constants.Twitter}>
             <img className='inline scale-150 hover:scale-[155%]' src={twitter} alt='Twitter' />
+          </a>
+          <a target='_blank' rel='noreferrer' href={constants.Github}>
+            <img className='inline scale-150 hover:scale-[155%] ml-8 w-[23px] h-[23px]' src={github} alt='Twitter' />
           </a>
         </div>
       </footer>

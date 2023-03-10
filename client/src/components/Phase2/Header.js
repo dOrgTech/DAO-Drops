@@ -75,7 +75,7 @@ const Header = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
                     <div className='border-[3px] border-aquaDD aqua-dot font-ob font-bold w-[21rem] px-4 pb-2 pt-1 bg-white hidden 1000px:block uppercase cursor-pointer hover:text-indigoDD2' onClick={() => setWalletToggle(!walletToggle)}>{truncate(address,11)}</div>
 
                     { walletToggle && 
-                      <div className='absolute top-0 z-30 bg-white cursor-pointer' onClick={() => setWalletToggle(!walletToggle)}>
+                      <div className='absolute top-0 z-30 bg-white cursor-pointer right-0 1000px:right-auto' onClick={() => setWalletToggle(!walletToggle)}>
                         <div className='border-4 border-aquaDD font-ob font-bold w-[21rem] pt-2 text-center'>
                           <div className='aqua-dot after:content-["•"] after:top-0 after:mr-[3px] px-4 hover:text-indigoDD2'>Your wallet is connected</div>
                           <hr className='mt-3 border-[#CCCCCC]' />
@@ -117,13 +117,20 @@ const Header = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
                           {/* Mobile View */}
                           <div className='flex 1000px:hidden h-[50px] bg-white border-[3px] border-indigoDD'>
                             <div className={`flex justify-center items-center flex-1 border-aquaDD border-r-[3px] font-ob font-bold w-full uppercase px-2 600px:px-4 ${ (votesSubmitted === 'true' || addressDetails === 'none') && 'grayscale pointer-events-none'} `} >
-                              <span className='font-obWide font-extrabold text-2xl pb-2 pr-2 min-w-[60px]'>{points} </span>
-                              <span className='leading-3 700px:leading-4 text-[0.7rem] 700px:text-[0.9rem] pb-0.5'>Your Points Remaining</span>
+                              <span className='text-magentaDD5 font-obWide font-extrabold text-2xl pb-2 pr-2 min-w-[60px]'>{points} </span>
+                              <span className='leading-3 700px:leading-4 text-[0.8rem] 700px:text-[0.9rem] pb-0.5'>PTS VOTE CREDITS</span>
                             </div>
                             <div className={`flex-1 ${ (votesSubmitted === 'true' || addressDetails === 'none') && 'grayscale pointer-events-none'} `} >
                               <div className='button1-small text-[0.6rem] w-[7.5rem] 700px:text-[0.8rem] 700px:w-[10rem] pb-0 m-auto border-b-4 mx-2 600px:mx-auto' style={{backgroundPosition: '100% 60%', backgroundSize: '14%'}} onClick={submitPoints}>{votesSubmitted === 'sending' ? 'Sending...' : votesSubmitted === 'true' ? 'Points Sent' : 'Send Points'}</div>
                             </div>
-                            <div className='flex justify-center items-center pb-1 px-1 pr-2 flex-1 aqua-dot 700px:after:content-["•"] after:right-4 after:top-0 font-ob font-bold w-full border-aquaDD border-l-[3px] bg-white'>{truncate(address,4)}</div>
+
+                            <div className='flex justify-center items-center pb-1 px-1 pr-2 flex-1 aqua-dot 700px:after:content-["•"] after:right-4 after:top-0 font-ob font-bold w-full border-aquaDD border-l-[3px] bg-white cursor-pointer' onClick={() => setWalletToggle(!walletToggle)}>{truncate(address,4)}</div>
+                            { votesSubmitted !== 'true' && points === 0 && 
+                              <div className={'flex absolute top-[50px] right-0 left-0 z-20 bg-white justify-center items-center px-1 text-center font-ibm font-bold text-[11px] text-indigoDD normal-case h-8 border-[3px] border-t-0 border-indigoDD'}>
+                                <span>By submitting you agree to&nbsp;<a target='_blank' rel='noreferrer' href='/terms' className='underline'>terms and conditions</a></span>
+                              </div>
+                            }
+                            { sendPointsNote === 'all' && <div className={'note absolute top-[50px] right-0 left-0 z-20 flex justify-center items-center pt-0.5 text-center font-ibm font-semibold text-sm text-[#181818] normal-case h-9 bg-white'}>Distribute all your points to submit!</div>}
                           </div>
                         </>
 
@@ -138,7 +145,7 @@ const Header = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
                             <div className={`flex justify-center items-center font-ob font-bold px-2 600px:px-4 w-3/4 `} >
                               <div className='font-ibm font-semibold text-xs leading-[13px]'>Oh we are sorry! It seems that you don’t have any points. You can try another wallet or try next time.</div>
                             </div>
-                            <div className='flex justify-center items-center pb-1 px-1 pr-2 aqua-dot 700px:after:content-["•"] after:right-4 after:top-0 font-ob font-bold border-indigoDD border-l-[3px] bg-white w-1/4 min-w-[128px]'>{truncate(address,4)}</div>
+                            <div className='flex justify-center items-center pb-1 px-1 pr-2 aqua-dot 700px:after:content-["•"] after:right-4 after:top-0 cursor-pointer font-ob font-bold border-indigoDD border-l-[3px] bg-white w-1/4 min-w-[128px]' onClick={() => setWalletToggle(!walletToggle)}>{truncate(address,4)}</div>
                         </div>
                         </>
                     }

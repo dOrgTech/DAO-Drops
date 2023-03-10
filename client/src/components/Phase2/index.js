@@ -23,7 +23,7 @@ import aquaBoxMobile from '../../assets/phase2/aqua-box-mobile.svg'
 import twitter from '../../assets/icons/twitter.svg'
 import dots3 from '../../assets/phase2/dots3.svg'
 import squiggle2 from '../../assets/phase2/squiggle2.svg'
-
+import github from '../../assets/icons/github.svg'
 
 // Phase2 Component
 // ------------------------------------------------------------------------------------------------------- //
@@ -37,7 +37,7 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
   const [popupDetails, setPopupDetails] = useState()
   const [projectsPicks, setProjectsPicks] = useState()
   const [votesSubmitted, setVotesSubmitted] = useState('false')
-  const phase2End = '2023-02-28T00:00:00.000+00:00'
+  const phase2End = '2023-03-25T00:00:00.000+00:00'
   // const phase2End = Date.now() + 10000
   
   useEffect(() => {
@@ -63,7 +63,7 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
     completed
     }) => {
     if (completed) {
-      setPhaseView('3')
+      setPhaseView('p')
       return <div> </div>;
     } else {
       return <span className='flex'>
@@ -93,7 +93,7 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
             setErrorPopupStatus={setErrorPopupStatus}
           />
 
-          <div className={`flex items-start relative ${walletStatus === 'connected' ? 'pt-[5.55rem] 700px:pt-[6.9rem] 1000px:pt-[4.375rem] mt-0' : 'mt-8 700px:mt-12 1000px:mt-2'}`}>
+          <div className={`flex items-start relative ${walletStatus === 'connected' ? 'pt-[6.85rem] 700px:pt-[8.2rem] 1000px:pt-[4.375rem] mt-0' : 'mt-8 700px:mt-12 1000px:mt-2'}`}>
               <img className='mt-6 700px:mt-0' src={logo} alt='DAO Drops Logo' />
 
               <div className='ml-12 w-full !min-h-[30rem] 1000px:!min-h-[21rem] 1000px:!max-h-[38rem] 1000px:h-[calc(100vh-500px)] mt-16 1000px:mt-32 border-[6px] border-indigoDD z-10 relative'>
@@ -148,6 +148,9 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
               <div className='1000px:mt-2.5 absolute 1000px:relative right-4 top-4 1000px:inset-0 scale-150 1000px:scale-100'>
                 <a target='_blank' rel='noreferrer' href={constants.Twitter}>
                   <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
+                </a>
+                <a target='_blank' rel='noreferrer' href={constants.Github}>
+                  <img className='inline hover:scale-105 ml-3 w-[23px] h-[23px]' src={github} alt='Twitter' />
                 </a>
               </div>
             </div>
@@ -268,6 +271,9 @@ const Phase2 = ({loadWeb3, disconnectWeb3, signer, address, addressDetails, wall
         <div className='1000px:w-1/3 text-right'>
           <a target='_blank' rel='noreferrer' href={constants.Twitter}>
             <img className='inline scale-150 hover:scale-[155%]' src={twitter} alt='Twitter' />
+          </a>
+          <a target='_blank' rel='noreferrer' href={constants.Github}>
+            <img className='inline scale-150 hover:scale-[155%] ml-8 w-[23px] h-[23px]' src={github} alt='Twitter' />
           </a>
         </div>
       </footer>

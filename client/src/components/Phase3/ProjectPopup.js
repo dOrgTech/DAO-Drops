@@ -28,14 +28,14 @@ const ProjectPopup = ({ popupStatus, setPopupStatus, popupDetails }) => {
   
                   <div className='px-8 pl-[30px] 600px:px-8 pt-20 text-indigoDD'>
                   <h4 className='font-ob font-extrabold text-3xl mb-6'>{popupDetails.name}</h4>
-                      <div className='font-ibm text-lg h-[16rem] overflow-y-auto whitespace-pre-wrap'>{popupDetails.message}</div>
+                      <div className='font-ibm text-lg h-[20.5rem] overflow-y-auto whitespace-pre-wrap'>{popupDetails.message}</div>
   
                       <div className='bg-white mt-6 p-6 border-[6px] border-[#CAFEF7]'>
                         <div className='font-ob font-bold uppercase'>Project Link:</div>
                         <a target='_blank' rel='noreferrer' href={withHttp(popupDetails.link)} className='font-ibm break-all'>{popupDetails.link}</a>
 
-                        <div className='font-ob font-bold uppercase mt-6'>Address:</div>
-                        <a target='_blank' rel='noreferrer' href={`https://etherscan.io/address/${popupDetails.paddress}`} className='font-ibm'>{popupDetails.paddress}</a>
+                        {/* <div className='font-ob font-bold uppercase mt-6'>Address:</div>
+                        <a target='_blank' rel='noreferrer' href={`https://etherscan.io/address/${popupDetails.paddress}`} className='font-ibm'>{popupDetails.paddress}</a> */}
                     </div>
   
                     <div className='flex mt-8 mb-6 justify-center'>
