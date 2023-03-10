@@ -15,6 +15,7 @@ import dots from '../../assets/phase1/dots.svg'
 import smallDots from '../../assets/phase1/dots-small.svg'
 import aquaBox from '../../assets/phase1/aqua-box.svg'
 import twitter from '../../assets/icons/twitter.svg'
+import github from '../../assets/icons/github.svg'
 
 
 // Phase1 Component
@@ -94,6 +95,9 @@ const Phase1 = ({setPhaseView}) => {
                 <div className='mt-2.5 relative inset-0'>
                   <a target='_blank' rel='noreferrer' href={constants.Twitter}>
                     <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
+                  </a>
+                  <a target='_blank' rel='noreferrer' href={constants.Github}>
+                    <img className='inline hover:scale-105 ml-3 w-[23px] h-[23px]' src={github} alt='Twitter' />
                   </a>
                 </div>
             </div>
