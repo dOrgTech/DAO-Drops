@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import Phase1 from './components/Phase1'
-import Phase2 from './components/Phase2'
+// import Phase1 from './components/Phase1'
+// import Phase2 from './components/Phase2'
 import Phase3 from './components/Phase3'
-import Pause from './components/Pause'
+// import Pause from './components/Pause'
 import Terms from './components/Terms'
 import axios from 'axios'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
@@ -26,18 +26,19 @@ const App = () => {
     const [signer, setSigner] = useState(null)
     const [address, setAddress] = useState('')
     const [addressDetails, setAddressDetails] = useState('none')
-    const [points, setPoints] = useState(null)
-    const [votes, setVotes] = useState(null)
+    // const [points, setPoints] = useState(null)
+    // const [votes, setVotes] = useState(null)
     const [walletStatus, setWalletStatus] = useState('disconnected')
-    const [phaseView, setPhaseView] = useState('2')
-  
-    useEffect(() => {
-      address && points !== null && localStorage.setItem(`points_${address}`, parseInt(points))
-    }, [address, points])
+    // const [phaseView, setPhaseView] = useState('3')
+    const [poap, setPoap] = useState(false)
 
-    useEffect(() => {
-      address && votes !== null && localStorage.setItem(`votes_${address}`, JSON.stringify(votes))
-    }, [address, votes])
+    // useEffect(() => {
+    //   address && points !== null && localStorage.setItem(`points_${address}`, parseInt(points))
+    // }, [address, points])
+
+    // useEffect(() => {
+    //   address && votes !== null && localStorage.setItem(`votes_${address}`, JSON.stringify(votes))
+    // }, [address, votes])
 
     useEffect(() => {
       const providerOptions = {
@@ -102,16 +103,16 @@ const App = () => {
         .then(r => 
           { if (r.data !== null) {
               setAddressDetails(r.data)
+              setPoap(r.data['score'] === 0 ? true : false)
 
-              let pointsStorage = localStorage.getItem(`points_${ethAddress}`)
-              pointsStorage ? setPoints(parseInt(pointsStorage)) : setPoints(parseInt(r.data['score']))
-
-              r.data.picks.length && r.data.picks.map( pick => setVotes(votes => ({...votes, [pick.id]: pick.points})) )
+              // let pointsStorage = localStorage.getItem(`points_${ethAddress}`)
+              // pointsStorage ? setPoints(parseInt(pointsStorage)) : setPoints(parseInt(r.data['score']))
+              // r.data.picks.length && r.data.picks.map( pick => setVotes(votes => ({...votes, [pick.id]: pick.points})) )
           }
         })
         .catch(e => {
           // console.error(e)
-          setPoints(0)
+          // setPoints(0)
         })
 
       setWalletStatus('connected')
@@ -119,8 +120,8 @@ const App = () => {
 
     function clearAddress() {
       setAddress('')
-      setPoints(null)
-      setVotes(null)
+      // setPoints(null)
+      // setVotes(null)
       localStorage.removeItem(address)
       localStorage.removeItem(`points_${address}`)
       localStorage.removeItem(`votes_${address}`)
@@ -155,14 +156,9 @@ const App = () => {
 
     return(
       <>
-        {/* { phaseView === '1' && <Phase1 setPhaseView={setPhaseView} /> }
-        { phaseView === '2' && <Phase2 loadWeb3={loadWeb3} disconnectWeb3={disconnectWeb3} signer={signer} address={address} addressDetails={addressDetails} walletStatus={walletStatus} points={points} setPoints={setPoints} votes={votes} setVotes={setVotes} setPhaseView={setPhaseView} /> }
-        { phaseView === '3' && <Phase3 loadWeb3={loadWeb3} disconnectWeb3={disconnectWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} /> }
-        { phaseView === 'p' && <Pause /> } */}
-
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={phaseView === '2' ? <Phase2 loadWeb3={loadWeb3} disconnectWeb3={disconnectWeb3} signer={signer} address={address} addressDetails={addressDetails} walletStatus={walletStatus} points={points} setPoints={setPoints} votes={votes} setVotes={setVotes} setPhaseView={setPhaseView} /> : phaseView === 'p' && <Pause /> } />
+            <Route path='/' element={ <Phase3 loadWeb3={loadWeb3} disconnectWeb3={disconnectWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} poap={poap} /> } />
             {/* <Route path='/' element={phaseView === '1' ? <Phase1 setPhaseView={setPhaseView} /> : phaseView === 'p' ? <Pause /> : <Phase1 setPhaseView={setPhaseView} /> } /> */}
             {/* <Route path='2' element={<Phase2 loadWeb3={loadWeb3} disconnectWeb3={disconnectWeb3} signer={signer} address={address} addressDetails={addressDetails} walletStatus={walletStatus} points={points} setPoints={setPoints} votes={votes} setVotes={setVotes} setPhaseView={setPhaseView} />} /> */}
             {/* <Route path='3' element={<Phase3 loadWeb3={loadWeb3} disconnectWeb3={disconnectWeb3} address={address} addressDetails={addressDetails} walletStatus={walletStatus} />} /> */}
@@ -171,7 +167,6 @@ const App = () => {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </BrowserRouter>
-
       </>
     )
   }
