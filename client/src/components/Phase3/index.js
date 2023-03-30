@@ -14,13 +14,13 @@ import dots from '../../assets/phase1/dots.svg'
 import twitter from '../../assets/icons/twitter.svg'
 import dots3 from '../../assets/phase2/dots3.svg'
 import squiggle2 from '../../assets/phase2/squiggle2.svg'
-import poap from '../../assets/phase3/poap.png'
+import poapImage from '../../assets/phase3/poap.png'
 import axios from 'axios'
 import github from '../../assets/icons/github.svg'
 
 // Phase3 Component
 // ------------------------------------------------------------------------------------------------------- //
-const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus}) => {
+const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus, poap}) => {
   
   const PICKS = 'https://dao-drops.herokuapp.com/posts/picks/'
 
@@ -78,20 +78,21 @@ const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus
                   <div className='border-b-[6px] w-full pb-6 pt-3 text-center border-indigoDD text-4xl 1000px:text-5xl'>REWARDS</div>
 
 
-                  { winner === 'check'
+                  { walletStatus !== 'connected'
                     ? <div className='px-12 my-auto flex flex-col'>
                         <div className='font-ibm font-semibold text-xl mb-6 1000px:mb-10'>If you participated as an allocator you have a reward!</div>
                         <div className='font-ibm font-semibold text-xl mb-8 1000px:mb-12'>You can check the leader board results below.</div>
                         <button className='button2 text-sm uppercase w-full' style={{backgroundPosition: '90% 50%'}} onClick={walletStatus === 'connected' ? () => setWinner('winner') : () => loadWeb3('click')}>Check Rewards</button>
                       </div>
 
-                    : winner === 'winner'
+                    : poap
                     ? <div className='px-8 1000px:px-12 my-auto flex flex-col'>
-                        <img className='mx-auto' src={poap} alt='poap' />
-                        <div className='font-obWide font-medium text-xl text-center mt-4'>Awesome! You were airdropped the DAO drops POAP</div>
+                        <img className='mx-auto' src={poapImage} alt='poap' />
+                        <div className='font-obWide font-medium text-xl text-center mt-4 mb-8'>Awesome! You can claim the DAO drops POAP</div>
+                        <a href='https://www.poap.delivery/dao-drops-round-1' target='_blank' rel='noreferrer' className='button2 text-sm uppercase w-full flex justify-center items-center' style={{backgroundPosition: '90% 50%'}}>Claim</a>
                       </div>
 
-                    : winner === 'not-winner'
+                    : !poap
                       ? <div className='px-8 1000px:px-10 my-auto flex flex-col'>
                         <div className='font-ibm font-semibold text-lg mb-8 1000px:mb-10'>You don’t have any rewards to claim but be sure to participate on the next Dao Drops round!</div>
                         <div className='font-ibm font-semibold text-lg 1000px:mb-12'>You can check the leader board results below.</div>
@@ -131,6 +132,9 @@ const Phase3 = ({loadWeb3, disconnectWeb3, address, addressDetails, walletStatus
               <div className='1000px:mt-2.5 absolute 1000px:relative right-4 top-4 1000px:inset-0 scale-150 1000px:scale-100'>
                 <a target='_blank' rel='noreferrer' href={constants.Twitter}>
                   <img className='inline hover:scale-105' src={twitter} alt='Twitter' />
+                </a>
+                <a target='_blank' rel='noreferrer' href={constants.Github}>
+                  <img className='inline hover:scale-105 ml-3 w-[23px] h-[23px]' src={github} alt='Twitter' />
                 </a>
               </div>
             </div>

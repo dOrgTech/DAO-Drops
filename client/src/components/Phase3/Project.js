@@ -22,7 +22,7 @@ const Project = ({index, id, name, desc, website, paddress, icon, points, usdcAm
         <div className='flex flex-col mt-1.5 700px:mt-4'>
           <div className={`font-obWide font-extrabold pb-0.5 700px:pb-1 h-[34px] 700px:h-[44px] flex items-end ${points > 999 ? 'text-[28px] leading-7 700px:text-4xl' : 'text-[32px] leading-8 700px:leading-[43px] 700px:text-[45px]' }`}>{points || '0'}</div>
           <div className='font-bold uppercase text-[0.6rem] 700px:text-[0.72rem]'>points Received</div>
-          <div className='font-bold uppercase text-indigoDD4 text-[0.6rem] 700px:text-[0.82rem]'>${numberWithCommas(usd.toFixed(0))} - USDC</div>
+          <div className='font-bold uppercase text-indigoDD4 text-[0.6rem] 700px:text-[0.82rem]'>${numberWithCommas(usd.toFixed(0))}</div>
         </div>
   
         <div className='absolute bottom-0 right-0 mr-3 mb-3 700px:mr-4 700px:mb-4 rounded-full '>
