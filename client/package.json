@@ -1,58 +1,42 @@
 {
-  "name": "daodrops",
-  "version": "0.1.0",
+  "name": "daodrops-client",
+  "version": "1.0.0",
   "private": true,
-  "homepage": ".",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint-next": "next lint",
+    "lint-eslint": "eslint --fix .",
+    "format": "prettier --write ."
+  },
   "dependencies": {
-    "@craco/craco": "^6.1.2",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@walletconnect/web3-provider": "^1.8.0",
-    "axios": "^0.24.0",
-    "dotenv": "^16.0.3",
-    "ethers": "^5.2.0",
-    "react": "^17.0.2",
-    "react-countdown": "^2.3.2",
-    "react-dom": "^17.0.2",
-    "react-google-recaptcha": "^2.1.0",
+    "@reown/appkit": "^1.8.12",
+    "@reown/appkit-adapter-ethers": "^1.8.12",
+    "axios": "^1.13.1",
+    "ethers": "^6.15.0",
+    "next": "16.0.1",
+    "react": "^19.2.0",
+    "react-countdown": "^2.3.6",
+    "react-dom": "^19.2.0",
+    "react-google-recaptcha": "^3.1.0",
     "react-jazzicon": "^1.0.4",
     "react-repeatable": "^2.0.1",
-    "react-router-dom": "^6.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1",
-    "web3-token": "^1.0.2",
-    "web3modal": "^1.9.9"
-  },
-  "scripts": {
-    "start": "TAILWIND_MODE=watch craco start",
-    "build": "CI=false craco build",
-    "build-local": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "web3-token": "^1.0.6"
   },
   "devDependencies": {
-    "autoprefixer": "^9.8.6",
-    "netlify-cli": "^3.39.3",
-    "postcss": "^7.0.35",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
+    "@types/node": "^24.9.2",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.38.0",
+    "eslint-config-next": "16.0.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "postcss": "^8.5.6",
+    "prettier": "3.6.2",
+    "prettier-plugin-tailwindcss": "^0.7.1",
+    "tailwindcss": "^3.4.18",
+    "typescript": "^5.9.3"
   }
 }

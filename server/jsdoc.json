@@ -1,0 +1,61 @@
+{
+  "source": {
+    "include": [
+      "dist/index.js",
+      "dist/config.js",
+      "dist/controllers",
+      "dist/routes",
+      "dist/models",
+      "dist/types",
+      "dist/pickSeeder.js",
+      "dist/scoreSeeder.js"
+    ],
+    "includePattern": ".+\\.js$",
+    "excludePattern": "(node_modules/)"
+  },
+  "plugins": ["plugins/markdown"],
+  "opts": {
+    "destination": "./docs",
+    "recurse": true,
+    "readme": "./README.md",
+    "template": "node_modules/docdash"
+  },
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true
+    }
+  },
+  "markdown": {
+    "hardwrap": false,
+    "idInHeadings": true
+  },
+  "docdash": {
+    "static": true,
+    "sort": true,
+    "search": true,
+    "collapse": false,
+    "typedefs": true,
+    "removeQuotes": "none",
+    "scripts": [],
+    "menu": {
+      "GitHub Repository": {
+        "href": "https://github.com/dOrgTech/DAO-Drops",
+        "target": "_blank",
+        "class": "menu-item",
+        "id": "repository"
+      },
+      "Full Documentation": {
+        "href": "https://github.com/dOrgTech/DAO-Drops/blob/fork/server/README.md",
+        "target": "_blank",
+        "class": "menu-item"
+      },
+      "Configuration": {
+        "href": "https://github.com/dOrgTech/DAO-Drops/blob/fork/server/config.ts",
+        "target": "_blank",
+        "class": "menu-item"
+      }
+    }
+  }
+}

@@ -1,36 +1,69 @@
-# DAO-Drops
+# DAO Drops
 
-Full stack MERN app for the DAO Drops Project
+A full-stack decentralized retroactive funding platform for the Ethereum ecosystem, enabling communities to nominate, vote, and distribute funding to deserving projects and contributors through a transparent multi-phase process.
 
-React based front end code can be found in the client folder.
+> **🎉 This is an upgraded and updated version of DAO Drops, rebuilt to be fully forkable and customizable for any community or DAO to run their own retroactive funding rounds.**
 
-Front end is hosted on Netlify
+## 📦 Project Structure
 
-Express and mongoDB code can be found in the server folder.
+This monorepo contains three main applications:
 
-Express middleware is hosted on Heroku while the database is hosted on
-MongoDB's Atlas
+### 🎨 [Client](./client)
 
-The scoring scripts and the data sets used for scoring can be found in the
-scripts folder.
+Next.js-based frontend application with Web3 wallet integration for the DAO Drops platform.
 
-## DAO Drops account scoring script
+**Key Features:**
 
-This account scoring script uses public data to generate activity based scores
-for Ethereum accounts for use in the DAO Drops project. This set of scripts can
-generate an overall score as well as a score based on each individual data set
-used. The scoring scripts and data sets can be found in the scripts folder.
-The data sets are in the csv_src folder found within the scripts
-folder.
-Each of the generated score sheets can be found in scoreSheets folder.
+- Three-phase workflow: Nomination → Allocation → Results
+- Web3 wallet integration via Reown AppKit
+- Responsive design with TailwindCSS
+- Real-time countdown timers and vote tracking
 
-## DAO Drops account scoring logic
+[**→ View Client Documentation**](./client/README.md)
 
-Allocation power is determined using a script that assigns points to every
-qualified address based on on-chain activity. For Drop 1, the allocators are
-comprised of these three sets of addresses:
+### ⚙️ [Server](./server)
 
-1. Galaxy.eco’s Shadowy Super Coder list for any addresses that deployed at least 3 contracts on Ethereum mainnet before
-   2023, and deployed contracts that had at least 2 different addresses interacted
-2. POAPs for past DevCons, ETHCC, ETH Paris, ETH Denver, ETH Berlin, ETH Boston, ETH Waterloo, EDCON, ETH CapeTown, ETH India, and Dappcon.
-3. DeepDAO’s data set of top 1,000 participants in DAOs by participation score and top 10,000 by number of DAOs participated in.
+Express/TypeScript backend API for managing submissions, curated picks, and point allocations.
+
+**Key Features:**
+
+- RESTful API with MongoDB/Mongoose
+- Web3 wallet authentication
+- Google reCAPTCHA spam protection
+- Database seeding utilities
+
+[**→ View Server Documentation**](./server/README.md)
+
+### 📊 [Scripts](./scripts)
+
+Account scoring system that analyzes on-chain and off-chain data to determine allocation power.
+
+**Key Features:**
+
+- POAP attendance tracking
+- DeepDAO participation scoring
+- Smart contract deployment analysis
+- Configurable scoring algorithms
+
+[**→ View Scripts Documentation**](./scripts/README.md)
+
+## 🚀 Quick Start
+
+Each application can be run independently. Refer to their respective README files for detailed setup instructions:
+
+1. **Client**: `cd client && npm install && npm run dev`
+2. **Server**: `cd server && npm install && npm run dev`
+3. **Scripts**: `cd scripts && npm install && npm run build`
+
+## 🏗️ Tech Stack
+
+- **Frontend**: Next.js 16, React 19, TypeScript, TailwindCSS
+- **Backend**: Express, MongoDB, Mongoose, TypeScript
+- **Blockchain**: Reown AppKit (WalletConnect), Web3 Authentication
+- **Deployment**: Netlify (Client), Heroku (Server), MongoDB Atlas (Database)
+
+## 📄 License
+
+MIT License - See [LICENSE](./LICENSE) for details
+
+**Built with ❤️ for the Ethereum ecosystem**

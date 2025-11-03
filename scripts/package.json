@@ -1,14 +1,26 @@
 {
-  "name": "scripts",
+  "name": "daodrops-scripts",
   "version": "1.0.0",
-  "description": "This account scoring script uses public data to generate activity based scores for Ethereum accounts for use in the DAO Drops project. This set of scripts can generate an overall score as well as a score based on each individual data set used. The scoring scripts and data sets can be found in the scripts folder.The data sets are in the csv_src folder found within the scripts folder. Each of the generated score sheets can be found in scoreSheets folder.",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start:deepdao": "ts-node scripts/dataMinerDeepDAO.ts",
+    "start:deployments": "ts-node scripts/dataMinerDeployments.ts",
+    "start:poap": "ts-node scripts/dataMinerPOAP.ts",
+    "start:full": "ts-node scripts/dataMinerFull.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "csv-parse": "^5.3.1"
+    "csv-parse": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.10.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }

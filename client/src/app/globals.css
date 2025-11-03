@@ -1,0 +1,546 @@
+/**
+ * GLOBAL STYLES
+ * 
+ * This file contains all global CSS, custom components, and utility classes.
+ * Built on top of Tailwind CSS using the @layer directive for proper specificity.
+ * 
+ * STRUCTURE:
+ * 1. Font Import (fonts.css)
+ * 2. Tailwind Directives (@tailwind base/components/utilities)
+ * 3. @layer base - Base element styles
+ * 4. @layer components - Reusable component classes
+ * 5. @layer utilities - Utility classes
+ * 6. Global overrides (reCAPTCHA, Web3Modal)
+ * 
+ * CUSTOMIZATION GUIDE:
+ * - Background images: Replace files in public/assets/phase1, phase2
+ * - Button styles: Edit .button1, .button2 classes
+ * - Project colors: Edit .p-orange, .p-green, .p-pink, .p-blue gradients
+ * - Popup styling: Edit .popup, .project-popup classes
+ * - Animations: Edit .bubble-animation keyframes
+ * 
+ * TAILWIND @LAYER:
+ * - @layer base: HTML element defaults
+ * - @layer components: Reusable component classes (buttons, backgrounds, etc.)
+ * - @layer utilities: Helper classes (.required, .ellipsis, etc.)
+ * 
+ * IMPORTANT:
+ * - Using @apply to leverage Tailwind utilities
+ * - Custom CSS properties for things Tailwind can't handle
+ * - Responsive breakpoints match tailwind.config.ts
+ */
+
+/* Import custom font declarations */
+@import './fonts.css';
+
+/* Tailwind CSS Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================================================================================================
+   BASE LAYER - HTML Element Defaults
+   ================================================================================================ */
+@layer base {
+  /* HTML & Body Configuration */
+
+  /**
+   * HTML element - Global scroll behavior
+   * - overflow-x-hidden: Prevent horizontal scrolling
+   * - scroll-behavior: smooth: Smooth scrolling for anchor links
+   * - scroll-padding-top: Offset for fixed header
+   */
+  html {
+    @apply overflow-x-hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 65px; /* Matches header height */
+  }
+
+  /**
+   * Body element - Page container
+   * - font-ob: Obviously font (set in tailwind.config.ts)
+   * - text-indigoDD: Default text color
+   * - min-w-[500px]: Minimum width for mobile
+   */
+  body {
+    @apply m-0 h-full min-w-[500px] overflow-x-hidden p-0 font-ob text-indigoDD;
+  }
+
+  /**
+   * Images - Prevent dragging and selection
+   * Good for UI images that shouldn't be draggable
+   */
+  img {
+    @apply max-w-full select-none;
+    -webkit-user-drag: none;
+    user-drag: none;
+    -webkit-touch-callout: none;
+  }
+
+  /**
+   * Remove default focus outlines
+   * Custom focus styles applied per component
+   */
+  button,
+  input {
+    @apply focus:outline-none;
+  }
+
+  /**
+   * Lists - Restore default list styling
+   * (Tailwind removes it by default)
+   */
+  ol,
+  ul {
+    list-style: initial;
+  }
+
+  /**
+   * Form Input Styles
+   * Default styling for text inputs and textareas
+   */
+  input {
+    @apply bg-gray2 px-3 font-normal;
+  }
+
+  textarea {
+    @apply resize-none bg-gray2 px-3 py-2 font-normal outline-none;
+  }
+
+  select {
+    @apply outline-none focus:outline-none;
+  }
+
+  /**
+   * Heading Hierarchy
+   * Default styles for all heading levels
+   * Using Obviously font families
+   */
+  h1 {
+    @apply font-obWide text-6xl font-extrabold;
+  }
+
+  h2 {
+    @apply font-obWide text-5xl font-extrabold;
+  }
+
+  h3 {
+    @apply font-obWide text-4xl font-extrabold;
+  }
+
+  h4 {
+    @apply font-ob text-2xl font-extrabold;
+  }
+
+  h5 {
+    @apply font-ob text-lg font-extrabold;
+  }
+
+  h6 {
+    @apply font-ob text-sm font-semibold;
+  }
+
+  /**
+   * Subtitle Classes
+   * Custom subtitle styles used throughout the app
+   */
+  .subtitle1 {
+    @apply font-obWide text-4xl font-bold;
+  }
+
+  .subtitle2 {
+    @apply font-obWide text-4xl font-medium;
+  }
+
+  /**
+   * Remove number input arrows (spinner buttons)
+   * For cleaner numeric inputs
+   */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  /**
+   * Text Selection Color
+   * Aqua highlight when users select text
+   */
+  ::selection {
+    @apply bg-aquaDD;
+  }
+
+  ::-moz-selection {
+    @apply bg-aquaDD;
+  }
+
+  /**
+   * Custom Select Dropdown Arrow
+   * Replaces default dropdown arrow with custom SVG
+   */
+  select {
+    background-image: url('/assets/icons/select-arrow.svg');
+    background-repeat: no-repeat;
+    background-position: 85% 52%;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}
+
+/* ================================================================================================
+   COMPONENTS LAYER - Reusable Component Classes
+   ================================================================================================ */
+@layer components {
+  /**
+   * BACKGROUND CLASSES
+   * Used for phase-specific backgrounds
+   * 
+   * CUSTOMIZATION: Replace image files in public/assets/
+   */
+
+  /* Phase 1 Background - Desktop */
+  /* Layered: circles.svg overlay + main background image */
+  .phase1-bg {
+    background:
+      url('/assets/phase1/circles.svg') no-repeat center,
+      url('/assets/phase1/bg.png') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  /* Phase 2 Background */
+  .phase2-bg {
+    background: url('/assets/phase2/bg.jpg') no-repeat center center;
+    background-size: cover;
+  }
+
+  /* Phase 1 Background - Mobile */
+  /* Separate mobile background for better optimization */
+  .phase1-bg-mobile {
+    background: url('/assets/phase1/bg-mobile.svg') no-repeat center;
+    background-size: cover;
+  }
+
+  /**
+   * BUTTON STYLES
+   * Custom button classes used throughout the app
+   */
+
+  /* Button 1 - Primary CTA Button (right arrow) */
+  /* Used in Phase 1 for "Nominate Them" button */
+  /* CUSTOMIZATION: Change arrow icon in public/assets/icons/ */
+  .button1 {
+    @apply subtitle1 cursor-pointer border-b-8 border-aquaDD pb-5 uppercase transition-transform hover:translate-x-1 hover:border-aquaDD2 hover:text-indigoDD2 600px:w-[28rem] 600px:text-3xl 1200px:w-[33.5rem] 1200px:text-4xl;
+    background-image: url('/assets/icons/arrow-magenta.svg');
+    background-repeat: no-repeat;
+    background-position: 100% 20%;
+  }
+
+  /* Button 1 Small - Smaller version for mobile */
+  .button1-small {
+    @apply button1 w-[23rem] border-b-[6px] pb-3 text-2xl;
+    background-size: 11%;
+  }
+
+  /* Button 1 Small Down - Down arrow variant */
+  .button1-small-down {
+    @apply button1-small transition-transform hover:translate-x-0 hover:translate-y-1;
+    background-image: url('/assets/icons/arrow-magenta-down.svg');
+    background-size: 6.5%;
+    background-position: 97% 25%;
+  }
+
+  /* Button 1 Down - Down arrow variant (used for "Drop Points" button) */
+  .button1-down {
+    @apply subtitle1 w-[29rem] cursor-pointer border-b-8 border-aquaDD pb-5 text-3xl uppercase transition-transform hover:translate-y-1 hover:border-aquaDD2 hover:text-indigoDD2 1000px:w-[33.5rem] 1000px:text-4xl;
+    background-image: url('/assets/icons/arrow-magenta-down.svg');
+    background-repeat: no-repeat;
+    background-position: 100% 20%;
+    background-size: 7%;
+  }
+
+  /* Button 2 - Secondary Button (gradient with white arrow) */
+  /* Used in nomination form submit */
+  .button2 {
+    @apply w-48 cursor-pointer pb-1 pl-3 pr-16 font-ob font-medium uppercase text-white;
+    background:
+      url('/assets/icons/arrow-white.svg') no-repeat center,
+      linear-gradient(90deg, #13daff 0%, #8be5ff 100%);
+    background-position: 83%;
+    border-radius: 1.25rem;
+    height: 3.25rem;
+  }
+
+  /* Button 2 Hover State - Darker gradient */
+  .button2:hover {
+    background:
+      url('/assets/icons/arrow-white.svg') no-repeat center,
+      linear-gradient(90deg, #02bbff 0%, #47ceff 100%);
+    background-position: 83%;
+  }
+
+  /**
+   * COUNTDOWN COMPONENTS
+   * Styles for countdown timer displays
+   */
+
+  /* Countdown labels (days, hours, min, sec) */
+  .countdown-text {
+    @apply mt-0.5 text-center font-ob text-xs font-bold uppercase;
+  }
+
+  /* Countdown numbers - Phase 1 */
+  .countdown-number {
+    @apply mr-0 w-[5rem] text-center text-3xl 600px:mr-6 600px:text-[2.6rem] 800px:mr-5 800px:w-[6.25rem] 800px:text-5xl;
+  }
+
+  /* Countdown numbers - Phase 2 */
+  .countdown-number2 {
+    @apply w-[6.25rem] text-center text-5xl;
+  }
+
+  /**
+   * POPUP STYLES
+   * Modal popup containers used across all phases
+   */
+
+  /* Note/Message Box - Subtle shadow */
+  .note {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Main Popup - Desktop (nomination, success messages) */
+  /* CUSTOMIZATION: Replace public/assets/phase1/popup-bg.png */
+  .popup {
+    @apply relative mx-[5%];
+    background: url('/assets/phase1/popup-bg.png') no-repeat top;
+    background-size: cover;
+    width: 1000px;
+    box-shadow: 6.5px 2.5px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Main Popup - Mobile */
+  /* Different background image optimized for mobile */
+  .popup-mobile {
+    @apply popup;
+    background: url('/assets/phase1/popup-bg-mobile.svg') no-repeat top;
+    background-size: cover;
+    background-position: 0 -65px;
+  }
+
+  /* Project Popup - Used in Phase 2 & 3 for project details */
+  /* CUSTOMIZATION: Replace public/assets/phase2/aqua-box2.svg */
+  .project-popup {
+    @apply relative scale-75 800px:scale-100;
+    background: url('/assets/phase2/aqua-box2.svg') no-repeat top;
+    background-size: contain;
+    width: 550px;
+    height: auto;
+    box-shadow: 6.5px 2.5px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Project Popup Background - Gradient */
+  .project-popup-bg {
+    background: radial-gradient(132.53% 132.53% at 3.28% 0%, #ffffff 0%, #eafefc 100%);
+  }
+
+  /* Scale down project popup on short screens */
+  @media screen and (max-height: 900px) {
+    .project-popup {
+      @apply scale-75;
+    }
+  }
+}
+
+/* ================================================================================================
+   UTILITIES LAYER - Helper Classes
+   ================================================================================================ */
+@layer utilities {
+  /**
+   * Required Field Indicator
+   * Adds red asterisk (*) after label text
+   * Used on form labels
+   */
+  .required:after {
+    content: ' *';
+    color: #fe1d1d;
+    font-size: 0.625rem;
+    vertical-align: text-bottom;
+  }
+
+  /**
+   * "Ends In" Decorative Line
+   * Creates the angled line decoration for countdown timers
+   * Uses CSS pseudo-elements for geometric shape
+   */
+  .endsin-line:before {
+    content: '';
+    display: inline-block;
+    border-top: 35px solid white;
+    border-right: 35px solid transparent;
+    position: relative;
+    height: 30px;
+    right: -114px;
+    top: -0.5px;
+    transform: rotate(270deg);
+  }
+
+  .endsin-line:after {
+    content: '';
+    position: relative;
+    height: 58px;
+    right: -97px;
+    top: -0.5px;
+    border-color: #3c1dfe;
+    border-right-style: solid;
+    border-right-width: 6px;
+    transform: rotate(-45deg);
+  }
+
+  /* Phase 2 countdown line adjustment */
+  .phase2:after {
+    right: -94px;
+  }
+
+  /* "To Play" label line adjustments */
+  .toplay:before {
+    right: -80px;
+  }
+
+  .toplay:after {
+    right: -62px;
+    top: 0.5px;
+  }
+
+  /**
+   * Aqua Dot Decorator
+   * Adds aqua colored dot (•) after element
+   * Used on wallet address displays
+   */
+  .aqua-dot:after {
+    @apply absolute -top-1.5 right-3 mr-0.5 text-4xl font-medium text-aquaDD;
+    content: '•';
+  }
+
+  /**
+   * Ellipsis Text Truncation
+   * Limits text to 2 lines with ellipsis (...)
+   * Works on project names in cards
+   */
+  .ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+  }
+
+  /**
+   * BUBBLE ANIMATION
+   * Floating animation for bubble decorative element
+   * Gentle up/down movement over 6 seconds
+   */
+  @keyframes bubble-animation {
+    0%,
+    100% {
+      transform: translateY(0);
+      transition-timing-function: ease-in;
+    }
+    50% {
+      transform: translateY(-3%); /* Move up 3% */
+      transition-timing-function: ease-out;
+    }
+  }
+
+  /* Apply bubble animation to element */
+  .bubble-animation {
+    animation: bubble-animation 6s infinite;
+  }
+
+  /**
+   * Details Button - Base style
+   * Used in project cards for "View Details" button
+   * Color-specific variants defined below
+   */
+  .details-button-custom {
+    @apply w-[7.5rem] cursor-pointer border-b-4 pb-1 font-ob text-[12px] font-bold uppercase transition-transform hover:translate-x-1 hover:text-indigoDD2 700px:w-[10rem] 700px:text-[15px];
+    background-repeat: no-repeat;
+    background-position: 100% 40%;
+    background-size: 12%;
+  }
+
+  /**
+   * PROJECT CARD COLOR GRADIENTS
+   * Four gradient options for project cards
+   * Applied dynamically based on card index
+   * 
+   * CUSTOMIZATION: Edit gradient colors to match your brand
+   * Pattern rotation defined in src/config.tsx appConfig.projectColors
+   */
+
+  /* Orange Gradient */
+  .p-orange {
+    background: linear-gradient(133.19deg, #ffbdbf 5.69%, #ffd1c0 94.95%);
+  }
+
+  /* Green Gradient */
+  .p-green {
+    background: linear-gradient(133.19deg, #80f6cb 5.69%, #38fade 94.95%);
+  }
+
+  /* Pink Gradient */
+  .p-pink {
+    background: linear-gradient(133.19deg, #ff98e8 5.69%, #fdc0fe 87.98%);
+  }
+
+  /* Blue Gradient */
+  .p-blue {
+    background: linear-gradient(133.19deg, #53ffff 5.69%, #5bc5ff 94.95%);
+  }
+
+  /**
+   * Details Button Color Variants
+   * Each project card color gets a matching details button style
+   * Arrow icon embedded as base64 SVG (different color for each)
+   * 
+   * NOTE: These are nested selectors (.p-orange .details-button)
+   * They automatically style .details-button elements inside .p-orange parents
+   */
+  .p-orange .details-button {
+    @apply details-button-custom border-[#fff8d2];
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxNiAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGQ9Ik0xNC41OTM0IDcuMDAwMzZMMTUuMTQ5NSA3LjkzODg1VjYuMDYxODZMMTQuNTkzNCA3LjAwMDM2Wk0wIDguMDkxMjZIMTQuNTkzNFY1LjkwOTQ1SDBWOC4wOTEyNlpNMTUuMTQ5NSA2LjA2MTg2TDcuNzg1OSAxLjY5ODIyTDYuNjczNjEgMy41NzUyMkwxNC4wMzcyIDcuOTM4ODVMMTUuMTQ5NSA2LjA2MTg2Wk0xNC4wMzcyIDYuMDYxODZMNi42NzM2MSAxMC40MjU1TDcuNzg1OSAxMi4zMDI1TDE1LjE0OTUgNy45Mzg4NUwxNC4wMzcyIDYuMDYxODZaIiBmaWxsPSIjRkZGOEQyIi8+DQo8L3N2Zz4NCg==);
+  }
+
+  .p-green .details-button {
+    @apply details-button-custom border-[#EAFEFC];
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxNiAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE0LjU5MzQgNy4wMDAzNkwxNS4xNDk1IDcuOTM4ODVWNi4wNjE4NkwxNC41OTM0IDcuMDAwMzZaTTAgOC4wOTEyNkgxNC41OTM0VjUuOTA5NDVIMFY4LjA5MTI2Wk0xNS4xNDk1IDYuMDYxODZMNy43ODU5IDEuNjk4MjJMNi42NzM2MSAzLjU3NTIyTDE0LjAzNzIgNy45Mzg4NUwxNS4xNDk1IDYuMDYxODZaTTE0LjAzNzIgNi4wNjE4Nkw2LjY3MzYxIDEwLjQyNTVMNy43ODU5IDEyLjMwMjVMMTUuMTQ5NSA3LjkzODg1TDE0LjAzNzIgNi4wNjE4NloiIGZpbGw9IiNFQUZFRkMiLz4KPC9zdmc+Cg==);
+  }
+
+  .p-pink .details-button {
+    @apply details-button-custom border-[#FFF0FC];
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxNiAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE0LjU5MzQgNy4wMDAzNkwxNS4xNDk1IDcuOTM4ODVWNi4wNjE4NkwxNC41OTM0IDcuMDAwMzZaTTAgOC4wOTEyNkgxNC41OTM0VjUuOTA5NDVIMFY4LjA5MTI2Wk0xNS4xNDk1IDYuMDYxODZMNy43ODU5IDEuNjk4MjJMNi42NzM2MSAzLjU3NTIyTDE0LjAzNzIgNy45Mzg4NUwxNS4xNDk1IDYuMDYxODZaTTE0LjAzNzIgNi4wNjE4Nkw2LjY3MzYxIDEwLjQyNTVMNy43ODU5IDEyLjMwMjVMMTUuMTQ5NSA3LjkzODg1TDE0LjAzNzIgNi4wNjE4NloiIGZpbGw9IiNGRkYwRkMiLz4KPC9zdmc+Cg==);
+  }
+
+  .p-blue .details-button {
+    @apply details-button-custom border-[#b1a4ff];
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTMiIHZpZXdCb3g9IjAgMCAxNiAxMyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGQ9Ik0xNC41OTM0IDcuMDAwMzZMMTUuMTQ5NSA3LjkzODg1VjYuMDYxODZMMTQuNTkzNCA3LjAwMDM2Wk0wIDguMDkxMjZIMTQuNTkzNFY1LjkwOTQ1SDBWOC4wOTEyNlpNMTUuMTQ5NSA2LjA2MTg2TDcuNzg1OSAxLjY5ODIyTDYuNjczNjEgMy41NzUyMkwxNC4wMzcyIDcuOTM4ODVMMTUuMTQ5NSA2LjA2MTg2Wk0xNC4wMzcyIDYuMDYxODZMNi42NzM2MSAxMC40MjU1TDcuNzg1OSAxMi4zMDI1TDE1LjE0OTUgNy45Mzg4NUwxNC4wMzcyIDYuMDYxODZaIiBmaWxsPSIjQjFBNEZGIi8+DQo8L3N2Zz4NCg==);
+  }
+}
+
+/* ================================================================================================
+   GLOBAL OVERRIDES - Third-party Library Styles
+   ================================================================================================ */
+
+/**
+ * Google reCAPTCHA Badge
+ * Hide the reCAPTCHA badge (we're using invisible reCAPTCHA)
+ * Badge is required by Google but can be hidden per ToS if you show privacy/terms links
+ */
+.grecaptcha-badge {
+  z-index: -1 !important;
+  visibility: hidden;
+}

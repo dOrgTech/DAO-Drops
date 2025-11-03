@@ -1,0 +1,26 @@
+# Compiled TypeScript files
+dist/
+
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Exported CSV files
+*.csv
+
+# JSDoc generated documentation
+docs/
+
