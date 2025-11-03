@@ -1,5 +1,7 @@
 # DAO-Drops
 
+> **🎉 Go to the [branch "fork"](https://github.com/dOrgTech/DAO-Drops/tree/fork) for an upgraded and updated version of DAO Drops, rebuilt to be fully forkable and customizable for any community or DAO to run their own retroactive funding rounds.**
+
 Full stack MERN app for the DAO Drops Project
 
 React based front end code can be found in the client folder.
